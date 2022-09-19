@@ -8,8 +8,8 @@
   "author": "Bowden Kelly",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/server.js",
-    "start:dev": "nodemon src/server.ts",
+    "start": "ts-node src/server.ts",
+    "start:dev": "nodemon",
     "build": "tsc",
     "watch-ts": "tsc -w",
     "test": "jest --watchAll --detectOpenHandles",
@@ -35,9 +35,9 @@
     "lint-staged": "^10.0.8",
     "lodash": "^4.17.15",
     "lusca": "^1.7.0",
-    "mongodb": "^4.8.1",
+    "mongodb": "^4.10.0",
     "mongodb-memory-server": "^8.8.0",
-    "mongoose": "^6.5.1",
+    "mongoose": "^6.6.1",
     "passport": "^0.6.0",
     "ts-jest": "^28.0.7",
     "winston": "^3.2.1"

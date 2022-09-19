@@ -4,7 +4,7 @@ import ApiError from '../helpers/apiError'
 import logger from '../util/logger'
 
 export default function (
-  error: ApiError|Error,
+  error: ApiError | Error,
   req: Request,
   res: Response,
   next: NextFunction
@@ -25,5 +25,4 @@ export default function (
       message: error.message,
     })
   }
-  
 }
