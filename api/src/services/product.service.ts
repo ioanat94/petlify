@@ -34,20 +34,22 @@ const update = async (
   return foundProduct
 }
 
-// const deleteMovie = async (movieId: string): Promise<MovieDocument | null> => {
-//   const foundMovie = Movie.findByIdAndDelete(movieId)
+const deleteProduct = async (
+  productId: string
+): Promise<ProductDocument | null> => {
+  const foundProduct = Product.findByIdAndDelete(productId)
 
-//   if (!foundMovie) {
-//     throw new NotFoundError(`Movie ${movieId} not found`)
-//   }
+  if (!foundProduct) {
+    throw new NotFoundError(`Product ${productId} not found`)
+  }
 
-//   return foundMovie
-// }
+  return foundProduct
+}
 
 export default {
   create,
   findById,
   findAll,
   update,
-  // deleteMovie,
+  deleteProduct,
 }
