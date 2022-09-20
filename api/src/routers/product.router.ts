@@ -1,14 +1,14 @@
 import express from 'express'
 
-import { createProduct } from '../controllers/product.controller'
+import { createProduct, findById } from '../controllers/product.controller'
 
 const router = express.Router()
 
 // Every path we define here will get /api/v1/products prefix
+router.post('/', createProduct)
 // router.get('/', findAll)
-// router.get('/:movieId', findById)
+router.get('/:productId', findById)
 // router.put('/:movieId', updateMovie)
 // router.delete('/:movieId', deleteMovie)
-router.post('/', createProduct)
 
 export default router

@@ -35,6 +35,23 @@ export const createProduct = async (
   }
 }
 
+// GET /products/:productId
+export const findById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.json(await productService.findById(req.params.productId))
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
+
 // // PUT /movies/:movieId
 // export const updateMovie = async (
 //   req: Request,
@@ -64,23 +81,6 @@ export const createProduct = async (
 //   try {
 //     await movieService.deleteMovie(req.params.movieId)
 //     res.status(204).end()
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
-
-// // GET /movies/:movieId
-// export const findById = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     res.json(await movieService.findById(req.params.movieId))
 //   } catch (error) {
 //     if (error instanceof Error && error.name == 'ValidationError') {
 //       next(new BadRequestError('Invalid Request', 400, error))

@@ -5,15 +5,15 @@ const create = async (product: ProductDocument): Promise<ProductDocument> => {
   return product.save()
 }
 
-// const findById = async (movieId: string): Promise<MovieDocument> => {
-//   const foundMovie = await Movie.findById(movieId)
+const findById = async (productId: string): Promise<ProductDocument> => {
+  const foundProduct = await Product.findById(productId)
 
-//   if (!foundMovie) {
-//     throw new NotFoundError(`Movie ${movieId} not found`)
-//   }
+  if (!foundProduct) {
+    throw new NotFoundError(`Product ${productId} not found`)
+  }
 
-//   return foundMovie
-// }
+  return foundProduct
+}
 
 // const findAll = async (): Promise<MovieDocument[]> => {
 //   return Movie.find().sort({ name: 1, publishedYear: -1 })
@@ -46,7 +46,7 @@ const create = async (product: ProductDocument): Promise<ProductDocument> => {
 
 export default {
   create,
-  // findById,
+  findById,
   // findAll,
   // update,
   // deleteMovie,
