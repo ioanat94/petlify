@@ -15,9 +15,9 @@ const findById = async (productId: string): Promise<ProductDocument> => {
   return foundProduct
 }
 
-// const findAll = async (): Promise<MovieDocument[]> => {
-//   return Movie.find().sort({ name: 1, publishedYear: -1 })
-// }
+const findAll = async (): Promise<ProductDocument[]> => {
+  return Product.find().sort({ price: 1, name: 1 })
+}
 
 // const update = async (
 //   movieId: string,
@@ -47,7 +47,7 @@ const findById = async (productId: string): Promise<ProductDocument> => {
 export default {
   create,
   findById,
-  // findAll,
+  findAll,
   // update,
   // deleteMovie,
 }
