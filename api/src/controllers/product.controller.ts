@@ -69,25 +69,25 @@ export const findById = async (
   }
 }
 
-// // PUT /movies/:movieId
-// export const updateMovie = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const update = req.body
-//     const movieId = req.params.movieId
-//     const updatedMovie = await movieService.update(movieId, update)
-//     res.json(updatedMovie)
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+// PUT /products/:productId
+export const updateProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const update = req.body
+    const productId = req.params.productId
+    const updatedProduct = await productService.update(productId, update)
+    res.json(updatedProduct)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
 
 // // DELETE /movies/:movieId
 // export const deleteMovie = async (

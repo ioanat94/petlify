@@ -19,20 +19,20 @@ const findAll = async (): Promise<ProductDocument[]> => {
   return Product.find().sort({ price: 1, name: 1 })
 }
 
-// const update = async (
-//   movieId: string,
-//   update: Partial<MovieDocument>
-// ): Promise<MovieDocument | null> => {
-//   const foundMovie = await Movie.findByIdAndUpdate(movieId, update, {
-//     new: true,
-//   })
+const update = async (
+  productId: string,
+  update: Partial<ProductDocument>
+): Promise<ProductDocument | null> => {
+  const foundProduct = await Product.findByIdAndUpdate(productId, update, {
+    new: true,
+  })
 
-//   if (!foundMovie) {
-//     throw new NotFoundError(`Movie ${movieId} not found`)
-//   }
+  if (!foundProduct) {
+    throw new NotFoundError(`Product ${productId} not found`)
+  }
 
-//   return foundMovie
-// }
+  return foundProduct
+}
 
 // const deleteMovie = async (movieId: string): Promise<MovieDocument | null> => {
 //   const foundMovie = Movie.findByIdAndDelete(movieId)
@@ -48,6 +48,6 @@ export default {
   create,
   findById,
   findAll,
-  // update,
+  update,
   // deleteMovie,
 }
