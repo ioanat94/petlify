@@ -15,6 +15,25 @@ export type Product = {
   price: number;
 };
 
+export type UpdatedProduct = {
+  _id?: string;
+  name?: string;
+  img?: string;
+  description?: string;
+  categories?: {
+    pet: string;
+    subcategory: string;
+  };
+  variants?: string[];
+  sizes?: string[];
+  price?: number;
+};
+
+export type PutType = {
+  productId: string;
+  updatedProduct: UpdatedProduct;
+};
+
 export interface ProductsState {
   allProducts: Product[];
   singleProduct: Product;
@@ -80,8 +99,24 @@ export const createProductThunk = createAsyncThunk(
   }
 );
 
+export const updateProductThunk = createAsyncThunk(
+  'product/update',
+  async (data: PutType) => {
+    const { productId, updatedProduct } = data;
+    const res = await axios.put(
+      `http://localhost:4000/api/v1/products/${productId}`,
+      updatedProduct
+    );
+
+    return {
+      data: res.data,
+      status: res.status,
+    };
+  }
+);
+
 export const productsSlice = createSlice({
-  name: 'countries',
+  name: 'products',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -129,6 +164,13 @@ export const productsSlice = createSlice({
         state.isLoading = false;
       }
     );
+    builder.addCase(updateProductThunk.pending, (state: ProductsState) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateProductThunk.fulfilled, (state: ProductsState) => {
+      state.allProducts = [...state.allProducts];
+      state.isLoading = false;
+    });
   },
 });
 

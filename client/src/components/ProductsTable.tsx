@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchProductsThunk, Product } from 'redux/slices/productsSlice';
 import { RootState } from 'redux/store';
@@ -38,6 +39,10 @@ const ProductsTable = () => {
         </td>
         <td>{product.sizes}</td>
         <td>{product.price}€</td>
+        <td>
+          <Link to={`/admin/products/${product._id}`}>Edit</Link>
+          <button>Delete</button>
+        </td>
       </tr>
     ));
   };
@@ -53,6 +58,7 @@ const ProductsTable = () => {
           <td>Variants</td>
           <td>Sizes</td>
           <td>Price</td>
+          <td>Actions</td>
         </tr>
       </thead>
       <tbody>{handleRenderRows(products)}</tbody>

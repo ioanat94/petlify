@@ -121,7 +121,11 @@ const AddProductPopup = () => {
       >
         Add variant
       </button>
-      <p>{variants}</p>
+      <ul>
+        {variants.map((variant) => (
+          <li key={variant}>{variant}</li>
+        ))}
+      </ul>
       <input
         type='checkbox'
         id='small'

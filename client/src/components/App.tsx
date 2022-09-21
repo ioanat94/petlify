@@ -3,6 +3,7 @@ import Home from 'pages/Home';
 import Product from 'pages/Product';
 import Admin from 'pages/Admin';
 import ProductManagement from 'pages/ProductManagement';
+import EditProduct from 'pages/EditProduct';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path='/products/:productId' element={<Product />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/admin/products' element={<ProductManagement />} />
+        <Route path='/admin/products/:productId' element={<EditProduct />} />
       </Routes>
     </BrowserRouter>
   );
