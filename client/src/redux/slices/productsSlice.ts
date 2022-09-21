@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export type Product = {
-  _id: string;
+  _id?: string;
   name: string;
   img: string;
   description: string;
@@ -65,6 +65,21 @@ export const fetchProductThunk = createAsyncThunk(
   }
 );
 
+export const createProductThunk = createAsyncThunk(
+  'product/create',
+  async (product: Product) => {
+    const res = await axios.post(
+      `http://localhost:4000/api/v1/products/`,
+      product
+    );
+
+    return {
+      data: res.data,
+      status: res.status,
+    };
+  }
+);
+
 export const productsSlice = createSlice({
   name: 'countries',
   initialState,
@@ -101,6 +116,16 @@ export const productsSlice = createSlice({
       fetchProductThunk.fulfilled,
       (state: ProductsState, action) => {
         state.singleProduct = action.payload.data;
+        state.isLoading = false;
+      }
+    );
+    builder.addCase(createProductThunk.pending, (state: ProductsState) => {
+      state.isLoading = true;
+    });
+    builder.addCase(
+      createProductThunk.fulfilled,
+      (state: ProductsState, action) => {
+        state.allProducts = [...state.allProducts, action.payload.data];
         state.isLoading = false;
       }
     );
