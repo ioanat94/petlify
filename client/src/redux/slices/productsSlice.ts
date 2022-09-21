@@ -115,6 +115,20 @@ export const updateProductThunk = createAsyncThunk(
   }
 );
 
+export const deleteProductThunk = createAsyncThunk(
+  'product/delete',
+  async (productId: string) => {
+    const res = await axios.delete(
+      `http://localhost:4000/api/v1/products/${productId}`
+    );
+
+    return {
+      data: res.data,
+      status: res.status,
+    };
+  }
+);
+
 export const productsSlice = createSlice({
   name: 'products',
   initialState,
@@ -171,6 +185,18 @@ export const productsSlice = createSlice({
       state.allProducts = [...state.allProducts];
       state.isLoading = false;
     });
+    builder.addCase(deleteProductThunk.pending, (state: ProductsState) => {
+      state.isLoading = true;
+    });
+    builder.addCase(
+      deleteProductThunk.fulfilled,
+      (state: ProductsState, action) => {
+        state.allProducts = state.allProducts.filter(
+          (product) => product._id !== action.payload.data
+        );
+        state.isLoading = false;
+      }
+    );
   },
 });
 

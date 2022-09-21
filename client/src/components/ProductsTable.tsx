@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { fetchProductsThunk, Product } from 'redux/slices/productsSlice';
+import {
+  deleteProductThunk,
+  fetchProductsThunk,
+  Product,
+} from 'redux/slices/productsSlice';
 import { RootState } from 'redux/store';
 
 const ProductsTable = () => {
@@ -14,6 +18,11 @@ const ProductsTable = () => {
   useEffect(() => {
     dispatch(fetchProductsThunk());
   }, [dispatch]);
+
+  const handleDelete = (productId: string) => {
+    dispatch(deleteProductThunk(productId));
+    window.location.reload();
+  };
 
   const handleRenderRows = (products: Product[]) => {
     return products.map((product) => (
@@ -41,7 +50,7 @@ const ProductsTable = () => {
         <td>{product.price}€</td>
         <td>
           <Link to={`/admin/products/${product._id}`}>Edit</Link>
-          <button>Delete</button>
+          <button onClick={() => handleDelete(product._id!)}>Delete</button>
         </td>
       </tr>
     ));
