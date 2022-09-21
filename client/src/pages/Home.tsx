@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchProductsThunk, Product } from 'redux/slices/productsSlice';
 import { RootState } from 'redux/store';
@@ -18,7 +20,7 @@ const Home = () => {
     return products.map((product) => (
       <div>
         <img src={product.img} alt='' width='200px' />
-        <h4>{product.name}</h4>
+        <Link to={`/products/${product._id}`}>{product.name}</Link>
         <p>{product.description}</p>
         <div>
           <span>{product.categories.pet}</span>
