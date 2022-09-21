@@ -126,7 +126,7 @@ const AddProductPopup = () => {
         type='checkbox'
         id='small'
         name='sizes'
-        value='s'
+        value='small'
         onChange={handleCheckbox}
       />
       <label htmlFor='small'>Small</label>
@@ -134,7 +134,7 @@ const AddProductPopup = () => {
         type='checkbox'
         id='medium'
         name='sizes'
-        value='m'
+        value='medium'
         onChange={handleCheckbox}
       />
       <label htmlFor='medium'>Medium</label>
@@ -142,7 +142,7 @@ const AddProductPopup = () => {
         type='checkbox'
         id='large'
         name='sizes'
-        value='l'
+        value='large'
         onChange={handleCheckbox}
       />
       <label htmlFor='large'>Large</label>
