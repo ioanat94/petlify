@@ -66,25 +66,25 @@ export const findById = async (
   }
 }
 
-// // PUT /products/:productId
-// export const updateProduct = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const update = req.body
-//     const productId = req.params.productId
-//     const updatedProduct = await productService.update(productId, update)
-//     res.json(updatedProduct)
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+// PUT /users/:userId
+export const updateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const update = req.body
+    const userId = req.params.userId
+    const updatedUser = await userService.update(userId, update)
+    res.json(updatedUser)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
 
 // // DELETE /products/:productId
 // export const deleteProduct = async (

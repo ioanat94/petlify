@@ -5,7 +5,7 @@ import {
   // deleteProduct,
   findAll,
   findById,
-  // updateProduct,
+  updateUser,
 } from '../controllers/user.controller'
 
 const router = express.Router()
@@ -14,7 +14,7 @@ const router = express.Router()
 router.post('/', createUser)
 router.get('/', findAll)
 router.get('/:userId', findById)
-// router.put('/:productId', updateProduct)
+router.put('/:userId', updateUser)
 // router.delete('/:productId', deleteProduct)
 
 export default router

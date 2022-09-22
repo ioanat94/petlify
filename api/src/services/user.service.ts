@@ -19,20 +19,20 @@ const findAll = async (): Promise<UserDocument[]> => {
   return User.find().sort({ name: 1 })
 }
 
-// const update = async (
-//   productId: string,
-//   update: Partial<ProductDocument>
-// ): Promise<ProductDocument | null> => {
-//   const foundProduct = await Product.findByIdAndUpdate(productId, update, {
-//     new: true,
-//   })
+const update = async (
+  userId: string,
+  update: Partial<UserDocument>
+): Promise<UserDocument | null> => {
+  const foundUser = await User.findByIdAndUpdate(userId, update, {
+    new: true,
+  })
 
-//   if (!foundProduct) {
-//     throw new NotFoundError(`Product ${productId} not found`)
-//   }
+  if (!foundUser) {
+    throw new NotFoundError(`User ${userId} not found`)
+  }
 
-//   return foundProduct
-// }
+  return foundUser
+}
 
 // const deleteProduct = async (
 //   productId: string
@@ -50,6 +50,6 @@ export default {
   create,
   findById,
   findAll,
-  // update,
+  update,
   // deleteProduct,
 }
