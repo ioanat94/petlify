@@ -5,6 +5,7 @@ const Admin = () => {
     <>
       <div>Admin</div>
       <Link to='/admin/products'>Manage products</Link>
+      <Link to='/admin/users'>Manage users</Link>
     </>
   );
 };

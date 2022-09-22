@@ -29,7 +29,7 @@ export type UpdatedProduct = {
   price?: number;
 };
 
-export type PutType = {
+type PutType = {
   productId: string;
   updatedProduct: UpdatedProduct;
 };
