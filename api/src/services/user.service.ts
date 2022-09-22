@@ -5,15 +5,15 @@ const create = async (user: UserDocument): Promise<UserDocument> => {
   return user.save()
 }
 
-// const findById = async (productId: string): Promise<ProductDocument> => {
-//   const foundProduct = await Product.findById(productId)
+const findById = async (userId: string): Promise<UserDocument> => {
+  const foundUser = await User.findById(userId)
 
-//   if (!foundProduct) {
-//     throw new NotFoundError(`Product ${productId} not found`)
-//   }
+  if (!foundUser) {
+    throw new NotFoundError(`User ${userId} not found`)
+  }
 
-//   return foundProduct
-// }
+  return foundUser
+}
 
 // const findAll = async (): Promise<ProductDocument[]> => {
 //   return Product.find().sort({ price: 1, name: 1 })
@@ -48,7 +48,7 @@ const create = async (user: UserDocument): Promise<UserDocument> => {
 
 export default {
   create,
-  // findById,
+  findById,
   // findAll,
   // update,
   // deleteProduct,
