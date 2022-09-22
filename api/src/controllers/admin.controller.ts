@@ -86,20 +86,20 @@ export const updateAdmin = async (
   }
 }
 
-// // DELETE /users/:userId
-// export const deleteUser = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     await userService.deleteUser(req.params.userId)
-//     res.status(204).end()
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+// DELETE /admins/:adminId
+export const deleteAdmin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    await adminService.deleteAdmin(req.params.adminId)
+    res.status(204).end()
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}

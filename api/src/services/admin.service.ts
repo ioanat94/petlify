@@ -34,20 +34,20 @@ const update = async (
   return foundAdmin
 }
 
-// const deleteUser = async (userId: string): Promise<UserDocument | null> => {
-//   const foundUser = User.findByIdAndDelete(userId)
+const deleteAdmin = async (adminId: string): Promise<AdminDocument | null> => {
+  const foundAdmin = Admin.findByIdAndDelete(adminId)
 
-//   if (!foundUser) {
-//     throw new NotFoundError(`User ${userId} not found`)
-//   }
+  if (!foundAdmin) {
+    throw new NotFoundError(`Admin ${adminId} not found`)
+  }
 
-//   return foundUser
-// }
+  return foundAdmin
+}
 
 export default {
   create,
   findById,
   findAll,
   update,
-  // deleteUser,
+  deleteAdmin,
 }

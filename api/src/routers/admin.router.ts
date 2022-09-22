@@ -2,7 +2,7 @@ import express from 'express'
 
 import {
   createAdmin,
-  // deleteUser,
+  deleteAdmin,
   findAll,
   findById,
   updateAdmin,
@@ -15,6 +15,6 @@ router.post('/', createAdmin)
 router.get('/', findAll)
 router.get('/:adminId', findById)
 router.put('/:adminId', updateAdmin)
-// router.delete('/:userId', deleteUser)
+router.delete('/:adminId', deleteAdmin)
 
 export default router
