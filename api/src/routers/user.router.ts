@@ -2,7 +2,7 @@ import express from 'express'
 
 import {
   createUser,
-  // deleteProduct,
+  deleteUser,
   findAll,
   findById,
   updateUser,
@@ -15,6 +15,6 @@ router.post('/', createUser)
 router.get('/', findAll)
 router.get('/:userId', findById)
 router.put('/:userId', updateUser)
-// router.delete('/:productId', deleteProduct)
+router.delete('/:userId', deleteUser)
 
 export default router

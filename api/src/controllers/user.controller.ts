@@ -86,20 +86,20 @@ export const updateUser = async (
   }
 }
 
-// // DELETE /products/:productId
-// export const deleteProduct = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     await productService.deleteProduct(req.params.productId)
-//     res.status(204).end()
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+// DELETE /users/:userId
+export const deleteUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    await userService.deleteUser(req.params.userId)
+    res.status(204).end()
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}

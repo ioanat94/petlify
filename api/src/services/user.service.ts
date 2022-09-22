@@ -34,22 +34,20 @@ const update = async (
   return foundUser
 }
 
-// const deleteProduct = async (
-//   productId: string
-// ): Promise<ProductDocument | null> => {
-//   const foundProduct = Product.findByIdAndDelete(productId)
+const deleteUser = async (userId: string): Promise<UserDocument | null> => {
+  const foundUser = User.findByIdAndDelete(userId)
 
-//   if (!foundProduct) {
-//     throw new NotFoundError(`Product ${productId} not found`)
-//   }
+  if (!foundUser) {
+    throw new NotFoundError(`User ${userId} not found`)
+  }
 
-//   return foundProduct
-// }
+  return foundUser
+}
 
 export default {
   create,
   findById,
   findAll,
   update,
-  // deleteProduct,
+  deleteUser,
 }
