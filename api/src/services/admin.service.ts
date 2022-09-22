@@ -15,9 +15,9 @@ const findById = async (adminId: string): Promise<AdminDocument> => {
   return foundAdmin
 }
 
-// const findAll = async (): Promise<UserDocument[]> => {
-//   return User.find().sort({ name: 1 })
-// }
+const findAll = async (): Promise<AdminDocument[]> => {
+  return Admin.find().sort({ name: 1 })
+}
 
 // const update = async (
 //   userId: string,
@@ -47,7 +47,7 @@ const findById = async (adminId: string): Promise<AdminDocument> => {
 export default {
   create,
   findById,
-  // findAll,
+  findAll,
   // update,
   // deleteUser,
 }
