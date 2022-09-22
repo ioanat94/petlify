@@ -5,7 +5,7 @@ import {
   // deleteUser,
   findAll,
   findById,
-  // updateUser,
+  updateAdmin,
 } from '../controllers/admin.controller'
 
 const router = express.Router()
@@ -14,7 +14,7 @@ const router = express.Router()
 router.post('/', createAdmin)
 router.get('/', findAll)
 router.get('/:adminId', findById)
-// router.put('/:userId', updateUser)
+router.put('/:adminId', updateAdmin)
 // router.delete('/:userId', deleteUser)
 
 export default router

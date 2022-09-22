@@ -66,25 +66,25 @@ export const findById = async (
   }
 }
 
-// // PUT /users/:userId
-// export const updateUser = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const update = req.body
-//     const userId = req.params.userId
-//     const updatedUser = await userService.update(userId, update)
-//     res.json(updatedUser)
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+// PUT /admins/:adminId
+export const updateAdmin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const update = req.body
+    const adminId = req.params.adminId
+    const updatedAdmin = await adminService.update(adminId, update)
+    res.json(updatedAdmin)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
 
 // // DELETE /users/:userId
 // export const deleteUser = async (

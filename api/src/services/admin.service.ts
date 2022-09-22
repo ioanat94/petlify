@@ -19,20 +19,20 @@ const findAll = async (): Promise<AdminDocument[]> => {
   return Admin.find().sort({ name: 1 })
 }
 
-// const update = async (
-//   userId: string,
-//   update: Partial<UserDocument>
-// ): Promise<UserDocument | null> => {
-//   const foundUser = await User.findByIdAndUpdate(userId, update, {
-//     new: true,
-//   })
+const update = async (
+  adminId: string,
+  update: Partial<AdminDocument>
+): Promise<AdminDocument | null> => {
+  const foundAdmin = await Admin.findByIdAndUpdate(adminId, update, {
+    new: true,
+  })
 
-//   if (!foundUser) {
-//     throw new NotFoundError(`User ${userId} not found`)
-//   }
+  if (!foundAdmin) {
+    throw new NotFoundError(`Admin ${adminId} not found`)
+  }
 
-//   return foundUser
-// }
+  return foundAdmin
+}
 
 // const deleteUser = async (userId: string): Promise<UserDocument | null> => {
 //   const foundUser = User.findByIdAndDelete(userId)
@@ -48,6 +48,6 @@ export default {
   create,
   findById,
   findAll,
-  // update,
+  update,
   // deleteUser,
 }
