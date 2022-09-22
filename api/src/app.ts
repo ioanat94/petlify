@@ -9,6 +9,7 @@ import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
 import productRouter from './routers/product.router'
 import userRouter from './routers/user.router'
+import adminRouter from './routers/admin.router'
 
 dotenv.config({ path: '.env' })
 const app = express()
@@ -45,6 +46,7 @@ app.use(passport.session())
 // Set up routers
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/users', userRouter)
+app.use('/api/v1/admins', adminRouter)
 
 // Custom API error handler
 app.use(apiErrorHandler)
