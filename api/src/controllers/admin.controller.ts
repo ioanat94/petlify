@@ -49,22 +49,22 @@ export const createAdmin = async (
 //   }
 // }
 
-// // GET /users/:userId
-// export const findById = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     res.json(await userService.findById(req.params.userId))
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+// GET /admins/:adminId
+export const findById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.json(await adminService.findById(req.params.adminId))
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
 
 // // PUT /users/:userId
 // export const updateUser = async (

@@ -5,15 +5,15 @@ const create = async (admin: AdminDocument): Promise<AdminDocument> => {
   return admin.save()
 }
 
-// const findById = async (userId: string): Promise<UserDocument> => {
-//   const foundUser = await User.findById(userId)
+const findById = async (adminId: string): Promise<AdminDocument> => {
+  const foundAdmin = await Admin.findById(adminId)
 
-//   if (!foundUser) {
-//     throw new NotFoundError(`User ${userId} not found`)
-//   }
+  if (!foundAdmin) {
+    throw new NotFoundError(`Admin ${adminId} not found`)
+  }
 
-//   return foundUser
-// }
+  return foundAdmin
+}
 
 // const findAll = async (): Promise<UserDocument[]> => {
 //   return User.find().sort({ name: 1 })
@@ -46,7 +46,7 @@ const create = async (admin: AdminDocument): Promise<AdminDocument> => {
 
 export default {
   create,
-  // findById,
+  findById,
   // findAll,
   // update,
   // deleteUser,
