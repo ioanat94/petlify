@@ -3,16 +3,16 @@ import express from 'express'
 import {
   createUser,
   // deleteProduct,
-  // findAll,
+  findAll,
   findById,
   // updateProduct,
 } from '../controllers/user.controller'
 
 const router = express.Router()
 
-// Every path we define here will get /api/v1/products prefix
+// Every path we define here will get /api/v1/users prefix
 router.post('/', createUser)
-// router.get('/', findAll)
+router.get('/', findAll)
 router.get('/:userId', findById)
 // router.put('/:productId', updateProduct)
 // router.delete('/:productId', deleteProduct)

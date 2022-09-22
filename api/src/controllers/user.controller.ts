@@ -32,22 +32,22 @@ export const createUser = async (
   }
 }
 
-// // GET /products
-// export const findAll = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     res.json(await productService.findAll())
-//   } catch (error) {
-//     if (error instanceof Error && error.name == 'ValidationError') {
-//       next(new BadRequestError('Invalid Request', 400, error))
-//     } else {
-//       next(error)
-//     }
-//   }
-// }
+// GET /users
+export const findAll = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.json(await userService.findAll())
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', 400, error))
+    } else {
+      next(error)
+    }
+  }
+}
 
 // GET /users/:userId
 export const findById = async (
