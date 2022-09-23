@@ -36,6 +36,46 @@ const EditProduct = () => {
     dispatch(fetchProductThunk(productId));
   }, [dispatch, productId]);
 
+  const handleSetName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductData({ ...productData, name: e.target.value });
+  };
+
+  const handleSetImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductData({ ...productData, img: e.target.value });
+  };
+
+  const handleSetDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductData({ ...productData, description: e.target.value });
+  };
+
+  const handleSetPet = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductData({
+      ...productData,
+      pet: (e.target as HTMLInputElement).value,
+    });
+  };
+
+  const handleSetSubcategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductData({
+      ...productData,
+      subcategory: (e.target as HTMLInputElement).value,
+    });
+  };
+
+  const handleSetVariant = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductData({ ...productData, variant: e.target.value });
+  };
+
+  const handleSetVariants = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const newVariants = [...productData.variants, productData.variant];
+    setProductData({ ...productData, variants: newVariants });
+  };
+
+  const handleSetPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductData({ ...productData, price: parseFloat(e.target.value) });
+  };
+
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       const newSizes = [...productData.sizes, e.target.value];
@@ -66,6 +106,25 @@ const EditProduct = () => {
     dispatch(updateProductThunk(data));
   };
 
+  const handleRenderVariants = () => {
+    return productData.variants.map((variant) => (
+      <li key={variant}>{variant}</li>
+    ));
+  };
+
+  const checkPet = {
+    cats: () => (product.categories.pet === 'cats' ? true : false),
+    dogs: () => (product.categories.pet === 'dogs' ? true : false),
+  };
+
+  const checkSubcategory = {
+    food: () => (product.categories.subcategory === 'food' ? true : false),
+    toys: () => (product.categories.subcategory === 'toys' ? true : false),
+    hygene: () => (product.categories.subcategory === 'hygene' ? true : false),
+    beds: () => (product.categories.subcategory === 'beds' ? true : false),
+    other: () => (product.categories.subcategory === 'other' ? true : false),
+  };
+
   return (
     <div>
       {!isLoading && (
@@ -76,9 +135,7 @@ const EditProduct = () => {
             id='name'
             required
             defaultValue={product.name}
-            onChange={(e) =>
-              setProductData({ ...productData, name: e.target.value })
-            }
+            onChange={handleSetName}
           />
           <img src={product.img} alt='' width='150px' />
           <label htmlFor='img'>Image URL</label>
@@ -87,9 +144,7 @@ const EditProduct = () => {
             id='img'
             required
             defaultValue={product.img}
-            onChange={(e) =>
-              setProductData({ ...productData, img: e.target.value })
-            }
+            onChange={handleSetImg}
           />
           <label htmlFor='desc'>Description</label>
           <input
@@ -97,27 +152,18 @@ const EditProduct = () => {
             id='desc'
             required
             defaultValue={product.description}
-            onChange={(e) =>
-              setProductData({ ...productData, description: e.target.value })
-            }
+            onChange={handleSetDescription}
           />
           <p>Categories</p>
           <p>Pet</p>
-          <div
-            onChange={(e) =>
-              setProductData({
-                ...productData,
-                pet: (e.target as HTMLInputElement).value,
-              })
-            }
-          >
+          <div onChange={handleSetPet}>
             <input
               type='radio'
               id='cats'
               name='pet'
               value='cats'
               required
-              defaultChecked={product.categories.pet === 'cats' ? true : false}
+              defaultChecked={checkPet.cats()}
             />
             <label htmlFor='cats'>Cats</label>
             <input
@@ -125,27 +171,18 @@ const EditProduct = () => {
               id='dogs'
               name='pet'
               value='dogs'
-              defaultChecked={product.categories.pet === 'dogs' ? true : false}
+              defaultChecked={checkPet.dogs()}
             />
             <label htmlFor='dogs'>Dogs</label>
           </div>
           <p>Subcategory</p>
-          <div
-            onChange={(e) =>
-              setProductData({
-                ...productData,
-                subcategory: (e.target as HTMLInputElement).value,
-              })
-            }
-          >
+          <div onChange={handleSetSubcategory}>
             <input
               type='radio'
               id='food'
               name='subcategory'
               value='food'
-              defaultChecked={
-                product.categories.subcategory === 'food' ? true : false
-              }
+              defaultChecked={checkSubcategory.food()}
               required
             />
             <label htmlFor='food'>Food</label>
@@ -154,9 +191,7 @@ const EditProduct = () => {
               id='toys'
               name='subcategory'
               value='toys'
-              defaultChecked={
-                product.categories.subcategory === 'toys' ? true : false
-              }
+              defaultChecked={checkSubcategory.toys()}
             />
             <label htmlFor='toys'>Toys</label>
             <input
@@ -164,9 +199,7 @@ const EditProduct = () => {
               id='hygene'
               name='subcategory'
               value='hygene'
-              defaultChecked={
-                product.categories.subcategory === 'hygene' ? true : false
-              }
+              defaultChecked={checkSubcategory.hygene()}
             />
             <label htmlFor='hygene'>Hygene</label>
             <input
@@ -174,9 +207,7 @@ const EditProduct = () => {
               id='beds'
               name='subcategory'
               value='beds'
-              defaultChecked={
-                product.categories.subcategory === 'beds' ? true : false
-              }
+              defaultChecked={checkSubcategory.beds()}
             />
             <label htmlFor='beds'>Beds</label>
             <input
@@ -184,37 +215,14 @@ const EditProduct = () => {
               id='other'
               name='subcategory'
               value='other'
-              defaultChecked={
-                product.categories.subcategory === 'other' ? true : false
-              }
+              defaultChecked={checkSubcategory.other()}
             />
             <label htmlFor='other'>Other</label>
           </div>
           <label htmlFor='variants'>Variants</label>
-          <input
-            type='text'
-            id='variants'
-            onChange={(e) =>
-              setProductData({ ...productData, variant: e.target.value })
-            }
-          />
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              const newVariants = [
-                ...productData.variants,
-                productData.variant,
-              ];
-              setProductData({ ...productData, variants: newVariants });
-            }}
-          >
-            Add variant
-          </button>
-          <ul>
-            {productData.variants.map((variant) => (
-              <li key={variant}>{variant}</li>
-            ))}
-          </ul>
+          <input type='text' id='variants' onChange={handleSetVariant} />
+          <button onClick={handleSetVariants}>Add variant</button>
+          <ul>{handleRenderVariants()}</ul>
           <input
             type='checkbox'
             id='small'
@@ -249,12 +257,7 @@ const EditProduct = () => {
             step='0.01'
             required
             defaultValue={product.price}
-            onChange={(e) =>
-              setProductData({
-                ...productData,
-                price: parseFloat(e.target.value),
-              })
-            }
+            onChange={handleSetPrice}
           />
           <button type='submit'>Submit</button>
         </form>

@@ -5,10 +5,14 @@ import { useState } from 'react';
 const ProductManagement = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleSetVisible = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <>
       <div>ProductManagement</div>
-      <button onClick={() => setIsVisible(!isVisible)}>Add Product</button>
+      <button onClick={handleSetVisible}>Add Product</button>
       {isVisible && <AddProductPopup />}
       <ProductsTable />
     </>

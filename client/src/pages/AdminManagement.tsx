@@ -5,10 +5,14 @@ import { useState } from 'react';
 const AdminManagement = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleSetVisible = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <>
       <div>AdminManagement</div>
-      <button onClick={() => setIsVisible(!isVisible)}>Add Admin</button>
+      <button onClick={handleSetVisible}>Add Admin</button>
       {isVisible && <AddAdminPopup />}
       <AdminsTable />
     </>

@@ -23,6 +23,22 @@ const AddAdminPopup = () => {
     });
   };
 
+  const handleSetFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminData({ ...adminData, firstname: e.target.value });
+  };
+
+  const handleSetLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminData({ ...adminData, lastname: e.target.value });
+  };
+
+  const handleSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminData({ ...adminData, email: e.target.value });
+  };
+
+  const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminData({ ...adminData, password: e.target.value });
+  };
+
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       const newRoles = [...adminData.roles, e.target.value];
@@ -56,34 +72,18 @@ const AddAdminPopup = () => {
         type='text'
         id='firstname'
         required
-        onChange={(e) =>
-          setAdminData({ ...adminData, firstname: e.target.value })
-        }
+        onChange={handleSetFirstName}
       />
       <label htmlFor='lastname'>Last Name</label>
-      <input
-        type='text'
-        id='lastname'
-        required
-        onChange={(e) =>
-          setAdminData({ ...adminData, lastname: e.target.value })
-        }
-      />
+      <input type='text' id='lastname' required onChange={handleSetLastName} />
       <label htmlFor='email'>Email</label>
-      <input
-        type='email'
-        id='email'
-        required
-        onChange={(e) => setAdminData({ ...adminData, email: e.target.value })}
-      />
+      <input type='email' id='email' required onChange={handleSetEmail} />
       <label htmlFor='password'>Password</label>
       <input
         type='password'
         id='password'
         required
-        onChange={(e) =>
-          setAdminData({ ...adminData, password: e.target.value })
-        }
+        onChange={handleSetPassword}
       />
       <input
         type='checkbox'

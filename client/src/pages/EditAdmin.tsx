@@ -30,6 +30,32 @@ const EditAdmin = () => {
     dispatch(fetchAdminThunk(adminId));
   }, [dispatch, adminId]);
 
+  const handleSetFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminData({ ...adminData, firstname: e.target.value });
+  };
+
+  const handleSetLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminData({ ...adminData, lastname: e.target.value });
+  };
+
+  const handleSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminData({ ...adminData, email: e.target.value });
+  };
+
+  const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminData({ ...adminData, password: e.target.value });
+  };
+
+  const checkRoles = {
+    productsRead: () => (admin.roles.includes('products-read') ? true : false),
+    productsWrite: () =>
+      admin.roles.includes('products-write') ? true : false,
+    usersRead: () => (admin.roles.includes('users-read') ? true : false),
+    usersWrite: () => (admin.roles.includes('users-write') ? true : false),
+    adminsRead: () => (admin.roles.includes('admins-read') ? true : false),
+    adminsWrite: () => (admin.roles.includes('admins-write') ? true : false),
+  };
+
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       const newRoles = [...adminData.roles, e.target.value];
@@ -66,9 +92,7 @@ const EditAdmin = () => {
             id='firstname'
             required
             defaultValue={admin.firstname}
-            onChange={(e) =>
-              setAdminData({ ...adminData, firstname: e.target.value })
-            }
+            onChange={handleSetFirstName}
           />
           <label htmlFor='lastname'>Last Name</label>
           <input
@@ -76,9 +100,7 @@ const EditAdmin = () => {
             id='lastname'
             required
             defaultValue={admin.lastname}
-            onChange={(e) =>
-              setAdminData({ ...adminData, lastname: e.target.value })
-            }
+            onChange={handleSetLastName}
           />
           <label htmlFor='email'>Email</label>
           <input
@@ -86,9 +108,7 @@ const EditAdmin = () => {
             id='email'
             required
             defaultValue={admin.email}
-            onChange={(e) =>
-              setAdminData({ ...adminData, email: e.target.value })
-            }
+            onChange={handleSetEmail}
           />
           <label htmlFor='password'>Password</label>
           <input
@@ -96,9 +116,7 @@ const EditAdmin = () => {
             id='password'
             required
             defaultValue={admin.password}
-            onChange={(e) =>
-              setAdminData({ ...adminData, password: e.target.value })
-            }
+            onChange={handleSetPassword}
           />
           <input
             type='checkbox'
@@ -106,9 +124,7 @@ const EditAdmin = () => {
             name='roles'
             value='products-read'
             onChange={handleCheckbox}
-            defaultChecked={
-              admin.roles.includes('products-read') ? true : false
-            }
+            defaultChecked={checkRoles.productsRead()}
           />
           <label htmlFor='products-read'>Products - Read</label>
           <input
@@ -117,9 +133,7 @@ const EditAdmin = () => {
             name='roles'
             value='products-write'
             onChange={handleCheckbox}
-            defaultChecked={
-              admin.roles.includes('products-write') ? true : false
-            }
+            defaultChecked={checkRoles.productsWrite()}
           />
           <label htmlFor='products-write'>Products - Write</label>
           <input
@@ -128,7 +142,7 @@ const EditAdmin = () => {
             name='roles'
             value='users-read'
             onChange={handleCheckbox}
-            defaultChecked={admin.roles.includes('users-read') ? true : false}
+            defaultChecked={checkRoles.usersRead()}
           />
           <label htmlFor='users-read'>Users - Read</label>
           <input
@@ -137,7 +151,7 @@ const EditAdmin = () => {
             name='roles'
             value='users-write'
             onChange={handleCheckbox}
-            defaultChecked={admin.roles.includes('users-write') ? true : false}
+            defaultChecked={checkRoles.usersWrite()}
           />
           <label htmlFor='users-write'>Users - Write</label>
           <input
@@ -146,7 +160,7 @@ const EditAdmin = () => {
             name='roles'
             value='admins-read'
             onChange={handleCheckbox}
-            defaultChecked={admin.roles.includes('admins-read') ? true : false}
+            defaultChecked={checkRoles.adminsRead()}
           />
           <label htmlFor='admins-read'>Admins - Read</label>
           <input
@@ -155,7 +169,7 @@ const EditAdmin = () => {
             name='roles'
             value='admins-write'
             onChange={handleCheckbox}
-            defaultChecked={admin.roles.includes('admins-write') ? true : false}
+            defaultChecked={checkRoles.adminsWrite()}
           />
           <label htmlFor='admins-write'>Admins - Write</label>
           <button type='submit'>Submit</button>
