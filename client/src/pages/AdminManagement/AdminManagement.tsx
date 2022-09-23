@@ -1,5 +1,5 @@
-import AddAdminPopup from 'components/AddAdminPopup';
-import AdminsTable from 'components/AdminsTable';
+import AddAdminPopup from 'components/AddAdminPopup/AddAdminPopup';
+import AdminsTable from 'components/AdminsTable/AdminsTable';
 import { useState } from 'react';
 
 const AdminManagement = () => {

@@ -1,5 +1,5 @@
-import AddProductPopup from 'components/AddProductPopup';
-import ProductsTable from 'components/ProductsTable';
+import AddProductPopup from 'components/AddProductPopup/AddProductPopup';
+import ProductsTable from 'components/ProductsTable/ProductsTable';
 import { useState } from 'react';
 
 const ProductManagement = () => {

@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from 'pages/Home';
-import Product from 'pages/Product';
-import Admin from 'pages/Admin';
-import ProductManagement from 'pages/ProductManagement';
-import EditProduct from 'pages/EditProduct';
-import UserManagement from 'pages/UserManagement';
-import User from 'pages/User';
-import AdminManagement from 'pages/AdminManagement';
-import EditAdmin from 'pages/EditAdmin';
+import Home from 'pages/Home/Home';
+import Product from 'pages/Product/Product';
+import Admin from 'pages/Admin/Admin';
+import ProductManagement from 'pages/ProductManagement/ProductManagement';
+import EditProduct from 'pages/EditProduct/EditProduct';
+import UserManagement from 'pages/UserManagement/UserManagement';
+import User from 'pages/User/User';
+import AdminManagement from 'pages/AdminManagement/AdminManagement';
+import EditAdmin from 'pages/EditAdmin/EditAdmin';
 
 const App = () => {
   return (
