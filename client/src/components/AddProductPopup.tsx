@@ -2,53 +2,72 @@ import React, { useState } from 'react';
 import { useAppDispatch } from 'redux/hooks';
 import { createProductThunk } from 'redux/slices/productsSlice';
 
+export type ProductData = {
+  name: string;
+  img: string;
+  description: string;
+  pet: string;
+  subcategory: string;
+  variant: string;
+  variants: string[];
+  sizes: string[];
+  price: number;
+};
+
 const AddProductPopup = () => {
-  const [name, setName] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [description, setDescription] = useState('');
-  const [pet, setPet] = useState('');
-  const [subcategory, setSubcategory] = useState('');
-  const [variant, setVariant] = useState('');
-  const [variants, setVariants] = useState<string[]>([]);
-  const [sizes, setSizes] = useState<string[]>([]);
-  const [price, setPrice] = useState(0);
+  const [productData, setProductData] = useState<ProductData>({
+    name: '',
+    img: '',
+    description: '',
+    pet: '',
+    subcategory: '',
+    variant: '',
+    variants: [],
+    sizes: [],
+    price: 0,
+  });
 
   const dispatch = useAppDispatch();
 
   const resetState = () => {
-    setName('');
-    setImageUrl('');
-    setDescription('');
-    setPet('');
-    setSubcategory('');
-    setVariant('');
-    setVariants([]);
-    setSizes([]);
-    setPrice(0);
+    setProductData({
+      name: '',
+      img: '',
+      description: '',
+      pet: '',
+      subcategory: '',
+      variant: '',
+      variants: [],
+      sizes: [],
+      price: 0,
+    });
   };
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      setSizes((prevSizes) => [...prevSizes, e.target.value]);
+      const newSizes = [...productData.sizes, e.target.value];
+      setProductData({ ...productData, sizes: newSizes });
     } else {
-      const newSizes = sizes.filter((size) => size !== e.target.value);
-      setSizes(newSizes);
+      const newSizes = productData.sizes.filter(
+        (size) => size !== e.target.value
+      );
+      setProductData({ ...productData, sizes: newSizes });
     }
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newProduct = {
-      name: name,
-      img: imageUrl,
-      description: description,
+      name: productData.name,
+      img: productData.img,
+      description: productData.description,
       categories: {
-        pet: pet,
-        subcategory: subcategory,
+        pet: productData.pet,
+        subcategory: productData.subcategory,
       },
-      variants: variants,
-      sizes: sizes,
-      price: price,
+      variants: productData.variants,
+      sizes: productData.sizes,
+      price: productData.price,
     };
     dispatch(createProductThunk(newProduct));
     e.target.reset();
@@ -62,25 +81,38 @@ const AddProductPopup = () => {
         type='text'
         id='name'
         required
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) =>
+          setProductData({ ...productData, name: e.target.value })
+        }
       />
-      <label htmlFor='imgurl'>Image URL</label>
+      <label htmlFor='img'>Image URL</label>
       <input
         type='text'
-        id='imgurl'
+        id='img'
         required
-        onChange={(e) => setImageUrl(e.target.value)}
+        onChange={(e) =>
+          setProductData({ ...productData, img: e.target.value })
+        }
       />
       <label htmlFor='desc'>Description</label>
       <input
         type='text'
         id='desc'
         required
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(e) =>
+          setProductData({ ...productData, description: e.target.value })
+        }
       />
       <p>Categories</p>
       <p>Pet</p>
-      <div onChange={(e) => setPet((e.target as HTMLInputElement).value)}>
+      <div
+        onChange={(e) =>
+          setProductData({
+            ...productData,
+            pet: (e.target as HTMLInputElement).value,
+          })
+        }
+      >
         <input type='radio' id='cats' name='pet' value='cats' required />
         <label htmlFor='cats'>Cats</label>
         <input type='radio' id='dogs' name='pet' value='dogs' />
@@ -88,7 +120,12 @@ const AddProductPopup = () => {
       </div>
       <p>Subcategory</p>
       <div
-        onChange={(e) => setSubcategory((e.target as HTMLInputElement).value)}
+        onChange={(e) =>
+          setProductData({
+            ...productData,
+            subcategory: (e.target as HTMLInputElement).value,
+          })
+        }
       >
         <input
           type='radio'
@@ -111,18 +148,21 @@ const AddProductPopup = () => {
       <input
         type='text'
         id='variants'
-        onChange={(e) => setVariant(e.target.value)}
+        onChange={(e) =>
+          setProductData({ ...productData, variant: e.target.value })
+        }
       />
       <button
         onClick={(e) => {
           e.preventDefault();
-          setVariants((prevVariants) => [...prevVariants, variant]);
+          const newVariants = [...productData.variants, productData.variant];
+          setProductData({ ...productData, variants: newVariants });
         }}
       >
         Add variant
       </button>
       <ul>
-        {variants.map((variant) => (
+        {productData.variants.map((variant) => (
           <li key={variant}>{variant}</li>
         ))}
       </ul>
@@ -156,7 +196,9 @@ const AddProductPopup = () => {
         id='price'
         step='0.01'
         required
-        onChange={(e) => setPrice(parseFloat(e.target.value))}
+        onChange={(e) =>
+          setProductData({ ...productData, price: parseFloat(e.target.value) })
+        }
       />
       <button type='submit'>Submit</button>
     </form>

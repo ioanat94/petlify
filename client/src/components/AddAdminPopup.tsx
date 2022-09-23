@@ -26,7 +26,6 @@ const AddAdminPopup = () => {
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       const newRoles = [...adminData.roles, e.target.value];
-      console.log(newRoles);
       setAdminData({ ...adminData, roles: newRoles });
     } else {
       const newRoles = adminData.roles.filter(

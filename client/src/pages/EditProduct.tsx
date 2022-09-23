@@ -1,3 +1,4 @@
+import { ProductData } from 'components/AddProductPopup';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -15,15 +16,17 @@ const EditProduct = () => {
     (state: RootState) => state.products.isLoading
   );
 
-  const [name, setName] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [description, setDescription] = useState('');
-  const [pet, setPet] = useState('');
-  const [subcategory, setSubcategory] = useState('');
-  const [variant, setVariant] = useState('');
-  const [variants, setVariants] = useState<string[]>([]);
-  const [sizes, setSizes] = useState<string[]>([]);
-  const [price, setPrice] = useState(0);
+  const [productData, setProductData] = useState<ProductData>({
+    name: '',
+    img: '',
+    description: '',
+    pet: '',
+    subcategory: '',
+    variant: '',
+    variants: [],
+    sizes: [],
+    price: 0,
+  });
 
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -35,26 +38,29 @@ const EditProduct = () => {
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      setSizes((prevSizes) => [...prevSizes, e.target.value]);
+      const newSizes = [...productData.sizes, e.target.value];
+      setProductData({ ...productData, sizes: newSizes });
     } else {
-      const newSizes = sizes.filter((size) => size !== e.target.value);
-      setSizes(newSizes);
+      const newSizes = productData.sizes.filter(
+        (size) => size !== e.target.value
+      );
+      setProductData({ ...productData, sizes: newSizes });
     }
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const updatedProduct = {
-      name: name,
-      img: imageUrl,
-      description: description,
+      name: productData.name,
+      img: productData.img,
+      description: productData.description,
       categories: {
-        pet: pet,
-        subcategory: subcategory,
+        pet: productData.pet,
+        subcategory: productData.subcategory,
       },
-      variants: variants,
-      sizes: sizes,
-      price: price,
+      variants: productData.variants,
+      sizes: productData.sizes,
+      price: productData.price,
     };
     const data = { productId: productId, updatedProduct: updatedProduct };
     dispatch(updateProductThunk(data));
@@ -70,16 +76,20 @@ const EditProduct = () => {
             id='name'
             required
             defaultValue={product.name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) =>
+              setProductData({ ...productData, name: e.target.value })
+            }
           />
           <img src={product.img} alt='' width='150px' />
-          <label htmlFor='imgurl'>Image URL</label>
+          <label htmlFor='img'>Image URL</label>
           <input
             type='text'
-            id='imgurl'
+            id='img'
             required
             defaultValue={product.img}
-            onChange={(e) => setImageUrl(e.target.value)}
+            onChange={(e) =>
+              setProductData({ ...productData, img: e.target.value })
+            }
           />
           <label htmlFor='desc'>Description</label>
           <input
@@ -87,11 +97,20 @@ const EditProduct = () => {
             id='desc'
             required
             defaultValue={product.description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) =>
+              setProductData({ ...productData, description: e.target.value })
+            }
           />
           <p>Categories</p>
           <p>Pet</p>
-          <div onChange={(e) => setPet((e.target as HTMLInputElement).value)}>
+          <div
+            onChange={(e) =>
+              setProductData({
+                ...productData,
+                pet: (e.target as HTMLInputElement).value,
+              })
+            }
+          >
             <input
               type='radio'
               id='cats'
@@ -113,7 +132,10 @@ const EditProduct = () => {
           <p>Subcategory</p>
           <div
             onChange={(e) =>
-              setSubcategory((e.target as HTMLInputElement).value)
+              setProductData({
+                ...productData,
+                subcategory: (e.target as HTMLInputElement).value,
+              })
             }
           >
             <input
@@ -172,18 +194,24 @@ const EditProduct = () => {
           <input
             type='text'
             id='variants'
-            onChange={(e) => setVariant(e.target.value)}
+            onChange={(e) =>
+              setProductData({ ...productData, variant: e.target.value })
+            }
           />
           <button
             onClick={(e) => {
               e.preventDefault();
-              setVariants((prevVariants) => [...prevVariants, variant]);
+              const newVariants = [
+                ...productData.variants,
+                productData.variant,
+              ];
+              setProductData({ ...productData, variants: newVariants });
             }}
           >
             Add variant
           </button>
           <ul>
-            {product.variants.map((variant) => (
+            {productData.variants.map((variant) => (
               <li key={variant}>{variant}</li>
             ))}
           </ul>
@@ -221,7 +249,12 @@ const EditProduct = () => {
             step='0.01'
             required
             defaultValue={product.price}
-            onChange={(e) => setPrice(parseFloat(e.target.value))}
+            onChange={(e) =>
+              setProductData({
+                ...productData,
+                price: parseFloat(e.target.value),
+              })
+            }
           />
           <button type='submit'>Submit</button>
         </form>
