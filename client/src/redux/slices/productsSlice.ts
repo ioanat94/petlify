@@ -1,5 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+import {
+  createProductThunk,
+  deleteProductThunk,
+  fetchProductsThunk,
+  fetchProductThunk,
+  updateProductThunk,
+} from 'redux/services/product.service';
 
 export type Product = {
   _id?: string;
@@ -29,11 +35,6 @@ export type UpdatedProduct = {
   price?: number;
 };
 
-type PutType = {
-  productId: string;
-  updatedProduct: UpdatedProduct;
-};
-
 export interface ProductsState {
   allProducts: Product[];
   singleProduct: Product;
@@ -57,97 +58,6 @@ const initialState: ProductsState = {
   },
   isLoading: false,
 };
-
-export const fetchProductsThunk = createAsyncThunk(
-  'products/fetch',
-  async () => {
-    try {
-      const res = await axios.get('http://localhost:4000/api/v1/products');
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const fetchProductThunk = createAsyncThunk(
-  'product/fetch',
-  async (productId: string) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:4000/api/v1/products/${productId}`
-      );
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const createProductThunk = createAsyncThunk(
-  'product/create',
-  async (product: Product) => {
-    try {
-      const res = await axios.post(
-        `http://localhost:4000/api/v1/products/`,
-        product
-      );
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const updateProductThunk = createAsyncThunk(
-  'product/update',
-  async (data: PutType) => {
-    try {
-      const { productId, updatedProduct } = data;
-      const res = await axios.put(
-        `http://localhost:4000/api/v1/products/${productId}`,
-        updatedProduct
-      );
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const deleteProductThunk = createAsyncThunk(
-  'product/delete',
-  async (productId: string) => {
-    try {
-      const res = await axios.delete(
-        `http://localhost:4000/api/v1/products/${productId}`
-      );
-
-      return {
-        data: productId,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
 
 export const productsSlice = createSlice({
   name: 'products',

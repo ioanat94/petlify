@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
-  Admin,
   fetchAdminThunk,
   updateAdminThunk,
-} from 'redux/slices/adminsSlice';
+} from 'redux/services/admin.service';
+import { Admin } from 'redux/slices/adminsSlice';
 import { RootState } from 'redux/store';
 
 const EditAdmin = () => {

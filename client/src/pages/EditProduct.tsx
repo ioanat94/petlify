@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
   fetchProductThunk,
   updateProductThunk,
-} from 'redux/slices/productsSlice';
+} from 'redux/services/product.service';
 import { RootState } from 'redux/store';
 
 const EditProduct = () => {

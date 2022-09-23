@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { fetchUserThunk } from 'redux/slices/usersSlice';
+import { fetchUserThunk } from 'redux/services/user.service';
 import { RootState } from 'redux/store';
 
 const User = () => {

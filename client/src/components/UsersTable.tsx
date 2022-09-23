@@ -4,8 +4,8 @@ import {
   deleteUserThunk,
   fetchUsersThunk,
   updateUserThunk,
-  User,
-} from 'redux/slices/usersSlice';
+} from 'redux/services/user.service';
+import { User } from 'redux/slices/usersSlice';
 import { RootState } from 'redux/store';
 
 const UsersTable = () => {

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch } from 'redux/hooks';
-import { Admin, createAdminThunk } from 'redux/slices/adminsSlice';
+import { createAdminThunk } from 'redux/services/admin.service';
+import { Admin } from 'redux/slices/adminsSlice';
 
 const AddAdminPopup = () => {
   const [adminData, setAdminData] = useState<Admin>({

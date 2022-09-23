@@ -1,5 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+import {
+  createUserThunk,
+  deleteUserThunk,
+  fetchUsersThunk,
+  fetchUserThunk,
+  updateUserThunk,
+} from 'redux/services/user.service';
 
 export type User = {
   _id?: string;
@@ -17,11 +23,6 @@ export type UpdatedUser = {
   email?: string;
   password?: string;
   isBanned?: boolean;
-};
-
-type PutType = {
-  userId: string;
-  updatedUser: UpdatedUser;
 };
 
 export interface UsersState {
@@ -42,91 +43,6 @@ const initialState: UsersState = {
   },
   isLoading: false,
 };
-
-export const fetchUsersThunk = createAsyncThunk('users/fetch', async () => {
-  try {
-    const res = await axios.get('http://localhost:4000/api/v1/users');
-
-    return {
-      data: res.data,
-      status: res.status,
-    };
-  } catch (error) {
-    throw error;
-  }
-});
-
-export const fetchUserThunk = createAsyncThunk(
-  'user/fetch',
-  async (userId: string) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:4000/api/v1/users/${userId}`
-      );
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const createUserThunk = createAsyncThunk(
-  'user/create',
-  async (user: User) => {
-    try {
-      const res = await axios.post(`http://localhost:4000/api/v1/users/`, user);
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const updateUserThunk = createAsyncThunk(
-  'user/update',
-  async (data: PutType) => {
-    try {
-      const { userId, updatedUser } = data;
-      const res = await axios.put(
-        `http://localhost:4000/api/v1/users/${userId}`,
-        updatedUser
-      );
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const deleteUserThunk = createAsyncThunk(
-  'user/delete',
-  async (userId: string) => {
-    try {
-      const res = await axios.delete(
-        `http://localhost:4000/api/v1/users/${userId}`
-      );
-
-      return {
-        data: userId,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
 
 export const usersSlice = createSlice({
   name: 'users',

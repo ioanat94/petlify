@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
   deleteProductThunk,
   fetchProductsThunk,
-  Product,
-} from 'redux/slices/productsSlice';
+} from 'redux/services/product.service';
+import { Product } from 'redux/slices/productsSlice';
 import { RootState } from 'redux/store';
 
 const ProductsTable = () => {

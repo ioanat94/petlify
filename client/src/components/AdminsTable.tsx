@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
-  Admin,
   deleteAdminThunk,
   fetchAdminsThunk,
-} from 'redux/slices/adminsSlice';
+} from 'redux/services/admin.service';
+import { Admin } from 'redux/slices/adminsSlice';
 import { RootState } from 'redux/store';
 
 const AdminsTable = () => {

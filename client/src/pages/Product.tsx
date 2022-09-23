@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { fetchProductThunk } from 'redux/slices/productsSlice';
+import { fetchProductThunk } from 'redux/services/product.service';
 import { RootState } from 'redux/store';
 
 const Product = () => {

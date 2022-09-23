@@ -1,5 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+import {
+  createAdminThunk,
+  deleteAdminThunk,
+  fetchAdminsThunk,
+  fetchAdminThunk,
+  updateAdminThunk,
+} from 'redux/services/admin.service';
 
 export type Admin = {
   _id?: string;
@@ -17,11 +23,6 @@ export type UpdatedAdmin = {
   email?: string;
   password?: string;
   roles?: string[];
-};
-
-type PutType = {
-  adminId: string;
-  updatedAdmin: UpdatedAdmin;
 };
 
 export interface AdminsState {
@@ -42,94 +43,6 @@ const initialState: AdminsState = {
   },
   isLoading: false,
 };
-
-export const fetchAdminsThunk = createAsyncThunk('admins/fetch', async () => {
-  try {
-    const res = await axios.get('http://localhost:4000/api/v1/admins');
-
-    return {
-      data: res.data,
-      status: res.status,
-    };
-  } catch (error) {
-    throw error;
-  }
-});
-
-export const fetchAdminThunk = createAsyncThunk(
-  'admin/fetch',
-  async (adminId: string) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:4000/api/v1/admins/${adminId}`
-      );
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const createAdminThunk = createAsyncThunk(
-  'admin/create',
-  async (admin: Admin) => {
-    try {
-      const res = await axios.post(
-        `http://localhost:4000/api/v1/admins/`,
-        admin
-      );
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const updateAdminThunk = createAsyncThunk(
-  'admin/update',
-  async (data: PutType) => {
-    try {
-      const { adminId, updatedAdmin } = data;
-      const res = await axios.put(
-        `http://localhost:4000/api/v1/admins/${adminId}`,
-        updatedAdmin
-      );
-
-      return {
-        data: res.data,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-export const deleteAdminThunk = createAsyncThunk(
-  'admin/delete',
-  async (adminId: string) => {
-    try {
-      const res = await axios.delete(
-        `http://localhost:4000/api/v1/admins/${adminId}`
-      );
-
-      return {
-        data: adminId,
-        status: res.status,
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-);
 
 export const adminsSlice = createSlice({
   name: 'admins',

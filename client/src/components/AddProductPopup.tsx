@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from 'redux/hooks';
-import { createProductThunk } from 'redux/slices/productsSlice';
+import { createProductThunk } from 'redux/services/product.service';
 
 export type ProductData = {
   name: string;
