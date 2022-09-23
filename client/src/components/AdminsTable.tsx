@@ -19,7 +19,6 @@ const AdminsTable = () => {
 
   const handleDelete = (adminId: string) => {
     dispatch(deleteAdminThunk(adminId));
-    window.location.reload();
   };
 
   const handleRenderRows = (admins: Admin[]) => {

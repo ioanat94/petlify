@@ -19,7 +19,6 @@ const UsersTable = () => {
 
   const handleDelete = (userId: string) => {
     dispatch(deleteUserThunk(userId));
-    window.location.reload();
   };
 
   const handleBan = (userId: string, isBanned: boolean) => {
@@ -30,7 +29,6 @@ const UsersTable = () => {
 
     const data = { userId: userId, updatedUser: updatedUser };
     dispatch(updateUserThunk(data));
-    window.location.reload();
   };
 
   const handleRenderRows = (users: User[]) => {

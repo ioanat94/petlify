@@ -21,7 +21,6 @@ const ProductsTable = () => {
 
   const handleDelete = (productId: string) => {
     dispatch(deleteProductThunk(productId));
-    window.location.reload();
   };
 
   const handleRenderRows = (products: Product[]) => {
@@ -50,7 +49,13 @@ const ProductsTable = () => {
         <td>{product.price}€</td>
         <td>
           <Link to={`/admin/products/${product._id}`}>Edit</Link>
-          <button onClick={() => handleDelete(product._id!)}>Delete</button>
+          <button
+            onClick={() => {
+              handleDelete(product._id!);
+            }}
+          >
+            Delete
+          </button>
         </td>
       </tr>
     ));

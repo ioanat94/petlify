@@ -102,7 +102,7 @@ export const deleteAdminThunk = createAsyncThunk(
     );
 
     return {
-      data: res.data,
+      data: adminId,
       status: res.status,
     };
   }

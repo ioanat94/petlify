@@ -85,6 +85,8 @@ export const updateUserThunk = createAsyncThunk(
       updatedUser
     );
 
+    console.log(res.data);
+
     return {
       data: res.data,
       status: res.status,
@@ -100,7 +102,7 @@ export const deleteUserThunk = createAsyncThunk(
     );
 
     return {
-      data: res.data,
+      data: userId,
       status: res.status,
     };
   }
@@ -144,8 +146,11 @@ export const usersSlice = createSlice({
     builder.addCase(updateUserThunk.pending, (state: UsersState) => {
       state.isLoading = true;
     });
-    builder.addCase(updateUserThunk.fulfilled, (state: UsersState) => {
-      state.allUsers = [...state.allUsers];
+    builder.addCase(updateUserThunk.fulfilled, (state: UsersState, action) => {
+      const updatedUser = state.allUsers.find(
+        (user) => user._id === action.payload.data._id
+      )!;
+      updatedUser.isBanned = action.payload.data.isBanned;
       state.isLoading = false;
     });
     builder.addCase(deleteUserThunk.pending, (state: UsersState) => {

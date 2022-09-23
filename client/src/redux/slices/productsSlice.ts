@@ -123,7 +123,7 @@ export const deleteProductThunk = createAsyncThunk(
     );
 
     return {
-      data: res.data,
+      data: productId,
       status: res.status,
     };
   }
