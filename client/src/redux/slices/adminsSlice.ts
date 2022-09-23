@@ -7,7 +7,7 @@ export type Admin = {
   lastname: string;
   email: string;
   password: string;
-  role: string;
+  roles: string[];
 };
 
 export type UpdatedAdmin = {
@@ -16,7 +16,7 @@ export type UpdatedAdmin = {
   lastname?: string;
   email?: string;
   password?: string;
-  role?: string;
+  roles?: string[];
 };
 
 type PutType = {
@@ -38,7 +38,7 @@ const initialState: AdminsState = {
     lastname: '',
     email: '',
     password: '',
-    role: '',
+    roles: [],
   },
   isLoading: false,
 };
@@ -131,7 +131,7 @@ export const adminsSlice = createSlice({
         lastname: '',
         email: '',
         password: '',
-        role: '',
+        roles: [],
       };
       state.isLoading = true;
     });

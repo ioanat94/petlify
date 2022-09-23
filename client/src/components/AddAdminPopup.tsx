@@ -7,7 +7,7 @@ const AddAdminPopup = () => {
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [roles, setRoles] = useState<string[]>([]);
 
   const dispatch = useAppDispatch();
 
@@ -16,7 +16,16 @@ const AddAdminPopup = () => {
     setLastName('');
     setEmail('');
     setPassword('');
-    setRole('');
+    setRoles([]);
+  };
+
+  const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setRoles((prevRoles) => [...prevRoles, e.target.value]);
+    } else {
+      const newRoles = roles.filter((role) => role !== e.target.value);
+      setRoles(newRoles);
+    }
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
@@ -26,7 +35,7 @@ const AddAdminPopup = () => {
       lastname: lastname,
       email: email,
       password: password,
-      role: role,
+      roles: roles,
     };
     dispatch(createAdminThunk(newAdmin));
     e.target.reset();
@@ -63,13 +72,46 @@ const AddAdminPopup = () => {
         required
         onChange={(e) => setPassword(e.target.value)}
       />
-      <label htmlFor='role'>Role</label>
       <input
-        type='role'
-        id='role'
-        required
-        onChange={(e) => setRole(e.target.value)}
+        type='checkbox'
+        id='products-read'
+        name='roles'
+        value='products-read'
+        onChange={handleCheckbox}
       />
+      <label htmlFor='products-read'>Products - Read</label>
+      <input
+        type='checkbox'
+        id='products-write'
+        name='roles'
+        value='products-write'
+        onChange={handleCheckbox}
+      />
+      <label htmlFor='products-write'>Products - Write</label>
+      <input
+        type='checkbox'
+        id='users-read'
+        name='roles'
+        value='users-read'
+        onChange={handleCheckbox}
+      />
+      <label htmlFor='users-read'>Users - Read</label>
+      <input
+        type='checkbox'
+        id='users-write'
+        name='roles'
+        value='users-write'
+        onChange={handleCheckbox}
+      />
+      <label htmlFor='users-write'>Users - Write</label>
+      <input
+        type='checkbox'
+        id='admins-read'
+        name='roles'
+        value='admins-read'
+        onChange={handleCheckbox}
+      />
+      <label htmlFor='admins-read'>Admins - Read</label>
       <button type='submit'>Submit</button>
     </form>
   );

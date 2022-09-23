@@ -193,6 +193,7 @@ const EditProduct = () => {
             name='sizes'
             value='small'
             onChange={handleCheckbox}
+            defaultChecked={product.sizes.includes('small') ? true : false}
           />
           <label htmlFor='small'>Small</label>
           <input
@@ -201,6 +202,7 @@ const EditProduct = () => {
             name='sizes'
             value='medium'
             onChange={handleCheckbox}
+            defaultChecked={product.sizes.includes('medium') ? true : false}
           />
           <label htmlFor='medium'>Medium</label>
           <input
@@ -209,6 +211,7 @@ const EditProduct = () => {
             name='sizes'
             value='large'
             onChange={handleCheckbox}
+            defaultChecked={product.sizes.includes('large') ? true : false}
           />
           <label htmlFor='large'>Large</label>
           <label htmlFor='price'>Price</label>

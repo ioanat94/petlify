@@ -27,8 +27,16 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  role: {
-    type: String,
+  roles: {
+    type: [String],
+    enum: [
+      'products-read',
+      'products-write',
+      'users-read',
+      'users-write',
+      'admins-read',
+      'admins-write',
+    ],
     required: true,
   },
 })

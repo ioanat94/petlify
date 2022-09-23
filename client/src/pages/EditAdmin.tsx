@@ -14,7 +14,7 @@ const EditAdmin = () => {
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [roles, setRoles] = useState<string[]>([]);
 
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -24,6 +24,15 @@ const EditAdmin = () => {
     dispatch(fetchAdminThunk(adminId));
   }, [dispatch, adminId]);
 
+  const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setRoles((prevRoles) => [...prevRoles, e.target.value]);
+    } else {
+      const newRoless = roles.filter((role) => role !== e.target.value);
+      setRoles(newRoless);
+    }
+  };
+
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const updatedAdmin = {
@@ -31,7 +40,7 @@ const EditAdmin = () => {
       lastname: lastname,
       email: email,
       password: password,
-      role: role,
+      roles: roles,
     };
     const data = { adminId: adminId, updatedAdmin: updatedAdmin };
     dispatch(updateAdminThunk(data));
@@ -73,14 +82,64 @@ const EditAdmin = () => {
             defaultValue={admin.password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label htmlFor='role'>Role</label>
           <input
-            type='role'
-            id='role'
-            required
-            defaultValue={admin.role}
-            onChange={(e) => setRole(e.target.value)}
+            type='checkbox'
+            id='products-read'
+            name='roles'
+            value='products-read'
+            onChange={handleCheckbox}
+            defaultChecked={
+              admin.roles.includes('products-read') ? true : false
+            }
           />
+          <label htmlFor='products-read'>Products - Read</label>
+          <input
+            type='checkbox'
+            id='products-write'
+            name='roles'
+            value='products-write'
+            onChange={handleCheckbox}
+            defaultChecked={
+              admin.roles.includes('products-write') ? true : false
+            }
+          />
+          <label htmlFor='products-write'>Products - Write</label>
+          <input
+            type='checkbox'
+            id='users-read'
+            name='roles'
+            value='users-read'
+            onChange={handleCheckbox}
+            defaultChecked={admin.roles.includes('users-read') ? true : false}
+          />
+          <label htmlFor='users-read'>Users - Read</label>
+          <input
+            type='checkbox'
+            id='users-write'
+            name='roles'
+            value='users-write'
+            onChange={handleCheckbox}
+            defaultChecked={admin.roles.includes('users-write') ? true : false}
+          />
+          <label htmlFor='users-write'>Users - Write</label>
+          <input
+            type='checkbox'
+            id='admins-read'
+            name='roles'
+            value='admins-read'
+            onChange={handleCheckbox}
+            defaultChecked={admin.roles.includes('admins-read') ? true : false}
+          />
+          <label htmlFor='admins-read'>Admins - Read</label>
+          <input
+            type='checkbox'
+            id='admins-write'
+            name='roles'
+            value='admins-write'
+            onChange={handleCheckbox}
+            defaultChecked={admin.roles.includes('admins-write') ? true : false}
+          />
+          <label htmlFor='admins-write'>Admins - Write</label>
           <button type='submit'>Submit</button>
         </form>
       )}

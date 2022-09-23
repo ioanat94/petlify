@@ -29,7 +29,13 @@ const AdminsTable = () => {
         <td>{admin.firstname}</td>
         <td>{admin.lastname}</td>
         <td>{admin.email}</td>
-        <td>{admin.role}</td>
+        <td>
+          <ul>
+            {admin.roles.map((role) => (
+              <li>{role}</li>
+            ))}
+          </ul>
+        </td>
         <td>
           <Link to={`/admin/admins/${admin._id}`}>Edit</Link>
           <button onClick={() => handleDelete(admin._id!)}>Delete</button>
