@@ -11,14 +11,14 @@ export const createAdmin = async (
   next: NextFunction
 ) => {
   try {
-    const { firstname, lastname, email, password, role } = req.body
+    const { firstname, lastname, email, password, roles } = req.body
 
     const admin = new Admin({
       firstname,
       lastname,
       email,
       password,
-      role,
+      roles,
     })
 
     await adminService.create(admin)

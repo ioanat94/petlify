@@ -5,7 +5,7 @@ export type AdminDocument = Document & {
   lastname: string
   email: string
   password: string
-  role: string
+  roles: string[]
 }
 
 const adminSchema = new mongoose.Schema({

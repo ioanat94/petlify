@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { fetchAdminThunk, updateAdminThunk } from 'redux/slices/adminsSlice';
+import {
+  Admin,
+  fetchAdminThunk,
+  updateAdminThunk,
+} from 'redux/slices/adminsSlice';
 import { RootState } from 'redux/store';
 
 const EditAdmin = () => {
@@ -10,11 +14,13 @@ const EditAdmin = () => {
     (state: RootState) => state.admins.isLoading
   );
 
-  const [firstname, setFirstName] = useState('');
-  const [lastname, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [roles, setRoles] = useState<string[]>([]);
+  const [adminData, setAdminData] = useState<Admin>({
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    roles: [],
+  });
 
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -26,21 +32,25 @@ const EditAdmin = () => {
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      setRoles((prevRoles) => [...prevRoles, e.target.value]);
+      const newRoles = [...adminData.roles, e.target.value];
+      console.log(newRoles);
+      setAdminData({ ...adminData, roles: newRoles });
     } else {
-      const newRoless = roles.filter((role) => role !== e.target.value);
-      setRoles(newRoless);
+      const newRoles = adminData.roles.filter(
+        (role) => role !== e.target.value
+      );
+      setAdminData({ ...adminData, roles: newRoles });
     }
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const updatedAdmin = {
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      password: password,
-      roles: roles,
+      firstname: adminData.firstname,
+      lastname: adminData.lastname,
+      email: adminData.email,
+      password: adminData.password,
+      roles: adminData.roles,
     };
     const data = { adminId: adminId, updatedAdmin: updatedAdmin };
     dispatch(updateAdminThunk(data));
@@ -56,7 +66,9 @@ const EditAdmin = () => {
             id='firstname'
             required
             defaultValue={admin.firstname}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e) =>
+              setAdminData({ ...adminData, firstname: e.target.value })
+            }
           />
           <label htmlFor='lastname'>Last Name</label>
           <input
@@ -64,7 +76,9 @@ const EditAdmin = () => {
             id='lastname'
             required
             defaultValue={admin.lastname}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) =>
+              setAdminData({ ...adminData, lastname: e.target.value })
+            }
           />
           <label htmlFor='email'>Email</label>
           <input
@@ -72,7 +86,9 @@ const EditAdmin = () => {
             id='email'
             required
             defaultValue={admin.email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) =>
+              setAdminData({ ...adminData, email: e.target.value })
+            }
           />
           <label htmlFor='password'>Password</label>
           <input
@@ -80,7 +96,9 @@ const EditAdmin = () => {
             id='password'
             required
             defaultValue={admin.password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) =>
+              setAdminData({ ...adminData, password: e.target.value })
+            }
           />
           <input
             type='checkbox'

@@ -1,41 +1,49 @@
 import { useState } from 'react';
 import { useAppDispatch } from 'redux/hooks';
-import { createAdminThunk } from 'redux/slices/adminsSlice';
+import { Admin, createAdminThunk } from 'redux/slices/adminsSlice';
 
 const AddAdminPopup = () => {
-  const [firstname, setFirstName] = useState('');
-  const [lastname, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [roles, setRoles] = useState<string[]>([]);
+  const [adminData, setAdminData] = useState<Admin>({
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    roles: [],
+  });
 
   const dispatch = useAppDispatch();
 
   const resetState = () => {
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPassword('');
-    setRoles([]);
+    setAdminData({
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+      roles: [],
+    });
   };
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      setRoles((prevRoles) => [...prevRoles, e.target.value]);
+      const newRoles = [...adminData.roles, e.target.value];
+      console.log(newRoles);
+      setAdminData({ ...adminData, roles: newRoles });
     } else {
-      const newRoles = roles.filter((role) => role !== e.target.value);
-      setRoles(newRoles);
+      const newRoles = adminData.roles.filter(
+        (role) => role !== e.target.value
+      );
+      setAdminData({ ...adminData, roles: newRoles });
     }
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newAdmin = {
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      password: password,
-      roles: roles,
+      firstname: adminData.firstname,
+      lastname: adminData.lastname,
+      email: adminData.email,
+      password: adminData.password,
+      roles: adminData.roles,
     };
     dispatch(createAdminThunk(newAdmin));
     e.target.reset();
@@ -49,28 +57,34 @@ const AddAdminPopup = () => {
         type='text'
         id='firstname'
         required
-        onChange={(e) => setFirstName(e.target.value)}
+        onChange={(e) =>
+          setAdminData({ ...adminData, firstname: e.target.value })
+        }
       />
       <label htmlFor='lastname'>Last Name</label>
       <input
         type='text'
         id='lastname'
         required
-        onChange={(e) => setLastName(e.target.value)}
+        onChange={(e) =>
+          setAdminData({ ...adminData, lastname: e.target.value })
+        }
       />
       <label htmlFor='email'>Email</label>
       <input
         type='email'
         id='email'
         required
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setAdminData({ ...adminData, email: e.target.value })}
       />
       <label htmlFor='password'>Password</label>
       <input
         type='password'
         id='password'
         required
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) =>
+          setAdminData({ ...adminData, password: e.target.value })
+        }
       />
       <input
         type='checkbox'
