@@ -1,12 +1,13 @@
-import { ProductData } from 'components/AddProductPopup/AddProductPopup';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
   fetchProductThunk,
   updateProductThunk,
 } from 'redux/services/product.service';
 import { RootState } from 'redux/store';
+import { ProductData } from 'components/AddProductPopup/AddProductPopup';
 
 const EditProduct = () => {
   const product = useAppSelector(

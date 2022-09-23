@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 import AddAdminPopup from 'components/AddAdminPopup/AddAdminPopup';
 import AdminsTable from 'components/AdminsTable/AdminsTable';
-import { useState } from 'react';
 
 const AdminManagement = () => {
   const [isVisible, setIsVisible] = useState(false);

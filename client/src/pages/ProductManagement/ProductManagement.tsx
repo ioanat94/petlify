@@ -1,6 +1,7 @@
+import { useState } from 'react';
+
 import AddProductPopup from 'components/AddProductPopup/AddProductPopup';
 import ProductsTable from 'components/ProductsTable/ProductsTable';
-import { useState } from 'react';
 
 const ProductManagement = () => {
   const [isVisible, setIsVisible] = useState(false);

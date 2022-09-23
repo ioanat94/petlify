@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
+
 import { fetchProductsThunk } from 'redux/services/product.service';
 import { Product } from 'redux/slices/productsSlice';
 import { RootState } from 'redux/store';
