@@ -11,6 +11,15 @@ import { RootState } from 'redux/store';
 const UsersTable = () => {
   const users = useAppSelector((state: RootState) => state.users.allUsers);
 
+  const tableHeaders = [
+    'ID',
+    'First Name',
+    'Last Name',
+    'Email',
+    'Banned',
+    'Actions',
+  ];
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -29,6 +38,10 @@ const UsersTable = () => {
 
     const data = { userId: userId, updatedUser: updatedUser };
     dispatch(updateUserThunk(data));
+  };
+
+  const handleRenderHeaders = (tableHeaders: string[]) => {
+    return tableHeaders.map((header) => <td key={header}>{header}</td>);
   };
 
   const handleRenderRows = (users: User[]) => {
@@ -52,14 +65,7 @@ const UsersTable = () => {
   return (
     <table>
       <thead>
-        <tr>
-          <td>ID</td>
-          <td>First Name</td>
-          <td>Last Name</td>
-          <td>Email</td>
-          <td>Banned</td>
-          <td>Actions</td>
-        </tr>
+        <tr>{handleRenderHeaders(tableHeaders)}</tr>
       </thead>
       <tbody>{handleRenderRows(users)}</tbody>
     </table>

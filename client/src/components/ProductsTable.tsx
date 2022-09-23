@@ -13,6 +13,17 @@ const ProductsTable = () => {
     (state: RootState) => state.products.allProducts
   );
 
+  const tableHeaders = [
+    'ID',
+    'Image',
+    'Name',
+    'Categories',
+    'Variants',
+    'Sizes',
+    'Price',
+    'Actions',
+  ];
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -21,6 +32,10 @@ const ProductsTable = () => {
 
   const handleDelete = (productId: string) => {
     dispatch(deleteProductThunk(productId));
+  };
+
+  const handleRenderHeaders = (tableHeaders: string[]) => {
+    return tableHeaders.map((header) => <td key={header}>{header}</td>);
   };
 
   const handleRenderRows = (products: Product[]) => {
@@ -64,16 +79,7 @@ const ProductsTable = () => {
   return (
     <table>
       <thead>
-        <tr>
-          <td>ID</td>
-          <td>Image</td>
-          <td>Name</td>
-          <td>Categories</td>
-          <td>Variants</td>
-          <td>Sizes</td>
-          <td>Price</td>
-          <td>Actions</td>
-        </tr>
+        <tr>{handleRenderHeaders(tableHeaders)}</tr>
       </thead>
       <tbody>{handleRenderRows(products)}</tbody>
     </table>
