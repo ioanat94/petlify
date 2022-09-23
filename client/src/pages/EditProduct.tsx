@@ -156,7 +156,7 @@ const EditProduct = () => {
           />
           <p>Categories</p>
           <p>Pet</p>
-          <div onChange={handleSetPet}>
+          <div>
             <input
               type='radio'
               id='cats'
@@ -164,6 +164,7 @@ const EditProduct = () => {
               value='cats'
               required
               defaultChecked={checkPet.cats()}
+              onChange={handleSetPet}
             />
             <label htmlFor='cats'>Cats</label>
             <input
@@ -172,11 +173,12 @@ const EditProduct = () => {
               name='pet'
               value='dogs'
               defaultChecked={checkPet.dogs()}
+              onChange={handleSetPet}
             />
             <label htmlFor='dogs'>Dogs</label>
           </div>
           <p>Subcategory</p>
-          <div onChange={handleSetSubcategory}>
+          <div>
             <input
               type='radio'
               id='food'
@@ -184,6 +186,7 @@ const EditProduct = () => {
               value='food'
               defaultChecked={checkSubcategory.food()}
               required
+              onChange={handleSetSubcategory}
             />
             <label htmlFor='food'>Food</label>
             <input
@@ -192,6 +195,7 @@ const EditProduct = () => {
               name='subcategory'
               value='toys'
               defaultChecked={checkSubcategory.toys()}
+              onChange={handleSetSubcategory}
             />
             <label htmlFor='toys'>Toys</label>
             <input
@@ -200,6 +204,7 @@ const EditProduct = () => {
               name='subcategory'
               value='hygene'
               defaultChecked={checkSubcategory.hygene()}
+              onChange={handleSetSubcategory}
             />
             <label htmlFor='hygene'>Hygene</label>
             <input
@@ -208,6 +213,7 @@ const EditProduct = () => {
               name='subcategory'
               value='beds'
               defaultChecked={checkSubcategory.beds()}
+              onChange={handleSetSubcategory}
             />
             <label htmlFor='beds'>Beds</label>
             <input
@@ -216,6 +222,7 @@ const EditProduct = () => {
               name='subcategory'
               value='other'
               defaultChecked={checkSubcategory.other()}
+              onChange={handleSetSubcategory}
             />
             <label htmlFor='other'>Other</label>
           </div>

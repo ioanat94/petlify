@@ -130,29 +130,67 @@ const AddProductPopup = () => {
       <input type='text' id='desc' required onChange={handleSetDescription} />
       <p>Categories</p>
       <p>Pet</p>
-      <div onChange={handleSetPet}>
-        <input type='radio' id='cats' name='pet' value='cats' required />
+      <div>
+        <input
+          type='radio'
+          id='cats'
+          name='pet'
+          value='cats'
+          required
+          onChange={handleSetPet}
+        />
         <label htmlFor='cats'>Cats</label>
-        <input type='radio' id='dogs' name='pet' value='dogs' />
+        <input
+          type='radio'
+          id='dogs'
+          name='pet'
+          value='dogs'
+          onChange={handleSetPet}
+        />
         <label htmlFor='dogs'>Dogs</label>
       </div>
       <p>Subcategory</p>
-      <div onChange={handleSetSubcategory}>
+      <div>
         <input
           type='radio'
           id='food'
           name='subcategory'
           value='food'
           required
+          onChange={handleSetSubcategory}
         />
         <label htmlFor='food'>Food</label>
-        <input type='radio' id='toys' name='subcategory' value='toys' />
+        <input
+          type='radio'
+          id='toys'
+          name='subcategory'
+          value='toys'
+          onChange={handleSetSubcategory}
+        />
         <label htmlFor='toys'>Toys</label>
-        <input type='radio' id='hygene' name='subcategory' value='hygene' />
+        <input
+          type='radio'
+          id='hygene'
+          name='subcategory'
+          value='hygene'
+          onChange={handleSetSubcategory}
+        />
         <label htmlFor='hygene'>Hygene</label>
-        <input type='radio' id='beds' name='subcategory' value='beds' />
+        <input
+          type='radio'
+          id='beds'
+          name='subcategory'
+          value='beds'
+          onChange={handleSetSubcategory}
+        />
         <label htmlFor='beds'>Beds</label>
-        <input type='radio' id='other' name='subcategory' value='other' />
+        <input
+          type='radio'
+          id='other'
+          name='subcategory'
+          value='other'
+          onChange={handleSetSubcategory}
+        />
         <label htmlFor='other'>Other</label>
       </div>
       <label htmlFor='variants'>Variants</label>
