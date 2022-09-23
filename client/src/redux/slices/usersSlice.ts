@@ -44,67 +44,87 @@ const initialState: UsersState = {
 };
 
 export const fetchUsersThunk = createAsyncThunk('users/fetch', async () => {
-  const res = await axios.get('http://localhost:4000/api/v1/users');
-
-  return {
-    data: res.data,
-    status: res.status,
-  };
-});
-
-export const fetchUserThunk = createAsyncThunk(
-  'user/fetch',
-  async (userId: string) => {
-    const res = await axios.get(`http://localhost:4000/api/v1/users/${userId}`);
+  try {
+    const res = await axios.get('http://localhost:4000/api/v1/users');
 
     return {
       data: res.data,
       status: res.status,
     };
+  } catch (error) {
+    throw error;
+  }
+});
+
+export const fetchUserThunk = createAsyncThunk(
+  'user/fetch',
+  async (userId: string) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:4000/api/v1/users/${userId}`
+      );
+
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
 export const createUserThunk = createAsyncThunk(
   'user/create',
   async (user: User) => {
-    const res = await axios.post(`http://localhost:4000/api/v1/users/`, user);
+    try {
+      const res = await axios.post(`http://localhost:4000/api/v1/users/`, user);
 
-    return {
-      data: res.data,
-      status: res.status,
-    };
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
 export const updateUserThunk = createAsyncThunk(
   'user/update',
   async (data: PutType) => {
-    const { userId, updatedUser } = data;
-    const res = await axios.put(
-      `http://localhost:4000/api/v1/users/${userId}`,
-      updatedUser
-    );
+    try {
+      const { userId, updatedUser } = data;
+      const res = await axios.put(
+        `http://localhost:4000/api/v1/users/${userId}`,
+        updatedUser
+      );
 
-    console.log(res.data);
-
-    return {
-      data: res.data,
-      status: res.status,
-    };
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
 export const deleteUserThunk = createAsyncThunk(
   'user/delete',
   async (userId: string) => {
-    const res = await axios.delete(
-      `http://localhost:4000/api/v1/users/${userId}`
-    );
+    try {
+      const res = await axios.delete(
+        `http://localhost:4000/api/v1/users/${userId}`
+      );
 
-    return {
-      data: userId,
-      status: res.status,
-    };
+      return {
+        data: userId,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
@@ -119,6 +139,10 @@ export const usersSlice = createSlice({
     });
     builder.addCase(fetchUsersThunk.fulfilled, (state: UsersState, action) => {
       state.allUsers = action.payload.data;
+      state.isLoading = false;
+    });
+    builder.addCase(fetchUsersThunk.rejected, (state: UsersState, error) => {
+      console.log(error);
       state.isLoading = false;
     });
     builder.addCase(fetchUserThunk.pending, (state: UsersState) => {
@@ -136,11 +160,19 @@ export const usersSlice = createSlice({
       state.singleUser = action.payload.data;
       state.isLoading = false;
     });
+    builder.addCase(fetchUserThunk.rejected, (state: UsersState, error) => {
+      console.log(error);
+      state.isLoading = false;
+    });
     builder.addCase(createUserThunk.pending, (state: UsersState) => {
       state.isLoading = true;
     });
     builder.addCase(createUserThunk.fulfilled, (state: UsersState, action) => {
       state.allUsers = [...state.allUsers, action.payload.data];
+      state.isLoading = false;
+    });
+    builder.addCase(createUserThunk.rejected, (state: UsersState, error) => {
+      console.log(error);
       state.isLoading = false;
     });
     builder.addCase(updateUserThunk.pending, (state: UsersState) => {
@@ -153,6 +185,10 @@ export const usersSlice = createSlice({
       updatedUser.isBanned = action.payload.data.isBanned;
       state.isLoading = false;
     });
+    builder.addCase(updateUserThunk.rejected, (state: UsersState, error) => {
+      console.log(error);
+      state.isLoading = false;
+    });
     builder.addCase(deleteUserThunk.pending, (state: UsersState) => {
       state.isLoading = true;
     });
@@ -160,6 +196,10 @@ export const usersSlice = createSlice({
       state.allUsers = state.allUsers.filter(
         (user) => user._id !== action.payload.data
       );
+      state.isLoading = false;
+    });
+    builder.addCase(deleteUserThunk.rejected, (state: UsersState, error) => {
+      console.log(error);
       state.isLoading = false;
     });
   },

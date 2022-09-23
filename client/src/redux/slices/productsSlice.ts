@@ -61,71 +61,91 @@ const initialState: ProductsState = {
 export const fetchProductsThunk = createAsyncThunk(
   'products/fetch',
   async () => {
-    const res = await axios.get('http://localhost:4000/api/v1/products');
+    try {
+      const res = await axios.get('http://localhost:4000/api/v1/products');
 
-    return {
-      data: res.data,
-      status: res.status,
-    };
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
 export const fetchProductThunk = createAsyncThunk(
   'product/fetch',
   async (productId: string) => {
-    const res = await axios.get(
-      `http://localhost:4000/api/v1/products/${productId}`
-    );
+    try {
+      const res = await axios.get(
+        `http://localhost:4000/api/v1/products/${productId}`
+      );
 
-    return {
-      data: res.data,
-      status: res.status,
-    };
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
 export const createProductThunk = createAsyncThunk(
   'product/create',
   async (product: Product) => {
-    const res = await axios.post(
-      `http://localhost:4000/api/v1/products/`,
-      product
-    );
+    try {
+      const res = await axios.post(
+        `http://localhost:4000/api/v1/products/`,
+        product
+      );
 
-    return {
-      data: res.data,
-      status: res.status,
-    };
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
 export const updateProductThunk = createAsyncThunk(
   'product/update',
   async (data: PutType) => {
-    const { productId, updatedProduct } = data;
-    const res = await axios.put(
-      `http://localhost:4000/api/v1/products/${productId}`,
-      updatedProduct
-    );
+    try {
+      const { productId, updatedProduct } = data;
+      const res = await axios.put(
+        `http://localhost:4000/api/v1/products/${productId}`,
+        updatedProduct
+      );
 
-    return {
-      data: res.data,
-      status: res.status,
-    };
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
 export const deleteProductThunk = createAsyncThunk(
   'product/delete',
   async (productId: string) => {
-    const res = await axios.delete(
-      `http://localhost:4000/api/v1/products/${productId}`
-    );
+    try {
+      const res = await axios.delete(
+        `http://localhost:4000/api/v1/products/${productId}`
+      );
 
-    return {
-      data: productId,
-      status: res.status,
-    };
+      return {
+        data: productId,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
@@ -142,6 +162,13 @@ export const productsSlice = createSlice({
       fetchProductsThunk.fulfilled,
       (state: ProductsState, action) => {
         state.allProducts = action.payload.data;
+        state.isLoading = false;
+      }
+    );
+    builder.addCase(
+      fetchProductsThunk.rejected,
+      (state: ProductsState, error) => {
+        console.log(error);
         state.isLoading = false;
       }
     );
@@ -168,6 +195,13 @@ export const productsSlice = createSlice({
         state.isLoading = false;
       }
     );
+    builder.addCase(
+      fetchProductThunk.rejected,
+      (state: ProductsState, error) => {
+        console.log(error);
+        state.isLoading = false;
+      }
+    );
     builder.addCase(createProductThunk.pending, (state: ProductsState) => {
       state.isLoading = true;
     });
@@ -178,6 +212,13 @@ export const productsSlice = createSlice({
         state.isLoading = false;
       }
     );
+    builder.addCase(
+      createProductThunk.rejected,
+      (state: ProductsState, error) => {
+        console.log(error);
+        state.isLoading = false;
+      }
+    );
     builder.addCase(updateProductThunk.pending, (state: ProductsState) => {
       state.isLoading = true;
     });
@@ -185,6 +226,13 @@ export const productsSlice = createSlice({
       state.allProducts = [...state.allProducts];
       state.isLoading = false;
     });
+    builder.addCase(
+      updateProductThunk.rejected,
+      (state: ProductsState, error) => {
+        console.log(error);
+        state.isLoading = false;
+      }
+    );
     builder.addCase(deleteProductThunk.pending, (state: ProductsState) => {
       state.isLoading = true;
     });
@@ -194,6 +242,13 @@ export const productsSlice = createSlice({
         state.allProducts = state.allProducts.filter(
           (product) => product._id !== action.payload.data
         );
+        state.isLoading = false;
+      }
+    );
+    builder.addCase(
+      deleteProductThunk.rejected,
+      (state: ProductsState, error) => {
+        console.log(error);
         state.isLoading = false;
       }
     );
