@@ -152,14 +152,6 @@ export const adminsSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(fetchAdminThunk.pending, (state: AdminsState) => {
-      state.singleAdmin = {
-        _id: '',
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        roles: [],
-      };
       state.isLoading = true;
     });
     builder.addCase(fetchAdminThunk.fulfilled, (state: AdminsState, action) => {

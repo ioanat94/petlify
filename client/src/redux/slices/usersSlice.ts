@@ -146,14 +146,6 @@ export const usersSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(fetchUserThunk.pending, (state: UsersState) => {
-      state.singleUser = {
-        _id: '',
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        isBanned: false,
-      };
       state.isLoading = true;
     });
     builder.addCase(fetchUserThunk.fulfilled, (state: UsersState, action) => {

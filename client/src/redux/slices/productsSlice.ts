@@ -173,19 +173,6 @@ export const productsSlice = createSlice({
       }
     );
     builder.addCase(fetchProductThunk.pending, (state: ProductsState) => {
-      state.singleProduct = {
-        _id: '',
-        name: '',
-        img: '',
-        description: '',
-        categories: {
-          pet: '',
-          subcategory: '',
-        },
-        variants: [],
-        sizes: [],
-        price: 0,
-      };
       state.isLoading = true;
     });
     builder.addCase(
