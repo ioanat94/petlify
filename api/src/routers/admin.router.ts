@@ -1,4 +1,6 @@
 import express from 'express'
+import { adminCreateSchema } from '../middlewares/validateForms'
+import { validate } from '../middlewares/validateForms'
 
 import {
   createAdmin,
@@ -11,7 +13,7 @@ import {
 const router = express.Router()
 
 // Every path we define here will get /api/v1/admins prefix
-router.post('/', createAdmin)
+router.post('/', validate(adminCreateSchema), createAdmin)
 router.get('/', findAll)
 router.get('/:adminId', findById)
 router.put('/:adminId', updateAdmin)
