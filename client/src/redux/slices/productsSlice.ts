@@ -120,10 +120,13 @@ export const productsSlice = createSlice({
     builder.addCase(updateProductThunk.pending, (state: ProductsState) => {
       state.isLoading = true;
     });
-    builder.addCase(updateProductThunk.fulfilled, (state: ProductsState) => {
-      state.allProducts = [...state.allProducts];
-      state.isLoading = false;
-    });
+    builder.addCase(
+      updateProductThunk.fulfilled,
+      (state: ProductsState, action) => {
+        state.singleProduct = action.payload.data;
+        state.isLoading = false;
+      }
+    );
     builder.addCase(
       updateProductThunk.rejected,
       (state: ProductsState, error) => {

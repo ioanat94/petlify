@@ -59,25 +59,41 @@ const EditAdmin = () => {
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      const newRoles = [...adminData.roles, e.target.value];
-      setAdminData({ ...adminData, roles: newRoles });
+      if (adminData.roles.length === 0) {
+        const newRoles = [...admin.roles, e.target.value];
+        setAdminData({ ...adminData, roles: newRoles });
+      } else {
+        const newRoles = [...adminData.roles, e.target.value];
+        setAdminData({ ...adminData, roles: newRoles });
+      }
     } else {
-      const newRoles = adminData.roles.filter(
-        (role) => role !== e.target.value
-      );
-      setAdminData({ ...adminData, roles: newRoles });
+      if (adminData.roles.length === 0) {
+        const newRoles = admin.roles.filter((size) => size !== e.target.value);
+        setAdminData({ ...adminData, roles: newRoles });
+      } else {
+        const newRoles = adminData.roles.filter(
+          (size) => size !== e.target.value
+        );
+        setAdminData({ ...adminData, roles: newRoles });
+      }
     }
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const updatedAdmin = {
+    const updatedAdmin: { [index: string]: any } = {
       firstname: adminData.firstname,
       lastname: adminData.lastname,
       email: adminData.email,
       password: adminData.password,
       roles: adminData.roles,
     };
+
+    Object.keys(updatedAdmin).forEach((key) => {
+      if (updatedAdmin[key] === '' || updatedAdmin[key].length === 0)
+        delete updatedAdmin[key];
+    });
+
     const data = { adminId: adminId, updatedAdmin: updatedAdmin };
     dispatch(updateAdminThunk(data));
   };
@@ -111,13 +127,7 @@ const EditAdmin = () => {
             onChange={handleSetEmail}
           />
           <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            id='password'
-            required
-            defaultValue={admin.password}
-            onChange={handleSetPassword}
-          />
+          <input type='password' id='password' onChange={handleSetPassword} />
           <input
             type='checkbox'
             id='products-read'

@@ -93,10 +93,13 @@ export const adminsSlice = createSlice({
     builder.addCase(updateAdminThunk.pending, (state: AdminsState) => {
       state.isLoading = true;
     });
-    builder.addCase(updateAdminThunk.fulfilled, (state: AdminsState) => {
-      state.allAdmins = [...state.allAdmins];
-      state.isLoading = false;
-    });
+    builder.addCase(
+      updateAdminThunk.fulfilled,
+      (state: AdminsState, action) => {
+        state.singleAdmin = action.payload.data;
+        state.isLoading = false;
+      }
+    );
     builder.addCase(updateAdminThunk.rejected, (state: AdminsState, error) => {
       console.log(error);
       state.isLoading = false;

@@ -1,3 +1,4 @@
+import { ProductData } from 'components/AddProductPopup/AddProductPopup';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -7,7 +8,6 @@ import {
   updateProductThunk,
 } from 'redux/services/product.service';
 import { RootState } from 'redux/store';
-import { ProductData } from 'components/AddProductPopup/AddProductPopup';
 
 const EditProduct = () => {
   const product = useAppSelector(
@@ -79,19 +79,31 @@ const EditProduct = () => {
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      const newSizes = [...productData.sizes, e.target.value];
-      setProductData({ ...productData, sizes: newSizes });
+      if (productData.sizes.length === 0) {
+        const newSizes = [...product.sizes, e.target.value];
+        setProductData({ ...productData, sizes: newSizes });
+      } else {
+        const newSizes = [...productData.sizes, e.target.value];
+        setProductData({ ...productData, sizes: newSizes });
+      }
     } else {
-      const newSizes = productData.sizes.filter(
-        (size) => size !== e.target.value
-      );
-      setProductData({ ...productData, sizes: newSizes });
+      if (productData.sizes.length === 0) {
+        const newSizes = product.sizes.filter(
+          (size) => size !== e.target.value
+        );
+        setProductData({ ...productData, sizes: newSizes });
+      } else {
+        const newSizes = productData.sizes.filter(
+          (size) => size !== e.target.value
+        );
+        setProductData({ ...productData, sizes: newSizes });
+      }
     }
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const updatedProduct = {
+    const updatedProduct: { [index: string]: any } = {
       name: productData.name,
       img: productData.img,
       description: productData.description,
@@ -103,6 +115,24 @@ const EditProduct = () => {
       sizes: productData.sizes,
       price: productData.price,
     };
+
+    Object.keys(updatedProduct.categories).forEach((key) => {
+      if (updatedProduct.categories[key] === '')
+        delete updatedProduct.categories[key];
+    });
+
+    if (Object.keys(updatedProduct.categories).length === 0)
+      delete updatedProduct.categories;
+
+    Object.keys(updatedProduct).forEach((key) => {
+      if (
+        updatedProduct[key] === '' ||
+        updatedProduct[key] === 0 ||
+        updatedProduct[key].length === 0
+      )
+        delete updatedProduct[key];
+    });
+
     const data = { productId: productId, updatedProduct: updatedProduct };
     dispatch(updateProductThunk(data));
   };
