@@ -12,6 +12,8 @@ module.exports = {
         'mainBlue': '#5a61cb',
         'mainYellow': '#f4cd57',
         'mainGrey': '#8c8c8c',
+        'adminBlue': '#0f172a',
+        'adminLightBlue': '#32a2d7',
       },
     },
   },

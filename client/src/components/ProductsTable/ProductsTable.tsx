@@ -41,36 +41,44 @@ const ProductsTable = () => {
 
   const handleRenderRows = (products: Product[]) => {
     return products.map((product) => (
-      <tr key={product._id}>
+      <tr key={product._id} className='h-28'>
         <td>{product._id}</td>
         <td>
-          <img src={product.img} alt='' width='100px' />
+          <img src={product.img} alt='' width='90px' />
         </td>
         <td>{product.name}</td>
         <td>
           <ul>
             {Object.values(product.categories).map((category) => (
-              <li key={category}>{category}</li>
+              <li key={category}>- {category}</li>
             ))}
           </ul>
         </td>
         <td>
           <ul>
             {product.variants.map((variant) => (
-              <li key={variant}>{variant}</li>
+              <li key={variant}>- {variant}</li>
             ))}
           </ul>
         </td>
-        <td>{product.sizes}</td>
-        <td>{product.price}€</td>
         <td>
-          <Link to={`/admin/products/${product._id}`}>Edit</Link>
+          <ul>
+            {product.sizes.map((size) => (
+              <li key={size}>- {size}</li>
+            ))}
+          </ul>
+        </td>
+        <td>{product.price}€</td>
+        <td className='flex gap-2 pt-10'>
+          <Link to={`/admin/products/${product._id}`}>
+            <img src={require('assets/edit.png')} alt='' width='24px' />
+          </Link>
           <button
             onClick={() => {
               handleDelete(product._id!);
             }}
           >
-            Delete
+            <img src={require('assets/delete.png')} alt='' width='24px' />
           </button>
         </td>
       </tr>
@@ -78,7 +86,7 @@ const ProductsTable = () => {
   };
 
   return (
-    <table>
+    <table className='min-w-[1000px]'>
       <thead>
         <tr>{handleRenderHeaders(tableHeaders)}</tr>
       </thead>

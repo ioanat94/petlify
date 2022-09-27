@@ -117,120 +117,199 @@ const AddProductPopup = () => {
 
   const handleRenderVariants = () => {
     return productData.variants.map((variant) => (
-      <li key={variant}>{variant}</li>
+      <span className='border border-adminLightBlue rounded px-3 py-1'>
+        {variant}
+      </span>
     ));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor='name'>Name</label>
-      <input type='text' id='name' required onChange={handleSetName} />
-      <label htmlFor='img'>Image URL</label>
-      <input type='text' id='img' required onChange={handleSetImg} />
-      <label htmlFor='desc'>Description</label>
-      <input type='text' id='desc' required onChange={handleSetDescription} />
-      <p>Categories</p>
-      <p>Pet</p>
-      <div>
+    <form
+      onSubmit={handleSubmit}
+      className='flex flex-col gap-4 border border-adminLightBlue rounded-xl px-10 py-6 w-max'
+    >
+      <div className='flex justify-between'>
+        <label htmlFor='name'>Name</label>
         <input
-          type='radio'
-          id='cats'
-          name='pet'
-          value='cats'
+          type='text'
+          id='name'
+          className='rounded text-black indent-2'
           required
-          onChange={handleSetPet}
+          onChange={handleSetName}
         />
-        <label htmlFor='cats'>Cats</label>
-        <input
-          type='radio'
-          id='dogs'
-          name='pet'
-          value='dogs'
-          onChange={handleSetPet}
-        />
-        <label htmlFor='dogs'>Dogs</label>
       </div>
-      <p>Subcategory</p>
-      <div>
+      <div className='flex justify-between'>
+        <label htmlFor='img'>Image URL</label>
         <input
-          type='radio'
-          id='food'
-          name='subcategory'
-          value='food'
+          type='text'
+          id='img'
+          className='rounded text-black indent-2'
           required
-          onChange={handleSetSubcategory}
+          onChange={handleSetImg}
         />
-        <label htmlFor='food'>Food</label>
-        <input
-          type='radio'
-          id='toys'
-          name='subcategory'
-          value='toys'
-          onChange={handleSetSubcategory}
-        />
-        <label htmlFor='toys'>Toys</label>
-        <input
-          type='radio'
-          id='hygene'
-          name='subcategory'
-          value='hygene'
-          onChange={handleSetSubcategory}
-        />
-        <label htmlFor='hygene'>Hygene</label>
-        <input
-          type='radio'
-          id='beds'
-          name='subcategory'
-          value='beds'
-          onChange={handleSetSubcategory}
-        />
-        <label htmlFor='beds'>Beds</label>
-        <input
-          type='radio'
-          id='other'
-          name='subcategory'
-          value='other'
-          onChange={handleSetSubcategory}
-        />
-        <label htmlFor='other'>Other</label>
       </div>
-      <label htmlFor='variants'>Variants</label>
-      <input type='text' id='variants' onChange={handleSetVariant} />
-      <button onClick={handleSetVariants}>Add variant</button>
-      <ul>{handleRenderVariants()}</ul>
-      <input
-        type='checkbox'
-        id='small'
-        name='sizes'
-        value='small'
-        onChange={handleCheckbox}
-      />
-      <label htmlFor='small'>Small</label>
-      <input
-        type='checkbox'
-        id='medium'
-        name='sizes'
-        value='medium'
-        onChange={handleCheckbox}
-      />
-      <label htmlFor='medium'>Medium</label>
-      <input
-        type='checkbox'
-        id='large'
-        name='sizes'
-        value='large'
-        onChange={handleCheckbox}
-      />
-      <label htmlFor='large'>Large</label>
-      <label htmlFor='price'>Price</label>
-      <input
-        type='number'
-        id='price'
-        step='0.01'
-        required
-        onChange={handleSetPrice}
-      />
-      <button type='submit'>Submit</button>
+      <div className='flex justify-between'>
+        <label htmlFor='desc'>Description</label>
+        <input
+          type='text'
+          id='desc'
+          className='rounded text-black indent-2'
+          required
+          onChange={handleSetDescription}
+        />
+      </div>
+      <div className='flex flex-col gap-2'>
+        <p>Categories</p>
+        <p>Pet</p>
+        <div className='flex gap-4'>
+          <div className='flex gap-2'>
+            <input
+              type='radio'
+              id='cats'
+              name='pet'
+              value='cats'
+              required
+              onChange={handleSetPet}
+            />
+            <label htmlFor='cats'>Cats</label>
+          </div>
+          <div className='flex gap-2'>
+            <input
+              type='radio'
+              id='dogs'
+              name='pet'
+              value='dogs'
+              onChange={handleSetPet}
+            />
+            <label htmlFor='dogs'>Dogs</label>
+          </div>
+        </div>
+        <p>Subcategory</p>
+        <div className='flex gap-4'>
+          <div className='flex gap-2'>
+            <input
+              type='radio'
+              id='food'
+              name='subcategory'
+              value='food'
+              required
+              onChange={handleSetSubcategory}
+            />
+            <label htmlFor='food'>Food</label>
+          </div>
+          <div className='flex gap-2'>
+            <input
+              type='radio'
+              id='toys'
+              name='subcategory'
+              value='toys'
+              onChange={handleSetSubcategory}
+            />
+            <label htmlFor='toys'>Toys</label>
+          </div>
+          <div className='flex gap-2'>
+            <input
+              type='radio'
+              id='hygene'
+              name='subcategory'
+              value='hygene'
+              onChange={handleSetSubcategory}
+            />
+            <label htmlFor='hygene'>Hygene</label>
+          </div>
+          <div className='flex gap-2'>
+            <input
+              type='radio'
+              id='beds'
+              name='subcategory'
+              value='beds'
+              onChange={handleSetSubcategory}
+            />
+            <label htmlFor='beds'>Beds</label>
+          </div>
+          <div className='flex gap-2'>
+            <input
+              type='radio'
+              id='other'
+              name='subcategory'
+              value='other'
+              onChange={handleSetSubcategory}
+            />
+            <label htmlFor='other'>Other</label>
+          </div>
+        </div>
+      </div>
+      <div className='flex flex-col gap-2'>
+        <label htmlFor='variants'>Variants</label>
+        <div className='flex items-center gap-8'>
+          <input
+            type='text'
+            id='variants'
+            className='rounded text-black indent-2 h-max'
+            onChange={handleSetVariant}
+          />
+          <button
+            onClick={handleSetVariants}
+            className='w-max bg-adminLightBlue px-2 py-1 border border-adminBlue rounded text-adminBlue font-medium transition-all hover:border-adminLightBlue hover:bg-adminBlue hover:text-adminLightBlue'
+          >
+            Add variant
+          </button>
+        </div>
+        <div className='flex gap-4'>{handleRenderVariants()}</div>
+      </div>
+      <div className='flex flex-col gap-2'>
+        <p>Sizes</p>
+        <div className='flex items-center gap-4'>
+          <div className='flex items-center gap-2'>
+            <input
+              type='checkbox'
+              id='small'
+              name='sizes'
+              value='small'
+              onChange={handleCheckbox}
+            />
+            <label htmlFor='small'>Small</label>
+          </div>
+          <div className='flex items-center gap-2'>
+            <input
+              type='checkbox'
+              id='medium'
+              name='sizes'
+              value='medium'
+              onChange={handleCheckbox}
+            />
+            <label htmlFor='medium'>Medium</label>
+          </div>
+          <div className='flex items-center gap-2'>
+            <input
+              type='checkbox'
+              id='large'
+              name='sizes'
+              value='large'
+              onChange={handleCheckbox}
+            />
+            <label htmlFor='large'>Large</label>
+          </div>
+        </div>
+      </div>
+      <div className='flex justify-between'>
+        <label htmlFor='price'>Price</label>
+        <input
+          type='number'
+          id='price'
+          step='0.01'
+          className='rounded text-black indent-2'
+          required
+          onChange={handleSetPrice}
+        />
+      </div>
+
+      <button
+        type='submit'
+        className='w-max bg-adminLightBlue px-2 py-1 border border-adminBlue rounded text-adminBlue font-medium transition-all hover:border-adminLightBlue hover:bg-adminBlue hover:text-adminLightBlue'
+      >
+        Submit
+      </button>
     </form>
   );
 };
