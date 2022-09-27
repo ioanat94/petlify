@@ -1,3 +1,5 @@
+import Footer from 'components/Footer/Footer';
+import Navbar from 'components/Navbar/Navbar';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -18,10 +20,33 @@ const User = () => {
 
   return (
     <div>
-      <p>{user.firstname}</p>
-      <p>{user.lastname}</p>
-      <p>{user.email}</p>
-      {user.isBanned && <p>BANNED</p>}
+      <Navbar />
+      <div className='flex justify-center min-h-[calc(100vh-128px)]'>
+        <div className='flex items-center mt-20 gap-20 h-max'>
+          <img
+            src={user.image}
+            alt=''
+            width='150px'
+            className='rounded-xl h-max'
+          />
+          <div className='flex items-center gap-20'>
+            <div>
+              <p className='text-mainBlue text-xl'>First Name</p>
+              <p>{user.firstname}</p>
+              <p className='text-mainBlue text-xl'>Last Name</p>
+              <p>{user.lastname}</p>
+              <p className='text-mainBlue text-xl'>E-mail</p>
+              <p>{user.email}</p>
+            </div>
+            {user.isBanned && (
+              <p className='text-red-500 font-bold text-2xl border-4 border-red-500 px-2 py-1 rounded-lg'>
+                BANNED
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 };

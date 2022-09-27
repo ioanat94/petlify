@@ -13,7 +13,7 @@ export type User = {
   firstname: string;
   lastname: string;
   email: string;
-  password: string;
+  image: string;
   isBanned: boolean;
 };
 
@@ -22,7 +22,7 @@ export type UpdatedUser = {
   firstname?: string;
   lastname?: string;
   email?: string;
-  password?: string;
+  image?: string;
   isBanned?: boolean;
 };
 
@@ -39,7 +39,7 @@ const initialState: UsersState = {
     firstname: '',
     lastname: '',
     email: '',
-    password: '',
+    image: '',
     isBanned: false,
   },
   isLoading: false,
