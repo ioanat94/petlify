@@ -11,13 +11,12 @@ export const createUser = async (
   next: NextFunction
 ) => {
   try {
-    const { firstname, lastname, email, password, isBanned } = req.body
+    const { firstname, lastname, email, isBanned } = req.body
 
     const user = new User({
       firstname,
       lastname,
       email,
-      password,
       isBanned,
     })
 

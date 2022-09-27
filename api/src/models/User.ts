@@ -4,7 +4,6 @@ export type UserDocument = Document & {
   firstname: string
   lastname: string
   email: string
-  password: string
   isBanned: boolean
 }
 
@@ -22,10 +21,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     index: true,
-  },
-  password: {
-    type: String,
-    required: true,
   },
   isBanned: {
     type: Boolean,
