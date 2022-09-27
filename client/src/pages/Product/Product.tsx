@@ -1,11 +1,11 @@
-import Footer from 'components/Footer/Footer';
-import Navbar from 'components/Navbar/Navbar';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchProductThunk } from 'redux/services/product.service';
 import { RootState } from 'redux/store';
+import Footer from 'components/Footer/Footer';
+import Navbar from 'components/Navbar/Navbar';
 
 const Product = () => {
   const product = useAppSelector(

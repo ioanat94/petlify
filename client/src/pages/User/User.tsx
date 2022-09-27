@@ -1,11 +1,11 @@
-import Footer from 'components/Footer/Footer';
-import Navbar from 'components/Navbar/Navbar';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchUserThunk } from 'redux/services/user.service';
 import { RootState } from 'redux/store';
+import Footer from 'components/Footer/Footer';
+import Navbar from 'components/Navbar/Navbar';
 
 const User = () => {
   const user = useAppSelector((state: RootState) => state.users.singleUser);

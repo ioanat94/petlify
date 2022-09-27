@@ -1,6 +1,3 @@
-import { ProductData } from 'components/AddProductPopup/AddProductPopup';
-import AdminNavbar from 'components/AdminNavbar/AdminNavbar';
-import AdminSideNav from 'components/AdminSideNav/AdminSideNav';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -10,6 +7,9 @@ import {
   updateProductThunk,
 } from 'redux/services/product.service';
 import { RootState } from 'redux/store';
+import { ProductData } from 'components/AddProductPopup/AddProductPopup';
+import AdminNavbar from 'components/AdminNavbar/AdminNavbar';
+import AdminSideNav from 'components/AdminSideNav/AdminSideNav';
 
 const EditProduct = () => {
   const product = useAppSelector(
