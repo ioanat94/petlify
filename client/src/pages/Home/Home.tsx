@@ -1,40 +1,19 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
-
-import { fetchProductsThunk } from 'redux/services/product.service';
-import { Product } from 'redux/slices/productsSlice';
-import { RootState } from 'redux/store';
+import Navbar from 'components/Navbar/Navbar';
+import SideNav from 'components/SideNav/SideNav';
+import ProductList from 'components/ProductList/ProductList';
+import Footer from 'components/Footer/Footer';
 
 const Home = () => {
-  const products = useAppSelector(
-    (state: RootState) => state.products.allProducts
-  );
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProductsThunk());
-  }, [dispatch]);
-
-  const handleRenderProducts = (products: Product[]) => {
-    return products.map((product) => (
-      <div>
-        <img src={product.img} alt='' width='200px' />
-        <Link to={`/products/${product._id}`}>{product.name}</Link>
-        <p>{product.description}</p>
-        <div>
-          <span>{product.categories.pet}</span>
-          <span>{product.categories.subcategory}</span>
-        </div>
-        <p>{product.variants}</p>
-        <p>{product.sizes}</p>
-        <p>{product.price}</p>
+  return (
+    <div>
+      <Navbar />
+      <div className='flex p-10 gap-20 min-h-[calc(100vh-64px)]'>
+        <SideNav />
+        <ProductList />
       </div>
-    ));
-  };
-
-  return <div>{handleRenderProducts(products)}</div>;
+      <Footer />
+    </div>
+  );
 };
 
 export default Home;
