@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <div className='flex p-10 gap-20 min-h-[calc(100vh-64px)]'>
+      <div className='flex p-16 gap-20 min-h-[calc(100vh-128px)]'>
         <SideNav />
         <ProductList />
       </div>
