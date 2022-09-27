@@ -303,7 +303,6 @@ const AddProductPopup = () => {
           onChange={handleSetPrice}
         />
       </div>
-
       <button
         type='submit'
         className='w-max bg-adminLightBlue px-2 py-1 border border-adminBlue rounded text-adminBlue font-medium transition-all hover:border-adminLightBlue hover:bg-adminBlue hover:text-adminLightBlue'
