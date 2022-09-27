@@ -68,66 +68,126 @@ const AddAdminPopup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor='firstname'>First Name</label>
-      <input
-        type='text'
-        id='firstname'
-        required
-        onChange={handleSetFirstName}
-      />
-      <label htmlFor='lastname'>Last Name</label>
-      <input type='text' id='lastname' required onChange={handleSetLastName} />
-      <label htmlFor='email'>Email</label>
-      <input type='email' id='email' required onChange={handleSetEmail} />
-      <label htmlFor='password'>Password</label>
-      <input
-        type='password'
-        id='password'
-        required
-        onChange={handleSetPassword}
-      />
-      <input
-        type='checkbox'
-        id='products-read'
-        name='roles'
-        value='products-read'
-        onChange={handleCheckbox}
-      />
-      <label htmlFor='products-read'>Products - Read</label>
-      <input
-        type='checkbox'
-        id='products-write'
-        name='roles'
-        value='products-write'
-        onChange={handleCheckbox}
-      />
-      <label htmlFor='products-write'>Products - Write</label>
-      <input
-        type='checkbox'
-        id='users-read'
-        name='roles'
-        value='users-read'
-        onChange={handleCheckbox}
-      />
-      <label htmlFor='users-read'>Users - Read</label>
-      <input
-        type='checkbox'
-        id='users-write'
-        name='roles'
-        value='users-write'
-        onChange={handleCheckbox}
-      />
-      <label htmlFor='users-write'>Users - Write</label>
-      <input
-        type='checkbox'
-        id='admins-read'
-        name='roles'
-        value='admins-read'
-        onChange={handleCheckbox}
-      />
-      <label htmlFor='admins-read'>Admins - Read</label>
-      <button type='submit'>Submit</button>
+    <form
+      onSubmit={handleSubmit}
+      className='flex flex-col gap-4 border border-adminLightBlue rounded-xl px-10 py-6 w-max'
+    >
+      <div className='flex justify-between'>
+        <label htmlFor='firstname'>First Name</label>
+        <input
+          type='text'
+          id='firstname'
+          required
+          className='rounded text-black indent-2'
+          onChange={handleSetFirstName}
+        />
+      </div>
+      <div className='flex justify-between'>
+        <label htmlFor='lastname'>Last Name</label>
+        <input
+          type='text'
+          id='lastname'
+          required
+          className='rounded text-black indent-2'
+          onChange={handleSetLastName}
+        />
+      </div>
+      <div className='flex justify-between'>
+        <label htmlFor='email'>Email</label>
+        <input
+          type='email'
+          id='email'
+          className='rounded text-black indent-2'
+          required
+          onChange={handleSetEmail}
+        />
+      </div>
+      <div className='flex justify-between'>
+        <label htmlFor='password'>Password</label>
+        <input
+          type='password'
+          id='password'
+          className='rounded text-black indent-2'
+          required
+          onChange={handleSetPassword}
+        />
+      </div>
+      <div className='flex flex-col gap-2'>
+        <p>Roles</p>
+        <div className='flex gap-10'>
+          <div className='flex flex-col'>
+            <div className='flex items-center gap-2'>
+              <input
+                type='checkbox'
+                id='products-read'
+                name='roles'
+                value='products-read'
+                onChange={handleCheckbox}
+              />
+              <label htmlFor='products-read'>Products - Read</label>
+            </div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='checkbox'
+                id='products-write'
+                name='roles'
+                value='products-write'
+                onChange={handleCheckbox}
+              />
+              <label htmlFor='products-write'>Products - Write</label>
+            </div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='checkbox'
+                id='users-read'
+                name='roles'
+                value='users-read'
+                onChange={handleCheckbox}
+              />
+              <label htmlFor='users-read'>Users - Read</label>
+            </div>
+          </div>
+          <div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='checkbox'
+                id='users-write'
+                name='roles'
+                value='users-write'
+                onChange={handleCheckbox}
+              />
+              <label htmlFor='users-write'>Users - Write</label>
+            </div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='checkbox'
+                id='admins-read'
+                name='roles'
+                value='admins-read'
+                onChange={handleCheckbox}
+              />
+              <label htmlFor='admins-read'>Admins - Read</label>
+            </div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='checkbox'
+                id='admins-write'
+                name='roles'
+                value='admins-write'
+                onChange={handleCheckbox}
+              />
+              <label htmlFor='admins-write'>Admins - Write</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type='submit'
+        className='w-max bg-adminLightBlue px-2 py-1 border border-adminBlue rounded text-adminBlue font-medium transition-all hover:border-adminLightBlue hover:bg-adminBlue hover:text-adminLightBlue'
+      >
+        Submit
+      </button>
     </form>
   );
 };

@@ -42,16 +42,20 @@ const AdminsTable = () => {
         <td>{admin.firstname}</td>
         <td>{admin.lastname}</td>
         <td>{admin.email}</td>
-        <td>
+        <td className='py-4'>
           <ul>
             {admin.roles.map((role) => (
-              <li>{role}</li>
+              <li>- {role}</li>
             ))}
           </ul>
         </td>
-        <td>
-          <Link to={`/admin/admins/${admin._id}`}>Edit</Link>
-          <button onClick={() => handleDelete(admin._id!)}>Delete</button>
+        <td className='flex gap-2 pt-4'>
+          <Link to={`/admin/admins/${admin._id}`}>
+            <img src={require('assets/edit.png')} alt='' width='24px' />
+          </Link>
+          <button onClick={() => handleDelete(admin._id!)}>
+            <img src={require('assets/delete.png')} alt='' width='24px' />
+          </button>
         </td>
       </tr>
     ));
