@@ -14,6 +14,7 @@ const UsersTable = () => {
 
   const tableHeaders = [
     'ID',
+    'Image',
     'First Name',
     'Last Name',
     'Email',
@@ -47,24 +48,33 @@ const UsersTable = () => {
 
   const handleRenderRows = (users: User[]) => {
     return users.map((user) => (
-      <tr key={user._id}>
+      <tr key={user._id} className='h-28'>
         <td>{user._id}</td>
+        <td>
+          <img src={user.image} alt='' width='90px' />
+        </td>
         <td>{user.firstname}</td>
         <td>{user.lastname}</td>
         <td>{user.email}</td>
         <td>{user.isBanned ? 'Yes' : 'No'}</td>
-        <td>
+        <td className='flex gap-2 pt-11'>
           <button onClick={() => handleBan(user._id!, user.isBanned)}>
-            {user.isBanned ? 'Unban' : 'Ban'}
+            {user.isBanned ? (
+              <p className='text-green-500'>Unban</p>
+            ) : (
+              <p className='text-red-500'>Ban</p>
+            )}
           </button>
-          <button onClick={() => handleDelete(user._id!)}>Delete</button>
+          <button onClick={() => handleDelete(user._id!)}>
+            <img src={require('assets/delete.png')} alt='' width='24px' />
+          </button>
         </td>
       </tr>
     ));
   };
 
   return (
-    <table>
+    <table className='min-w-[1000px]'>
       <thead>
         <tr>{handleRenderHeaders(tableHeaders)}</tr>
       </thead>
