@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchProductsThunk } from 'redux/services/product.service';
 import { RootState } from 'redux/store';
 import ProductCard from 'components/ProductCard/ProductCard';
+import { useSearchParams } from 'react-router-dom';
 
 const ProductList = () => {
   const products = useAppSelector(
@@ -11,10 +12,17 @@ const ProductList = () => {
   );
 
   const dispatch = useAppDispatch();
+  const [params] = useSearchParams();
+  const pet = params.get('pet');
+  const subcategory = params.get('subcategory');
+  const query =
+    subcategory === null
+      ? `?pet=${pet}`
+      : `?pet=${pet}&subcategory=${subcategory}`;
 
   useEffect(() => {
-    dispatch(fetchProductsThunk());
-  }, [dispatch]);
+    dispatch(fetchProductsThunk(query));
+  }, [dispatch, query]);
 
   const handleRenderProducts = () => {
     return products.map((product) => <ProductCard {...product} />);

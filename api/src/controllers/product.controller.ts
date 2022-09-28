@@ -42,7 +42,25 @@ export const findAll = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await productService.findAll())
+    const pet = req.query.pet
+    const subcategory = req.query.subcategory
+
+    const products = await productService.findAll()
+    let productsRef = [...products]
+
+    if (pet) {
+      productsRef = productsRef.filter((product) =>
+        product.categories.pet.includes(pet as string)
+      )
+    }
+
+    if (subcategory) {
+      productsRef = productsRef.filter((product) =>
+        product.categories.subcategory.includes(subcategory as string)
+      )
+    }
+
+    res.json(productsRef)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', 400, error))

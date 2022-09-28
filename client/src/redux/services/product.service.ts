@@ -12,9 +12,10 @@ const URL = 'http://localhost:4000/api/v1/products';
 
 export const fetchProductsThunk = createAsyncThunk(
   'products/fetch',
-  async () => {
+
+  async (query?: string) => {
     try {
-      const res = await axios.get(`${URL}`);
+      const res = await axios.get(`${URL}${query}`);
 
       return {
         data: res.data,
