@@ -15,7 +15,7 @@ export const fetchProductsThunk = createAsyncThunk(
 
   async (query?: string) => {
     try {
-      const res = await axios.get(`${URL}${query}`);
+      const res = await axios.get(`${URL}${query ? query : ''}`);
 
       return {
         data: res.data,

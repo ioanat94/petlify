@@ -13,25 +13,27 @@ const ProductCard = ({ _id, name, img, categories, sizes, price }: Product) => {
 
   return (
     <div className='w-max flex flex-col gap-4'>
-      <img src={img} alt='' width='200px' className='border border-mainGrey' />
+      <img src={img} alt='' width='200px' />
       <Link to={`/products/${_id}`} className='text-mainBlue font-medium'>
         {name}
       </Link>
       <div className='flex items-center gap-2'>{renderSizes()}</div>
       <div className='flex items-center justify-between'>
-        <div className='flex gap-2'>
-          <span className='border rounded-full border-mainYellow px-2 py-1'>
+        <div className='flex flex-col gap-2'>
+          <span className='border rounded-full border-mainYellow px-2 py-1 w-max'>
             #{categories.pet}
           </span>
-          <span className='border rounded-full border-mainYellow px-2 py-1'>
+          <span className='border rounded-full border-mainYellow px-2 py-1 w-max'>
             #{categories.subcategory}
           </span>
         </div>
-        <span className='text-right text-lg font-bold'>{price}€</span>
+        <div className='flex flex-col gap-2'>
+          <span className='text-right text-lg font-bold'>{price}€</span>
+          <button className='w-max px-4 py-1 text-mainBlue font-bold border-2 border-mainBlue rounded-lg transition-all hover:border-white hover:bg-mainBlue hover:text-white'>
+            BUY
+          </button>
+        </div>
       </div>
-      <button className='w-max px-4 py-1 text-mainBlue font-bold border-2 border-mainBlue rounded-lg transition-all hover:border-white hover:bg-mainBlue hover:text-white'>
-        BUY
-      </button>
     </div>
   );
 };
