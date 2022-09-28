@@ -16,7 +16,9 @@ const ProductList = () => {
   const pet = params.get('pet');
   const subcategory = params.get('subcategory');
   const query =
-    subcategory === null
+    pet === null
+      ? ''
+      : subcategory === null
       ? `?pet=${pet}`
       : `?pet=${pet}&subcategory=${subcategory}`;
 

@@ -2,6 +2,7 @@ import AdminNavbar from 'components/AdminNavbar/AdminNavbar';
 import AdminSideNav from 'components/AdminSideNav/AdminSideNav';
 
 const Admin = () => {
+  document.title = 'Petlify Admin Dashboard';
   return (
     <>
       <AdminNavbar />
