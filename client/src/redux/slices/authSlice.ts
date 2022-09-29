@@ -2,6 +2,33 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { fetchTokenThunk } from 'redux/services/auth.service';
 
+function setInfo() {
+  if (!localStorage.getItem('token')) {
+    const token = '';
+    const loggedInUser = {
+      _id: '',
+      firstname: '',
+      lastname: '',
+      email: '',
+      image: '',
+    };
+    return { token, loggedInUser };
+  }
+
+  const token: string = JSON.parse(localStorage.getItem('token') || '');
+  const loggedInUser: LoggedInUser = JSON.parse(
+    localStorage.getItem('user')!
+  ) || {
+    _id: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    image: '',
+  };
+
+  return { token, loggedInUser };
+}
+
 type LoggedInUser = {
   _id: string;
   firstname: string;
@@ -17,14 +44,8 @@ export interface UsersState {
 }
 
 const initialState: UsersState = {
-  token: localStorage.getItem('token') || '',
-  loggedInUser: JSON.parse(localStorage.getItem('user')!) || {
-    _id: '',
-    firstname: '',
-    lastname: '',
-    email: '',
-    image: '',
-  },
+  token: setInfo().token,
+  loggedInUser: setInfo().loggedInUser,
   isLoading: false,
 };
 
