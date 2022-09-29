@@ -25,9 +25,13 @@ export const fetchUsersThunk = createAsyncThunk('users/fetch', async () => {
 
 export const fetchUserThunk = createAsyncThunk(
   'user/fetch',
-  async (userId: string) => {
+  async ({ userId, token }: { userId: string; token: string }) => {
     try {
-      const res = await axios.get(`${URL}/${userId}`);
+      const res = await axios.get(`${URL}/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: res.data,

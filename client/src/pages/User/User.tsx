@@ -9,14 +9,15 @@ import Navbar from 'components/Navbar/Navbar';
 
 const User = () => {
   const user = useAppSelector((state: RootState) => state.users.singleUser);
+  const token = useAppSelector((state: RootState) => state.auth.token);
 
   const dispatch = useAppDispatch();
   const params = useParams();
   const userId: string | undefined = params.userId!;
 
   useEffect(() => {
-    dispatch(fetchUserThunk(userId));
-  }, [dispatch, userId]);
+    dispatch(fetchUserThunk({ userId, token }));
+  }, [dispatch, userId, token]);
 
   return (
     <div>

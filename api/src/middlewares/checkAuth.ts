@@ -13,6 +13,7 @@ export default function (req: Request, res: Response, next: NextFunction) {
       const decodedUser = jwt.verify(token, JWT_SECRET)
 
       req.user = decodedUser
+
       return next()
     }
     throw new ForbiddenError()
