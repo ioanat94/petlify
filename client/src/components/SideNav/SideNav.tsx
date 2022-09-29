@@ -5,7 +5,7 @@ const SideNav = () => {
 
   const handleRenderCategories = (pet: string) => {
     return categories.map((category) => (
-      <li className='pl-3'>
+      <li className='pl-3' key={`${pet}&${category.toLowerCase()}`}>
         <Link to={`/?pet=${pet}&subcategory=${category.toLowerCase()}`}>
           {category}
         </Link>

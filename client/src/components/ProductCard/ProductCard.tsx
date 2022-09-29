@@ -5,7 +5,10 @@ import { Product } from 'redux/slices/productsSlice';
 const ProductCard = ({ _id, name, img, categories, sizes, price }: Product) => {
   const renderSizes = () => {
     return sizes.map((size) => (
-      <span className='border border-mainBlue text-mainBlue w-6 text-center'>
+      <span
+        className='border border-mainBlue text-mainBlue w-6 text-center'
+        key={size}
+      >
         {size[0].toUpperCase()}
       </span>
     ));

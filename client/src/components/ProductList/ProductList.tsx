@@ -27,7 +27,9 @@ const ProductList = () => {
   }, [dispatch, query]);
 
   const handleRenderProducts = () => {
-    return products.map((product) => <ProductCard {...product} />);
+    return products.map((product) => (
+      <ProductCard {...product} key={product._id} />
+    ));
   };
 
   return (
