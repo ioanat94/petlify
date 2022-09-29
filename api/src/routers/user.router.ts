@@ -1,4 +1,5 @@
 import express from 'express'
+import checkAuth from '../middlewares/checkAuth'
 
 import {
   createUser,
@@ -13,7 +14,7 @@ const router = express.Router()
 // Every path we define here will get /api/v1/users prefix
 router.post('/', createUser)
 router.get('/', findAll)
-router.get('/:userId', findById)
+router.get('/:userId', checkAuth, findById)
 router.put('/:userId', updateUser)
 router.delete('/:userId', deleteUser)
 

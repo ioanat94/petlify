@@ -1,4 +1,6 @@
 import GoogleTokenStrategy from 'passport-google-id-token'
+import User from '../models/User'
+import UserDocument from '../models/User'
 import { GOOGLE_CLIENT_ID } from '../util/secrets'
 
 interface ParsedToken {
@@ -28,7 +30,21 @@ export default function () {
       try {
         console.log('googleId:', googleId)
         console.log('parsedToken:', parsedToken)
-        done(null)
+
+        let user: any = await User.findOne({
+          email: parsedToken.payload.email,
+        })
+        if (!user) {
+          user = new User({
+            firstname: parsedToken.payload.given_name,
+            lastname: parsedToken.payload.family_name,
+            email: parsedToken.payload.email,
+            image: parsedToken.payload.picture,
+          })
+          user.save()
+        }
+
+        done(null, user)
       } catch (err) {
         done(err)
       }
