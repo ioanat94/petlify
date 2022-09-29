@@ -9,7 +9,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        'mainBlue': '#5a61cb',
+        'mainBlue': '#444a9c',
         'mainYellow': '#f4cd57',
         'mainGrey': '#8c8c8c',
         'adminBlue': '#0f172a',
