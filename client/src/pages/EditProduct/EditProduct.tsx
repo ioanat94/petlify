@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
@@ -18,6 +18,18 @@ const EditProduct = () => {
   const isLoading = useAppSelector(
     (state: RootState) => state.products.isLoading
   );
+
+  const adminToken = useAppSelector(
+    (state: RootState) => state.adminAuth.adminToken
+  );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!adminToken) {
+      navigate('/admin/login');
+    }
+  }, [adminToken, navigate]);
 
   const [productData, setProductData] = useState<ProductData>({
     name: '',

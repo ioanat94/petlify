@@ -9,12 +9,13 @@ import {
   findById,
   updateAdmin,
 } from '../controllers/admin.controller'
+import checkAuth from '../middlewares/checkAuth'
 
 const router = express.Router()
 
 // Every path we define here will get /api/v1/admins prefix
 router.post('/', validate(adminCreateSchema), createAdmin)
-router.get('/', findAll)
+router.get('/', checkAuth, findAll)
 router.get('/:adminId', findById)
 router.put('/:adminId', updateAdmin)
 router.delete('/:adminId', deleteAdmin)

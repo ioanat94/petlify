@@ -4,7 +4,7 @@ import axios from 'axios';
 const URL = 'http://localhost:4000/api/v1/auth';
 
 export const fetchAdminTokenThunk = createAsyncThunk(
-  'admin/fetch',
+  'name/fetch',
   async ({ email, password }: { email: string; password: string }) => {
     try {
       const res = await axios.post(`${URL}/login-admin`, {

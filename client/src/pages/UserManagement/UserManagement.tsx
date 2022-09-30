@@ -1,8 +1,24 @@
 import AdminNavbar from 'components/AdminNavbar/AdminNavbar';
 import AdminSideNav from 'components/AdminSideNav/AdminSideNav';
 import UsersTable from 'components/UsersTable/UsersTable';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from 'redux/hooks';
+import { RootState } from 'redux/store';
 
 const UserManagement = () => {
+  const adminToken = useAppSelector(
+    (state: RootState) => state.adminAuth.adminToken
+  );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!adminToken) {
+      navigate('/admin/login');
+    }
+  }, [adminToken, navigate]);
+
   return (
     <>
       <AdminNavbar />

@@ -10,18 +10,25 @@ type PutType = {
 
 const URL = 'http://localhost:4000/api/v1/admins';
 
-export const fetchAdminsThunk = createAsyncThunk('admins/fetch', async () => {
-  try {
-    const res = await axios.get(`${URL}/`);
+export const fetchAdminsThunk = createAsyncThunk(
+  'admins/fetch',
+  async (token: string) => {
+    try {
+      const res = await axios.get(`${URL}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    return {
-      data: res.data,
-      status: res.status,
-    };
-  } catch (error) {
-    throw error;
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
-});
+);
 
 export const fetchAdminThunk = createAsyncThunk(
   'admin/fetch',

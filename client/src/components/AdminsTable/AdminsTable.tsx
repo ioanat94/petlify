@@ -11,6 +11,9 @@ import { RootState } from 'redux/store';
 
 const AdminsTable = () => {
   const admins = useAppSelector((state: RootState) => state.admins.allAdmins);
+  const token = useAppSelector(
+    (state: RootState) => state.adminAuth.adminToken
+  );
 
   const tableHeaders = [
     'ID',
@@ -24,8 +27,8 @@ const AdminsTable = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchAdminsThunk());
-  }, [dispatch]);
+    dispatch(fetchAdminsThunk(token));
+  }, [dispatch, token]);
 
   const handleDelete = (adminId: string) => {
     dispatch(deleteAdminThunk(adminId));
