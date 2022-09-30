@@ -1,7 +1,7 @@
 import express from 'express'
 import passport from 'passport'
 
-import { login } from '../controllers/auth.controller'
+import { login, loginAdmin } from '../controllers/auth.controller'
 
 const router = express.Router()
 
@@ -11,5 +11,6 @@ router.post(
   passport.authenticate('google-id-token', { session: false }),
   login
 )
+router.post('/login-admin', loginAdmin)
 
 export default router

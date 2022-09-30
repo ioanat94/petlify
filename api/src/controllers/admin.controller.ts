@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
+import bcrypt from 'bcrypt'
 
 import Admin from '../models/Admin'
 import adminService from '../services/admin.service'
@@ -19,6 +20,14 @@ export const createAdmin = async (
       email,
       password,
       roles,
+    })
+
+    const saltRounds = 10
+    admin.password = await new Promise((resolve, reject) => {
+      bcrypt.hash(password, saltRounds, function (err, hash) {
+        if (err) reject(err)
+        resolve(hash)
+      })
     })
 
     await adminService.create(admin)
