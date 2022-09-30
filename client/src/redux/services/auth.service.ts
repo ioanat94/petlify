@@ -5,7 +5,7 @@ import axios from 'axios';
 const URL = 'http://localhost:4000/api/v1/auth';
 
 export const fetchTokenThunk = createAsyncThunk(
-  'users/fetch',
+  'auth/fetch',
   async (credential: CredentialResponse) => {
     try {
       const res = await axios.post(
@@ -17,7 +17,6 @@ export const fetchTokenThunk = createAsyncThunk(
           },
         }
       );
-      console.log(res.data);
 
       return {
         data: res.data,

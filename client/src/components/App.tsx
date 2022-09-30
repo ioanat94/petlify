@@ -9,6 +9,7 @@ import UserManagement from 'pages/UserManagement/UserManagement';
 import User from 'pages/User/User';
 import AdminManagement from 'pages/AdminManagement/AdminManagement';
 import EditAdmin from 'pages/EditAdmin/EditAdmin';
+import AdminLogin from 'pages/AdminLogin/AdminLogin';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path='/products/:productId' element={<Product />} />
         <Route path='/users/:userId' element={<User />} />
         <Route path='/admin' element={<Admin />} />
+        <Route path='/admin/login' element={<AdminLogin />} />
         <Route path='/admin/products' element={<ProductManagement />} />
         <Route path='/admin/products/:productId' element={<EditProduct />} />
         <Route path='/admin/users' element={<UserManagement />} />
