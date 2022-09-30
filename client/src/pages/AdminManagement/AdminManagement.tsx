@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import AddAdminPopup from 'components/AddAdminPopup/AddAdminPopup';
 import AdminsTable from 'components/AdminsTable/AdminsTable';
@@ -6,7 +7,6 @@ import AdminNavbar from 'components/AdminNavbar/AdminNavbar';
 import AdminSideNav from 'components/AdminSideNav/AdminSideNav';
 import { useAppSelector } from 'redux/hooks';
 import { RootState } from 'redux/store';
-import { useNavigate } from 'react-router-dom';
 
 const AdminManagement = () => {
   const [isVisible, setIsVisible] = useState(false);

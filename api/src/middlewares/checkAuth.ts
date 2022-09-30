@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../util/secrets'
 
+import { JWT_SECRET } from '../util/secrets'
 import { ForbiddenError } from '../helpers/apiError'
 
 export default function (req: Request, res: Response, next: NextFunction) {

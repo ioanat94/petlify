@@ -1,6 +1,6 @@
 import express from 'express'
-import checkAuth from '../middlewares/checkAuth'
 
+import checkAuth from '../middlewares/checkAuth'
 import {
   createUser,
   deleteUser,

@@ -1,7 +1,7 @@
 import express from 'express'
+
 import { adminCreateSchema } from '../middlewares/validateForms'
 import { validate } from '../middlewares/validateForms'
-
 import {
   createAdmin,
   deleteAdmin,

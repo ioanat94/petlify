@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchAdminTokenThunk } from 'redux/services/adminAuth.service';
 import AdminNavbar from 'components/AdminNavbar/AdminNavbar';
 import { RootState } from 'redux/store';
-import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
   const adminToken = useAppSelector(

@@ -1,6 +1,6 @@
 import GoogleTokenStrategy from 'passport-google-id-token'
+
 import User from '../models/User'
-import UserDocument from '../models/User'
 import { GOOGLE_CLIENT_ID } from '../util/secrets'
 
 interface ParsedToken {

@@ -1,7 +1,7 @@
 import express from 'express'
+
 import { productCreateSchema } from '../middlewares/validateForms'
 import { validate } from '../middlewares/validateForms'
-
 import {
   createProduct,
   deleteProduct,
