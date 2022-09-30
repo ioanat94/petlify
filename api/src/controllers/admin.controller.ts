@@ -84,6 +84,15 @@ export const updateAdmin = async (
   try {
     const update = req.body
     const adminId = req.params.adminId
+
+    const saltRounds = 10
+    update.password = await new Promise((resolve, reject) => {
+      bcrypt.hash(update.password, saltRounds, function (err, hash) {
+        if (err) reject(err)
+        resolve(hash)
+      })
+    })
+
     const updatedAdmin = await adminService.update(adminId, update)
     res.json(updatedAdmin)
   } catch (error) {

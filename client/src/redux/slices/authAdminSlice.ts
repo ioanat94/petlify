@@ -47,7 +47,6 @@ export const authAdminSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      console.log('test');
       state.adminToken = '';
       state.loggedInAdmin = { _id: '', roles: [] };
       localStorage.setItem('adminToken', JSON.stringify(state.adminToken));

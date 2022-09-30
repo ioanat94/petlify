@@ -11,7 +11,6 @@ export const fetchAdminTokenThunk = createAsyncThunk(
         email: email,
         password: password,
       });
-      console.log(res.data);
 
       return {
         data: res.data,
