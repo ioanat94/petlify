@@ -10,6 +10,7 @@ import User from 'pages/User/User';
 import AdminManagement from 'pages/AdminManagement/AdminManagement';
 import EditAdmin from 'pages/EditAdmin/EditAdmin';
 import AdminLogin from 'pages/AdminLogin/AdminLogin';
+import Unauthorized from 'pages/Unauthorized/Unauthorized';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/admin/users' element={<UserManagement />} />
         <Route path='/admin/admins' element={<AdminManagement />} />
         <Route path='/admin/admins/:adminId' element={<EditAdmin />} />
+        <Route path='/admin/unauthorized' element={<Unauthorized />} />
       </Routes>
     </BrowserRouter>
   );

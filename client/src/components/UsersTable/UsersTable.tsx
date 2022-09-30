@@ -14,6 +14,9 @@ const UsersTable = () => {
   const token = useAppSelector(
     (state: RootState) => state.adminAuth.adminToken
   );
+  const loggedInAdmin = useAppSelector(
+    (state: RootState) => state.adminAuth.loggedInAdmin
+  );
 
   const tableHeaders = [
     'ID',
@@ -45,6 +48,10 @@ const UsersTable = () => {
     dispatch(updateUserThunk(data));
   };
 
+  const checkWritePerms = () => {
+    return loggedInAdmin.roles.includes('users-write');
+  };
+
   const handleRenderHeaders = (tableHeaders: string[]) => {
     return tableHeaders.map((header) => <td key={header}>{header}</td>);
   };
@@ -60,18 +67,20 @@ const UsersTable = () => {
         <td>{user.lastname}</td>
         <td>{user.email}</td>
         <td>{user.isBanned ? 'Yes' : 'No'}</td>
-        <td className='flex gap-2 pt-11'>
-          <button onClick={() => handleBan(user._id!, user.isBanned)}>
-            {user.isBanned ? (
-              <p className='text-green-500'>Unban</p>
-            ) : (
-              <p className='text-red-500'>Ban</p>
-            )}
-          </button>
-          <button onClick={() => handleDelete(user._id!)}>
-            <img src={require('assets/delete.png')} alt='' width='24px' />
-          </button>
-        </td>
+        {checkWritePerms() && (
+          <td className='flex gap-2 pt-11'>
+            <button onClick={() => handleBan(user._id!, user.isBanned)}>
+              {user.isBanned ? (
+                <p className='text-green-500'>Unban</p>
+              ) : (
+                <p className='text-red-500'>Ban</p>
+              )}
+            </button>
+            <button onClick={() => handleDelete(user._id!)}>
+              <img src={require('assets/delete.png')} alt='' width='24px' />
+            </button>
+          </td>
+        )}
       </tr>
     ));
   };

@@ -20,14 +20,22 @@ const EditAdmin = () => {
   const adminToken = useAppSelector(
     (state: RootState) => state.adminAuth.adminToken
   );
+  const loggedInAdmin = useAppSelector(
+    (state: RootState) => state.adminAuth.loggedInAdmin
+  );
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!adminToken) {
       navigate('/admin/login');
+      return;
     }
-  }, [adminToken, navigate]);
+
+    if (!loggedInAdmin.roles.includes('admins-write')) {
+      navigate('/admin/unauthorized');
+    }
+  }, [adminToken, navigate, loggedInAdmin.roles]);
 
   const [adminData, setAdminData] = useState<Admin>({
     firstname: '',

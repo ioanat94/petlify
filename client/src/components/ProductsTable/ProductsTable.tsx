@@ -13,6 +13,9 @@ const ProductsTable = () => {
   const products = useAppSelector(
     (state: RootState) => state.products.allProducts
   );
+  const loggedInAdmin = useAppSelector(
+    (state: RootState) => state.adminAuth.loggedInAdmin
+  );
 
   const tableHeaders = [
     'ID',
@@ -33,6 +36,10 @@ const ProductsTable = () => {
 
   const handleDelete = (productId: string) => {
     dispatch(deleteProductThunk(productId));
+  };
+
+  const checkWritePerms = () => {
+    return loggedInAdmin.roles.includes('products-write');
   };
 
   const handleRenderHeaders = (tableHeaders: string[]) => {
@@ -69,18 +76,20 @@ const ProductsTable = () => {
           </ul>
         </td>
         <td>{product.price}€</td>
-        <td className='flex gap-2 pt-10'>
-          <Link to={`/admin/products/${product._id}`}>
-            <img src={require('assets/edit.png')} alt='' width='24px' />
-          </Link>
-          <button
-            onClick={() => {
-              handleDelete(product._id!);
-            }}
-          >
-            <img src={require('assets/delete.png')} alt='' width='24px' />
-          </button>
-        </td>
+        {checkWritePerms() && (
+          <td className='flex gap-2 pt-10'>
+            <Link to={`/admin/products/${product._id}`}>
+              <img src={require('assets/edit.png')} alt='' width='24px' />
+            </Link>
+            <button
+              onClick={() => {
+                handleDelete(product._id!);
+              }}
+            >
+              <img src={require('assets/delete.png')} alt='' width='24px' />
+            </button>
+          </td>
+        )}
       </tr>
     ));
   };

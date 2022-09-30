@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logout } from 'redux/slices/authAdminSlice';
+import { RootState } from 'redux/store';
 
 const AdminNavbar = () => {
+  const token = useAppSelector(
+    (state: RootState) => state.adminAuth.adminToken
+  );
+
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
@@ -16,9 +21,11 @@ const AdminNavbar = () => {
         <img src={require('assets/admin.png')} alt='' width='40px' />
         <p className='text-2xl'>Admin</p>
       </Link>
-      <button className='text-lg' onClick={handleLogout}>
-        LOG OUT
-      </button>
+      {token && (
+        <button className='text-lg' onClick={handleLogout}>
+          LOG OUT
+        </button>
+      )}
     </div>
   );
 };

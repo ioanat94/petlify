@@ -18,14 +18,26 @@ const ProductManagement = () => {
   const adminToken = useAppSelector(
     (state: RootState) => state.adminAuth.adminToken
   );
+  const loggedInAdmin = useAppSelector(
+    (state: RootState) => state.adminAuth.loggedInAdmin
+  );
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!adminToken) {
       navigate('/admin/login');
+      return;
     }
-  }, [adminToken, navigate]);
+
+    if (!loggedInAdmin.roles.includes('products-read')) {
+      navigate('/admin/unauthorized');
+    }
+  }, [adminToken, navigate, loggedInAdmin.roles]);
+
+  const checkWritePerms = () => {
+    return loggedInAdmin.roles.includes('products-write');
+  };
 
   return (
     <>
@@ -34,12 +46,14 @@ const ProductManagement = () => {
         <AdminSideNav />
         <div className='text-white p-10 flex flex-col gap-8 w-full'>
           <div className='text-3xl font-medium'>Product Management</div>
-          <button
-            onClick={handleSetVisible}
-            className='w-max bg-adminLightBlue px-2 py-1 border border-adminBlue rounded text-adminBlue font-medium transition-all hover:border-adminLightBlue hover:bg-adminBlue hover:text-adminLightBlue'
-          >
-            Add Product
-          </button>
+          {checkWritePerms() && (
+            <button
+              onClick={handleSetVisible}
+              className='w-max bg-adminLightBlue px-2 py-1 border border-adminBlue rounded text-adminBlue font-medium transition-all hover:border-adminLightBlue hover:bg-adminBlue hover:text-adminLightBlue'
+            >
+              Add Product
+            </button>
+          )}
           {isVisible && <AddProductPopup />}
           <ProductsTable />
         </div>

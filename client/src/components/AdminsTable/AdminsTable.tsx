@@ -14,6 +14,9 @@ const AdminsTable = () => {
   const token = useAppSelector(
     (state: RootState) => state.adminAuth.adminToken
   );
+  const loggedInAdmin = useAppSelector(
+    (state: RootState) => state.adminAuth.loggedInAdmin
+  );
 
   const tableHeaders = [
     'ID',
@@ -34,6 +37,10 @@ const AdminsTable = () => {
     dispatch(deleteAdminThunk(adminId));
   };
 
+  const checkWritePerms = () => {
+    return loggedInAdmin.roles.includes('admins-write');
+  };
+
   const handleRenderHeaders = (tableHeaders: string[]) => {
     return tableHeaders.map((header) => <td key={header}>{header}</td>);
   };
@@ -52,14 +59,16 @@ const AdminsTable = () => {
             ))}
           </ul>
         </td>
-        <td className='flex gap-2 pt-4'>
-          <Link to={`/admin/admins/${admin._id}`}>
-            <img src={require('assets/edit.png')} alt='' width='24px' />
-          </Link>
-          <button onClick={() => handleDelete(admin._id!)}>
-            <img src={require('assets/delete.png')} alt='' width='24px' />
-          </button>
-        </td>
+        {checkWritePerms() && (
+          <td className='flex gap-2 pt-4'>
+            <Link to={`/admin/admins/${admin._id}`}>
+              <img src={require('assets/edit.png')} alt='' width='24px' />
+            </Link>
+            <button onClick={() => handleDelete(admin._id!)}>
+              <img src={require('assets/delete.png')} alt='' width='24px' />
+            </button>
+          </td>
+        )}
       </tr>
     ));
   };

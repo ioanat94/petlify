@@ -14,6 +14,9 @@ const AdminManagement = () => {
   const handleSetVisible = () => {
     setIsVisible(!isVisible);
   };
+  const loggedInAdmin = useAppSelector(
+    (state: RootState) => state.adminAuth.loggedInAdmin
+  );
 
   const adminToken = useAppSelector(
     (state: RootState) => state.adminAuth.adminToken
@@ -24,8 +27,17 @@ const AdminManagement = () => {
   useEffect(() => {
     if (!adminToken) {
       navigate('/admin/login');
+      return;
     }
-  }, [adminToken, navigate]);
+
+    if (!loggedInAdmin.roles.includes('admins-read')) {
+      navigate('/admin/unauthorized');
+    }
+  }, [adminToken, navigate, loggedInAdmin.roles]);
+
+  const checkWritePerms = () => {
+    return loggedInAdmin.roles.includes('admins-write');
+  };
 
   return (
     <>
@@ -34,12 +46,14 @@ const AdminManagement = () => {
         <AdminSideNav />
         <div className='text-white p-10 flex flex-col gap-8 w-full'>
           <div className='text-3xl font-medium'>Admin Management</div>
-          <button
-            onClick={handleSetVisible}
-            className='w-max bg-adminLightBlue px-2 py-1 border border-adminBlue rounded text-adminBlue font-medium transition-all hover:border-adminLightBlue hover:bg-adminBlue hover:text-adminLightBlue'
-          >
-            Add Admin
-          </button>
+          {checkWritePerms() && (
+            <button
+              onClick={handleSetVisible}
+              className='w-max bg-adminLightBlue px-2 py-1 border border-adminBlue rounded text-adminBlue font-medium transition-all hover:border-adminLightBlue hover:bg-adminBlue hover:text-adminLightBlue'
+            >
+              Add Admin
+            </button>
+          )}
           {isVisible && <AddAdminPopup />}
           <AdminsTable />
         </div>
