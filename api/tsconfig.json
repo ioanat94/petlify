@@ -11,23 +11,13 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "node_modules/*",
-      ]
-    }
+      "*": ["node_modules/*"]
+    },
+    "types": ["jest", "node"]
   },
-  "include": [
-    "src/**/*"
-  ],
+  "include": ["src/**/*"],
   "ts-node": {
     "files": true
   },
-  "files": [
-    "global.d.ts"
-  ],
-  "exclude": [
-    "*.test.ts",
-    "*.fixture.ts",
-    "db-helper.ts"
-  ]
+  "files": ["global.d.ts"]
 }
