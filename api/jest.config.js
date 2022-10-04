@@ -11,4 +11,5 @@ module.exports = {
   testMatch: ['**/src/**/*.test.(ts|js)'],
   testEnvironment: 'node',
   setupFiles: ['dotenv/config'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/src/helpers/'],
 }
