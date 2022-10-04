@@ -24,7 +24,7 @@ const Navbar = () => {
       </Link>
       <div className='flex items-center gap-4'>
         <Link to={`/users/${user._id}`}>
-          <img src={user.image} alt='' className='w-8 rounded-full' />
+          <img src={user.image} alt='' className='w-8 h-8 rounded-full' />
         </Link>
 
         <img src={require('assets/cart.png')} alt='' className='w-8' />
