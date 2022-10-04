@@ -7,6 +7,7 @@ import AdminNavbar from 'components/AdminNavbar/AdminNavbar';
 import AdminSideNav from 'components/AdminSideNav/AdminSideNav';
 import { useAppSelector } from 'redux/hooks';
 import { RootState } from 'redux/store';
+import AdminSearchbar from 'components/AdminSearchbar/AdminSearchbar';
 
 const ProductManagement = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -55,6 +56,7 @@ const ProductManagement = () => {
             </button>
           )}
           {isVisible && <AddProductPopup />}
+          <AdminSearchbar category='products' />
           <ProductsTable />
         </div>
       </div>

@@ -12,9 +12,9 @@ const URL = 'http://localhost:4000/api/v1/users';
 
 export const fetchUsersThunk = createAsyncThunk(
   'users/fetch',
-  async (token: string) => {
+  async ({ token, query }: { token: string; query?: string }) => {
     try {
-      const res = await axios.get(`${URL}`, {
+      const res = await axios.get(`${URL}${query ? query : ''}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

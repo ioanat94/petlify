@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
@@ -28,11 +29,14 @@ const UsersTable = () => {
     'Actions',
   ];
 
+  const location = useLocation();
+  const query = location.search;
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchUsersThunk(token));
-  }, [dispatch, token]);
+    dispatch(fetchUsersThunk({ token, query }));
+  }, [dispatch, token, query]);
 
   const handleDelete = (userId: string) => {
     dispatch(deleteUserThunk(userId));

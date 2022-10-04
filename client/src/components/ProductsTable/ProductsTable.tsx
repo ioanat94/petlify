@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
@@ -28,11 +28,14 @@ const ProductsTable = () => {
     'Actions',
   ];
 
+  const location = useLocation();
+  const query = location.search;
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchProductsThunk());
-  }, [dispatch]);
+    dispatch(fetchProductsThunk(query));
+  }, [dispatch, query]);
 
   const handleDelete = (productId: string) => {
     dispatch(deleteProductThunk(productId));

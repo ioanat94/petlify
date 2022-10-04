@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
@@ -27,11 +27,14 @@ const AdminsTable = () => {
     'Actions',
   ];
 
+  const location = useLocation();
+  const query = location.search;
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchAdminsThunk(token));
-  }, [dispatch, token]);
+    dispatch(fetchAdminsThunk({ token, query }));
+  }, [dispatch, token, query]);
 
   const handleDelete = (adminId: string) => {
     dispatch(deleteAdminThunk(adminId));

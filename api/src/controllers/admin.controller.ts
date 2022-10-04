@@ -48,7 +48,18 @@ export const findAll = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await adminService.findAll())
+    const search = req.query.search
+
+    const admins = await adminService.findAll()
+    let adminsRef = [...admins]
+
+    if (search) {
+      adminsRef = adminsRef.filter((admin) =>
+        admin.email.toLowerCase().includes(search as string)
+      )
+    }
+
+    res.json(adminsRef)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', 400, error))

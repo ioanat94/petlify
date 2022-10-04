@@ -39,7 +39,18 @@ export const findAll = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await userService.findAll())
+    const search = req.query.search
+
+    const users = await userService.findAll()
+    let usersRef = [...users]
+
+    if (search) {
+      usersRef = usersRef.filter((user) =>
+        user.email.toLowerCase().includes(search as string)
+      )
+    }
+
+    res.json(usersRef)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', 400, error))
