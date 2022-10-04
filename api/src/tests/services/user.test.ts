@@ -16,7 +16,7 @@ async function createUser(email?: string) {
   return await UserService.create(user)
 }
 
-describe('Product service', () => {
+describe('User service', () => {
   let mongodHelper: MongodHelper
 
   beforeAll(async () => {
