@@ -5,7 +5,14 @@ export type AdminDocument = Document & {
   lastname: string
   email: string
   password: string
-  roles: string[]
+  roles: (
+    | 'products-read'
+    | 'products-write'
+    | 'users-read'
+    | 'users-write'
+    | 'admins-read'
+    | 'admins-write'
+  )[]
 }
 
 const adminSchema = new mongoose.Schema({

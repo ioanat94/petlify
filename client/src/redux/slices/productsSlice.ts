@@ -22,20 +22,6 @@ export type Product = {
   price: number;
 };
 
-export type UpdatedProduct = {
-  _id?: string;
-  name?: string;
-  img?: string;
-  description?: string;
-  categories?: {
-    pet: string;
-    subcategory: string;
-  };
-  variants?: string[];
-  sizes?: string[];
-  price?: number;
-};
-
 export interface ProductsState {
   allProducts: Product[];
   singleProduct: Product;

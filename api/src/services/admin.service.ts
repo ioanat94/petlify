@@ -1,5 +1,5 @@
 import Admin, { AdminDocument } from '../models/Admin'
-import { NotFoundError } from '../helpers/apiError'
+import { BadRequestError, NotFoundError } from '../helpers/apiError'
 
 const create = async (admin: AdminDocument): Promise<AdminDocument> => {
   return admin.save()
@@ -10,6 +10,16 @@ const findById = async (adminId: string): Promise<AdminDocument> => {
 
   if (!foundAdmin) {
     throw new NotFoundError(`Admin ${adminId} not found`)
+  }
+
+  return foundAdmin
+}
+
+const findByEmail = async (email: string): Promise<AdminDocument> => {
+  const foundAdmin = await Admin.findOne({ email: email })
+
+  if (!foundAdmin) {
+    throw new BadRequestError('Wrong email or password.')
   }
 
   return foundAdmin
@@ -47,6 +57,7 @@ const deleteAdmin = async (adminId: string): Promise<AdminDocument | null> => {
 export default {
   create,
   findById,
+  findByEmail,
   findAll,
   update,
   deleteAdmin,

@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { UpdatedUser, User } from 'redux/slices/usersSlice';
+import { User } from 'redux/slices/usersSlice';
 
 type PutType = {
   userId: string;
-  updatedUser: UpdatedUser;
+  updatedUser: Partial<User>;
 };
 
 const URL = 'http://localhost:4000/api/v1/users';

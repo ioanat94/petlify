@@ -17,15 +17,6 @@ export type User = {
   isBanned: boolean;
 };
 
-export type UpdatedUser = {
-  _id?: string;
-  firstname?: string;
-  lastname?: string;
-  email?: string;
-  image?: string;
-  isBanned?: boolean;
-};
-
 export interface UsersState {
   allUsers: User[];
   singleUser: User;

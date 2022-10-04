@@ -60,12 +60,21 @@ export const adminCreateSchema = z.object({
         invalid_type_error: 'Password must be a string',
       })
       .min(8, { message: 'Must be 8 or more characters long' }),
-    roles: z.array(
-      z.string({
-        required_error: 'At least one role is required',
-        invalid_type_error: 'Role must be a string',
-      })
-    ),
+    roles:
+      // z.enum([
+      //   'products-read',
+      //   'products-write',
+      //   'users-read',
+      //   'users-write',
+      //   'admins-read',
+      //   'admins-write',
+      // ]),
+      z.array(
+        z.string({
+          required_error: 'At least one role is required',
+          invalid_type_error: 'Role must be a string',
+        })
+      ),
   }),
 })
 

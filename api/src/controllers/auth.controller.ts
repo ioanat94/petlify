@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
 import { BadRequestError } from '../helpers/apiError'
-import Admin from '../models/Admin'
 import { JWT_SECRET } from '../util/secrets'
+import adminService from '../services/admin.service'
 
 export const login = async (req: Request, res: Response) => {
   const user: any = req.user
@@ -27,7 +27,7 @@ export const login = async (req: Request, res: Response) => {
 }
 
 export const loginAdmin = async (req: Request, res: Response) => {
-  const foundAdmin = await Admin.findOne({ email: req.body.email })
+  const foundAdmin = await adminService.findByEmail(req.body.email)
 
   if (!foundAdmin) {
     throw new BadRequestError('Wrong email or password.')

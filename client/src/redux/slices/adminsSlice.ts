@@ -17,15 +17,6 @@ export type Admin = {
   roles: string[];
 };
 
-export type UpdatedAdmin = {
-  _id?: string;
-  firstname?: string;
-  lastname?: string;
-  email?: string;
-  password?: string;
-  roles?: string[];
-};
-
 export interface AdminsState {
   allAdmins: Admin[];
   singleAdmin: Admin;

@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { Product, UpdatedProduct } from 'redux/slices/productsSlice';
+import { Product } from 'redux/slices/productsSlice';
 
 type PutType = {
   productId: string;
-  updatedProduct: UpdatedProduct;
+  updatedProduct: Partial<Product>;
 };
 
 const URL = 'http://localhost:4000/api/v1/products';

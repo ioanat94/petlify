@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { Admin, UpdatedAdmin } from 'redux/slices/adminsSlice';
+import { Admin } from 'redux/slices/adminsSlice';
 
 type PutType = {
   adminId: string;
-  updatedAdmin: UpdatedAdmin;
+  updatedAdmin: Partial<Admin>;
 };
 
 const URL = 'http://localhost:4000/api/v1/admins';
