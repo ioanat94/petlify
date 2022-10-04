@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchProductsThunk } from 'redux/services/product.service';
@@ -11,16 +11,10 @@ const ProductList = () => {
     (state: RootState) => state.products.allProducts
   );
 
+  const location = useLocation();
+  const query = location.search;
+
   const dispatch = useAppDispatch();
-  const [params] = useSearchParams();
-  const pet = params.get('pet');
-  const subcategory = params.get('subcategory');
-  const query =
-    pet === null
-      ? ''
-      : subcategory === null
-      ? `?pet=${pet}`
-      : `?pet=${pet}&subcategory=${subcategory}`;
 
   useEffect(() => {
     dispatch(fetchProductsThunk(query));

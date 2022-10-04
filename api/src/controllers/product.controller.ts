@@ -44,6 +44,7 @@ export const findAll = async (
   try {
     const pet = req.query.pet
     const subcategory = req.query.subcategory
+    const search = req.query.search
 
     const products = await productService.findAll()
     let productsRef = [...products]
@@ -57,6 +58,12 @@ export const findAll = async (
     if (subcategory) {
       productsRef = productsRef.filter((product) =>
         product.categories.subcategory.includes(subcategory as string)
+      )
+    }
+
+    if (search) {
+      productsRef = productsRef.filter((product) =>
+        product.name.toLowerCase().includes(search as string)
       )
     }
 
