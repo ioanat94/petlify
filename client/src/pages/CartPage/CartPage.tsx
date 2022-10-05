@@ -62,25 +62,41 @@ const CartPage = () => {
     });
   };
 
+  const checkEmptyCart = () => {
+    return items.length === 0;
+  };
+
   return (
     <>
       <Navbar />
-      <div className='min-h-[calc(100vh-128px)] pt-16 px-10 flex flex-col gap-10'>
-        <table className='w-full min-w-[700px]'>
-          <thead>
-            <tr>{renderHeaders(tableHeaders)}</tr>
-          </thead>
-          <tbody>{renderRows(items)}</tbody>
-        </table>
-        <div className='flex items-center gap-10'>
-          <p className='text-lg font-semibold'>
-            Total: <span>{totalPrice.toFixed(2)}€</span>
-          </p>
-          <button className='w-max py-1 px-3 border-2 border-mainBlue text-mainBlue font-semibold rounded transition-all hover:bg-mainBlue hover:text-white'>
-            Place order
-          </button>
+      {checkEmptyCart() ? (
+        <div className='min-h-[calc(100vh-128px)] flex flex-col items-center pt-20 gap-10'>
+          <img
+            src={require('../../assets/empty-cart.webp')}
+            alt=''
+            width='500px'
+          />
+          <p className='text-xl font-semibold'>Your Cart is Empty</p>
+          <p>Looks like you haven't added anything to your cart yet.</p>
         </div>
-      </div>
+      ) : (
+        <div className='min-h-[calc(100vh-128px)] pt-16 px-10 flex flex-col gap-10'>
+          <table className='w-2/3 min-w-[700px]'>
+            <thead>
+              <tr>{renderHeaders(tableHeaders)}</tr>
+            </thead>
+            <tbody>{renderRows(items)}</tbody>
+          </table>
+          <div className='flex items-center gap-10'>
+            <p className='text-lg font-semibold'>
+              Total: <span>{totalPrice.toFixed(2)}€</span>
+            </p>
+            <button className='w-max py-1 px-3 border-2 border-mainBlue text-mainBlue font-semibold rounded transition-all hover:bg-mainBlue hover:text-white'>
+              Place order
+            </button>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </>
