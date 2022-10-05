@@ -16,6 +16,7 @@ function setCart() {
 export type CartProduct = {
   productId: string;
   id: string;
+  image: string;
   name: string;
   size: string;
   variant: string;

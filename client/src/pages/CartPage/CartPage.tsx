@@ -3,12 +3,18 @@ import { CartProduct, removeFromCart } from 'redux/slices/cartSlice';
 import { RootState } from 'redux/store';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CartPage = () => {
   const items = useAppSelector((state: RootState) => state.cart.items);
 
   const [totalPrice, setTotalPrice] = useState(0);
+  const [address, setAddress] = useState({
+    street: '',
+    postal: '',
+    city: '',
+    country: '',
+  });
 
   useEffect(() => {
     let cartTotal = 0;
@@ -20,10 +26,26 @@ const CartPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const tableHeaders = ['ID', 'Name', 'Size', 'Variant', 'Price', ''];
+  const tableHeaders = ['ID', 'Image', 'Name', 'Size', 'Variant', 'Price', ''];
 
   const handleRemoveProduct = (id: string) => {
     dispatch(removeFromCart(id));
+  };
+
+  const handleSetStreet = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress({ ...address, street: e.target.value });
+  };
+
+  const handleSetPostal = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress({ ...address, postal: e.target.value });
+  };
+
+  const handleSetCity = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress({ ...address, city: e.target.value });
+  };
+
+  const handleSetCountry = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress({ ...address, country: e.target.value });
   };
 
   const renderHeaders = (tableHeaders: string[]) => {
@@ -41,6 +63,9 @@ const CartPage = () => {
       return (
         <tr className='h-12' key={item.productId}>
           <td>{item.productId.substring(0, 8)}</td>
+          <td>
+            <img src={item.image} alt='' width='50px' />
+          </td>
           <td>{item.name}</td>
           <td>{item.size}</td>
           <td>{item.variant}</td>
@@ -87,13 +112,53 @@ const CartPage = () => {
             </thead>
             <tbody>{renderRows(items)}</tbody>
           </table>
-          <div className='flex items-center gap-10'>
-            <p className='text-lg font-semibold'>
-              Total: <span>{totalPrice.toFixed(2)}€</span>
-            </p>
-            <button className='w-max py-1 px-3 border-2 border-mainBlue text-mainBlue font-semibold rounded transition-all hover:bg-mainBlue hover:text-white'>
-              Place order
-            </button>
+          <div className='flex gap-20'>
+            <form action='' className='flex flex-col gap-2'>
+              <label htmlFor='street' className='font-semibold'>
+                Street and number
+              </label>
+              <input
+                type='text'
+                id='street'
+                className='border border-mainBlue w-96 rounded indent-1'
+                onChange={(e) => handleSetStreet(e)}
+              />
+              <label htmlFor='postal' className='font-semibold'>
+                Postal code
+              </label>
+              <input
+                type='text'
+                id='postal'
+                className='border border-mainBlue w-96 rounded indent-1'
+                onChange={(e) => handleSetPostal(e)}
+              />
+              <label htmlFor='city' className='font-semibold'>
+                City
+              </label>
+              <input
+                type='text'
+                id='city'
+                className='border border-mainBlue w-96 rounded indent-1'
+                onChange={(e) => handleSetCity(e)}
+              />
+              <label htmlFor='country' className='font-semibold'>
+                Country
+              </label>
+              <input
+                type='text'
+                id='country'
+                className='border border-mainBlue w-96 rounded indent-1'
+                onChange={(e) => handleSetCountry(e)}
+              />
+            </form>
+            <div className='flex items-center gap-10'>
+              <p className='text-lg font-semibold'>
+                Total: <span>{totalPrice.toFixed(2)}€</span>
+              </p>
+              <button className='w-max py-1 px-3 border-2 border-mainBlue text-mainBlue font-semibold rounded transition-all hover:bg-mainBlue hover:text-white'>
+                Place order
+              </button>
+            </div>
           </div>
         </div>
       )}

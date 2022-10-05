@@ -78,6 +78,7 @@ const ProductPage = () => {
     const productToAdd = {
       productId: uuidv4(),
       id: product._id as string,
+      image: product.img,
       name: product.name,
       size: chosenSize || product.sizes[0],
       variant: chosenVariant || product.variants[0],
