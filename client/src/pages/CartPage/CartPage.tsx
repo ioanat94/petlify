@@ -1,12 +1,21 @@
+import React, { useEffect, useState } from 'react';
+import {
+  PayPalButtons,
+  PayPalScriptProvider,
+  usePayPalScriptReducer,
+} from '@paypal/react-paypal-js';
+
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { CartProduct, removeFromCart } from 'redux/slices/cartSlice';
 import { RootState } from 'redux/store';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
-import React, { useEffect, useState } from 'react';
 
 const CartPage = () => {
   const items = useAppSelector((state: RootState) => state.cart.items);
+
+  const [cash, setCash] = useState(false);
+  const [paid, setPaid] = useState(false);
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [address, setAddress] = useState({
@@ -91,6 +100,62 @@ const CartPage = () => {
     return items.length === 0;
   };
 
+  const handleSetCash = () => {
+    setCash(!cash);
+    setPaid(!paid);
+  };
+
+  const currency = 'EUR';
+
+  const ButtonWrapper = ({
+    currency,
+    showSpinner,
+  }: {
+    currency: string;
+    showSpinner: boolean;
+  }) => {
+    const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+
+    useEffect(() => {
+      dispatch({
+        type: 'resetOptions',
+        value: {
+          ...options,
+          currency: currency,
+        },
+      });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currency, showSpinner]);
+
+    return (
+      <>
+        {showSpinner && isPending && <div className='spinner' />}
+        <PayPalButtons
+          style={{ layout: 'vertical' }}
+          disabled={false}
+          forceReRender={[totalPrice, currency]}
+          fundingSource={'paypal'}
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: totalPrice.toString(),
+                  },
+                },
+              ],
+            });
+          }}
+          onApprove={(data, actions) => {
+            return actions.order!.capture().then((details) => {
+              setPaid(true);
+            });
+          }}
+        />
+      </>
+    );
+  };
+
   return (
     <>
       <Navbar />
@@ -151,11 +216,39 @@ const CartPage = () => {
                 onChange={(e) => handleSetCountry(e)}
               />
             </form>
-            <div className='flex items-center gap-10'>
-              <p className='text-lg font-semibold'>
+            <div className='flex flex-col gap-10 self-center'>
+              <p className='text-lg font-bold'>
                 Total: <span>{totalPrice.toFixed(2)}€</span>
               </p>
-              <button className='w-max py-1 px-3 border-2 border-mainBlue text-mainBlue font-semibold rounded transition-all hover:bg-mainBlue hover:text-white'>
+              <div className='flex flex-col gap-2'>
+                <p className='font-semibold'>Choose payment method:</p>
+                <div className='flex gap-4'>
+                  <button
+                    onClick={handleSetCash}
+                    className={`w-max py-1 px-3 border-2 border-mainBlue font-semibold rounded ${
+                      cash ? 'bg-mainBlue text-white' : 'bg-white text-mainBlue'
+                    }`}
+                  >
+                    Cash on delivery
+                  </button>
+                  <div className='pt-1'>
+                    <PayPalScriptProvider
+                      options={{
+                        'client-id':
+                          'ATba9YMUOGj85RMZlI2u9oHbhEgJc-hLy_xQAdzqeGZAbD28Wh6B1kZiMAq2kwmo6youM6TP5-FjgNhp',
+                        components: 'buttons',
+                        currency: 'EUR',
+                      }}
+                    >
+                      <ButtonWrapper currency={currency} showSpinner={false} />
+                    </PayPalScriptProvider>
+                  </div>
+                </div>
+              </div>
+              <button
+                className='w-max py-1 px-3 border-2 border-mainBlue text-mainBlue font-semibold rounded hover:bg-mainBlue hover:text-white disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200'
+                disabled={!paid}
+              >
                 Place order
               </button>
             </div>
