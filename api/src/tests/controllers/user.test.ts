@@ -4,10 +4,8 @@ import { UserDocument } from '../../models/User'
 import app from '../../app'
 import connect, { MongodHelper } from '../../helpers/db-helper'
 
-const userToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzM1NWJjYzFiYjc5YWY5MWJhYTk3YjgiLCJmaXJzdG5hbWUiOiJJb2FuYSIsImxhc3RuYW1lIjoiVGlwbGVhIiwiZW1haWwiOiJpb2FuYXRpcGxlYTk0QGdtYWlsLmNvbSIsImltYWdlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FDTlBFdS05QU5pb1psRnJTenVkTE81NTBqSGtaVWstQ04wRk9rV0NRVm5WeUI0PXMyODgtcC1ydy1ubyIsImlzQmFubmVkIjpmYWxzZSwiaWF0IjoxNjY0ODk2ODg4LCJleHAiOjE2NjQ5MDA0ODh9.Lh5SiXbFZrt4wKY9hPxyFdgrAa7KRTu2T_zuyfSSZms'
-const adminToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiNjMzNmUyMWExYTAzZTI0ZjQ4ZDY4OGU4IiwiZmlyc3RuYW1lIjoiU3VwZXIiLCJsYXN0bmFtZSI6IkFkbWluIiwiZW1haWwiOiJzdXBlcmFkbWluQHBldGxpZnkuaW8iLCJyb2xlcyI6WyJwcm9kdWN0cy1yZWFkIiwicHJvZHVjdHMtd3JpdGUiLCJ1c2Vycy1yZWFkIiwidXNlcnMtd3JpdGUiLCJhZG1pbnMtd3JpdGUiLCJhZG1pbnMtcmVhZCJdLCJpYXQiOjE2NjQ4OTcyNDUsImV4cCI6MTY2NDkwMDg0NX0.1hpwuzAi9XXZNs-3EY1qXaG5Tdo_8PbTaKYpCTaHVFk'
+const userToken = process.env.userToken
+const adminToken = process.env.adminToken
 const nonExistingUserId = '5e57b77b5744fa0b461c7906'
 
 async function createUser(override?: Partial<UserDocument>) {
