@@ -11,6 +11,7 @@ import productRouter from './routers/product.router'
 import userRouter from './routers/user.router'
 import adminRouter from './routers/admin.router'
 import authRouter from './routers/auth.router'
+import orderRouter from './routers/order.router'
 import loginWithGoogle from './passport/google'
 
 dotenv.config({ path: '.env' })
@@ -51,6 +52,7 @@ passport.use(loginWithGoogle())
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/admins', adminRouter)
+app.use('/api/v1/orders', orderRouter)
 app.use('/api/v1/auth', authRouter)
 
 // Custom API error handler
