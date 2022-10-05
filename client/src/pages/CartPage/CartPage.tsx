@@ -10,9 +10,14 @@ import { CartProduct, removeFromCart } from 'redux/slices/cartSlice';
 import { RootState } from 'redux/store';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
+import { createOrderThunk } from 'redux/services/order.service';
 
 const CartPage = () => {
   const items = useAppSelector((state: RootState) => state.cart.items);
+  const user = useAppSelector((state: RootState) => state.auth.loggedInUser);
+
+  let productIds: any[] = [];
+  items.map((item) => productIds.push(item.id));
 
   const [cash, setCash] = useState(false);
   const [paid, setPaid] = useState(false);
@@ -100,7 +105,8 @@ const CartPage = () => {
     return items.length === 0;
   };
 
-  const handleSetCash = () => {
+  const handleSetCash = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     setCash(!cash);
     setPaid(!paid);
   };
@@ -133,7 +139,6 @@ const CartPage = () => {
         <PayPalButtons
           style={{ layout: 'vertical' }}
           disabled={false}
-          forceReRender={[totalPrice, currency]}
           fundingSource={'paypal'}
           createOrder={(data, actions) => {
             return actions.order.create({
@@ -154,6 +159,21 @@ const CartPage = () => {
         />
       </>
     );
+  };
+
+  const handlePlaceOrder = (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+
+    const newOrder = {
+      products: productIds,
+      user: user._id,
+      date: new Date(),
+      address: `${address.street}, ${address.postal} ${address.city}, ${address.country}`,
+      value: totalPrice,
+      status: 'processing',
+    };
+
+    dispatch(createOrderThunk(newOrder));
   };
 
   return (
@@ -178,80 +198,92 @@ const CartPage = () => {
             <tbody>{renderRows(items)}</tbody>
           </table>
           <div className='flex gap-20'>
-            <form action='' className='flex flex-col gap-2'>
-              <label htmlFor='street' className='font-semibold'>
-                Street and number
-              </label>
-              <input
-                type='text'
-                id='street'
-                className='border border-mainBlue w-96 rounded indent-1'
-                onChange={(e) => handleSetStreet(e)}
-              />
-              <label htmlFor='postal' className='font-semibold'>
-                Postal code
-              </label>
-              <input
-                type='text'
-                id='postal'
-                className='border border-mainBlue w-96 rounded indent-1'
-                onChange={(e) => handleSetPostal(e)}
-              />
-              <label htmlFor='city' className='font-semibold'>
-                City
-              </label>
-              <input
-                type='text'
-                id='city'
-                className='border border-mainBlue w-96 rounded indent-1'
-                onChange={(e) => handleSetCity(e)}
-              />
-              <label htmlFor='country' className='font-semibold'>
-                Country
-              </label>
-              <input
-                type='text'
-                id='country'
-                className='border border-mainBlue w-96 rounded indent-1'
-                onChange={(e) => handleSetCountry(e)}
-              />
-            </form>
-            <div className='flex flex-col gap-10 self-center'>
-              <p className='text-lg font-bold'>
-                Total: <span>{totalPrice.toFixed(2)}€</span>
-              </p>
+            <form action='' onSubmit={handlePlaceOrder} className='flex gap-20'>
               <div className='flex flex-col gap-2'>
-                <p className='font-semibold'>Choose payment method:</p>
-                <div className='flex gap-4'>
-                  <button
-                    onClick={handleSetCash}
-                    className={`w-max py-1 px-3 border-2 border-mainBlue font-semibold rounded ${
-                      cash ? 'bg-mainBlue text-white' : 'bg-white text-mainBlue'
-                    }`}
-                  >
-                    Cash on delivery
-                  </button>
-                  <div className='pt-1'>
-                    <PayPalScriptProvider
-                      options={{
-                        'client-id':
-                          'ATba9YMUOGj85RMZlI2u9oHbhEgJc-hLy_xQAdzqeGZAbD28Wh6B1kZiMAq2kwmo6youM6TP5-FjgNhp',
-                        components: 'buttons',
-                        currency: 'EUR',
-                      }}
+                <label htmlFor='street' className='font-semibold'>
+                  Street and number
+                </label>
+                <input
+                  required
+                  type='text'
+                  id='street'
+                  className='border border-mainBlue w-96 rounded indent-1'
+                  onChange={(e) => handleSetStreet(e)}
+                />
+                <label htmlFor='postal' className='font-semibold'>
+                  Postal code
+                </label>
+                <input
+                  required
+                  type='text'
+                  id='postal'
+                  className='border border-mainBlue w-96 rounded indent-1'
+                  onChange={(e) => handleSetPostal(e)}
+                />
+                <label htmlFor='city' className='font-semibold'>
+                  City
+                </label>
+                <input
+                  required
+                  type='text'
+                  id='city'
+                  className='border border-mainBlue w-96 rounded indent-1'
+                  onChange={(e) => handleSetCity(e)}
+                />
+                <label htmlFor='country' className='font-semibold'>
+                  Country
+                </label>
+                <input
+                  required
+                  type='text'
+                  id='country'
+                  className='border border-mainBlue w-96 rounded indent-1'
+                  onChange={(e) => handleSetCountry(e)}
+                />
+              </div>
+              <div className='flex flex-col gap-10 self-center'>
+                <p className='text-lg font-bold'>
+                  Total: <span>{totalPrice.toFixed(2)}€</span>
+                </p>
+                <div className='flex flex-col gap-2'>
+                  <p className='font-semibold'>Choose payment method:</p>
+                  <div className='flex gap-4'>
+                    <button
+                      onClick={handleSetCash}
+                      className={`w-max py-1 px-3 border-2 border-mainBlue font-semibold rounded ${
+                        cash
+                          ? 'bg-mainBlue text-white'
+                          : 'bg-white text-mainBlue'
+                      }`}
                     >
-                      <ButtonWrapper currency={currency} showSpinner={false} />
-                    </PayPalScriptProvider>
+                      Cash on delivery
+                    </button>
+                    <div className='pt-1'>
+                      <PayPalScriptProvider
+                        options={{
+                          'client-id':
+                            'ATba9YMUOGj85RMZlI2u9oHbhEgJc-hLy_xQAdzqeGZAbD28Wh6B1kZiMAq2kwmo6youM6TP5-FjgNhp',
+                          components: 'buttons',
+                          currency: 'EUR',
+                        }}
+                      >
+                        <ButtonWrapper
+                          currency={currency}
+                          showSpinner={false}
+                        />
+                      </PayPalScriptProvider>
+                    </div>
                   </div>
                 </div>
+                <button
+                  className='w-max py-1 px-3 border-2 border-mainBlue text-mainBlue font-semibold rounded hover:bg-mainBlue hover:text-white disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200'
+                  disabled={!paid}
+                  type='submit'
+                >
+                  Place order
+                </button>
               </div>
-              <button
-                className='w-max py-1 px-3 border-2 border-mainBlue text-mainBlue font-semibold rounded hover:bg-mainBlue hover:text-white disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200'
-                disabled={!paid}
-              >
-                Place order
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       )}
