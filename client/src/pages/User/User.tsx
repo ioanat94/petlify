@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchUserThunk, updateUserThunk } from 'redux/services/user.service';
@@ -7,6 +7,7 @@ import { RootState } from 'redux/store';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import SomethingWentWrong from 'components/SomethingWentWrong/SomethingWentWrong';
+import { fetchOrdersThunk } from 'redux/services/order.service';
 
 type UserInfo = {
   firstname: string;
@@ -17,6 +18,7 @@ type UserInfo = {
 const User = () => {
   const user = useAppSelector((state: RootState) => state.users.singleUser);
   const token = useAppSelector((state: RootState) => state.auth.token);
+  const orders = useAppSelector((state: RootState) => state.orders.allOrders);
 
   const [userData, setUserData] = useState<UserInfo>({
     firstname: '',
@@ -30,7 +32,38 @@ const User = () => {
 
   useEffect(() => {
     dispatch(fetchUserThunk({ userId, token }));
+    dispatch(fetchOrdersThunk(userId));
   }, [dispatch, userId, token]);
+
+  const handleRenderOrders = () => {
+    return orders.map((order) => (
+      <div className='flex justify-between items-center border-2 border-mainBlue rounded-lg py-4 px-8'>
+        <div>
+          <p className='font-semibold'>
+            Order ID: <span className='font-normal'>{order._id}</span>
+          </p>
+          <p className='font-semibold'>
+            Date:{' '}
+            <span className='font-normal'>
+              {order.date.toString().substring(0, 10)}
+            </span>
+          </p>
+          <p className='font-semibold'>
+            Status: <span className='font-normal'>{order.status}</span>
+          </p>
+          <p className='font-semibold'>
+            Value: <span className='font-normal'>{order.value}€</span>
+          </p>
+        </div>
+        <Link to={`/orders/${order._id}`}>
+          <button className='flex items-center gap-4 text-mainBlue font-semibold border-2 border-mainBlue rounded-lg px-4 py-2 h-max'>
+            View Order{' '}
+            <img src={require('../../assets/open.png')} alt='' width='20px' />
+          </button>
+        </Link>
+      </div>
+    ));
+  };
 
   const handleSetFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({ ...userData, firstname: e.target.value });
@@ -64,7 +97,7 @@ const User = () => {
     <div>
       <Navbar />
       {userId === user._id ? (
-        <div className='flex justify-center min-h-[calc(100vh-128px)]'>
+        <div className='flex flex-col gap-10 items-center min-h-[calc(100vh-128px)]'>
           <div className='flex items-center justify-evenly mt-20 h-max w-[750px]'>
             <img
               src={user.image}
@@ -140,6 +173,10 @@ const User = () => {
                 </p>
               )}
             </div>
+          </div>
+          <div className='w-[600px] flex flex-col gap-4'>
+            <p className='text-mainBlue text-xl font-semibold'>My Orders</p>
+            <div className='flex flex-col gap-4'>{handleRenderOrders()}</div>
           </div>
         </div>
       ) : (

@@ -11,6 +11,7 @@ import { RootState } from 'redux/store';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import { createOrderThunk } from 'redux/services/order.service';
+import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
   const items = useAppSelector((state: RootState) => state.cart.items);
@@ -39,6 +40,7 @@ const CartPage = () => {
   }, [items]);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const tableHeaders = ['ID', 'Image', 'Name', 'Size', 'Variant', 'Price', ''];
 
@@ -174,6 +176,7 @@ const CartPage = () => {
     };
 
     dispatch(createOrderThunk(newOrder));
+    navigate(`/users/${user._id}`);
   };
 
   return (
