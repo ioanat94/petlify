@@ -32,9 +32,11 @@ const ProductCard = ({ _id, name, img, categories, sizes, price }: Product) => {
         </div>
         <div className='flex flex-col gap-2'>
           <span className='text-right text-lg font-bold'>{price}€</span>
-          <button className='w-max px-4 py-1 text-mainBlue font-bold border-2 border-mainBlue rounded-lg transition-all hover:border-white hover:bg-mainBlue hover:text-white'>
-            BUY
-          </button>
+          <Link to={`/products/${_id}`}>
+            <button className='w-max px-4 py-1 text-mainBlue font-bold border-2 border-mainBlue rounded-lg transition-all hover:border-white hover:bg-mainBlue hover:text-white'>
+              BUY
+            </button>
+          </Link>
         </div>
       </div>
     </div>

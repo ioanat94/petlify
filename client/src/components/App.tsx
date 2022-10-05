@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from 'pages/Home/Home';
-import Product from 'pages/Product/Product';
 import Admin from 'pages/Admin/Admin';
 import ProductManagement from 'pages/ProductManagement/ProductManagement';
 import EditProduct from 'pages/EditProduct/EditProduct';
@@ -11,14 +10,17 @@ import AdminManagement from 'pages/AdminManagement/AdminManagement';
 import EditAdmin from 'pages/EditAdmin/EditAdmin';
 import AdminLogin from 'pages/AdminLogin/AdminLogin';
 import Unauthorized from 'pages/Unauthorized/Unauthorized';
+import ProductPage from 'pages/ProductPage/ProductPage';
+import CartPage from 'pages/CartPage/CartPage';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/products/:productId' element={<Product />} />
+        <Route path='/products/:productId' element={<ProductPage />} />
         <Route path='/users/:userId' element={<User />} />
+        <Route path='/cart' element={<CartPage />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/admin/login' element={<AdminLogin />} />
         <Route path='/admin/products' element={<ProductManagement />} />

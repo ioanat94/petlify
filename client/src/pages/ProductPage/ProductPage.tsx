@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchProductThunk } from 'redux/services/product.service';
 import { RootState } from 'redux/store';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
+import { addToCart } from 'redux/slices/cartSlice';
+import { Product } from 'redux/slices/productsSlice';
 
-const Product = () => {
+const ProductPage = () => {
   const product = useAppSelector(
     (state: RootState) => state.products.singleProduct
   );
 
-  const [chosenSize, setChosenSize] = useState('');
-  const [chosenVariant, setChosenVariant] = useState('');
+  const [chosenSize, setChosenSize] = useState(product.sizes[0]);
+  const [chosenVariant, setChosenVariant] = useState(product.variants[0]);
 
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -71,6 +74,18 @@ const Product = () => {
     ));
   };
 
+  const handleAddToCart = (product: Product) => {
+    const productToAdd = {
+      productId: uuidv4(),
+      id: product._id as string,
+      name: product.name,
+      size: chosenSize || product.sizes[0],
+      variant: chosenVariant || product.variants[0],
+      price: product.price,
+    };
+    dispatch(addToCart(productToAdd));
+  };
+
   return (
     <>
       <Navbar />
@@ -93,7 +108,10 @@ const Product = () => {
             )}
             <div className='flex gap-6'>
               <p className='text-2xl font-bold'>{product.price}€</p>
-              <button className='w-max px-4 py-1 text-mainBlue font-bold border-2 border-mainBlue rounded-lg transition-all hover:border-white hover:bg-mainBlue hover:text-white'>
+              <button
+                onClick={() => handleAddToCart(product)}
+                className='w-max px-4 py-1 text-mainBlue font-bold border-2 border-mainBlue rounded-lg transition-all hover:border-white hover:bg-mainBlue hover:text-white'
+              >
                 BUY
               </button>
             </div>
@@ -114,4 +132,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductPage;
