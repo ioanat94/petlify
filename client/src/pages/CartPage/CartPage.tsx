@@ -6,7 +6,7 @@ import {
 } from '@paypal/react-paypal-js';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { CartProduct, removeFromCart } from 'redux/slices/cartSlice';
+import { CartProduct, emptyCart, removeFromCart } from 'redux/slices/cartSlice';
 import { RootState } from 'redux/store';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
@@ -176,6 +176,7 @@ const CartPage = () => {
     };
 
     dispatch(createOrderThunk(newOrder));
+    dispatch(emptyCart());
     navigate(`/users/${user._id}`);
   };
 

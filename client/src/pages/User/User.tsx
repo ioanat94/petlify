@@ -174,7 +174,7 @@ const User = () => {
               )}
             </div>
           </div>
-          <div className='w-[600px] flex flex-col gap-4'>
+          <div className='w-[600px] flex flex-col gap-4 pb-20'>
             <p className='text-mainBlue text-xl font-semibold'>My Orders</p>
             <div className='flex flex-col gap-4'>{handleRenderOrders()}</div>
           </div>
