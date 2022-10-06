@@ -49,7 +49,10 @@ const User = () => {
             </span>
           </p>
           <p className='font-semibold'>
-            Status: <span className='font-normal'>{order.status}</span>
+            Status:{' '}
+            <span className='font-normal'>
+              {order.status[0].toUpperCase() + order.status.substring(1)}
+            </span>
           </p>
           <p className='font-semibold'>
             Value: <span className='font-normal'>{order.value}€</span>

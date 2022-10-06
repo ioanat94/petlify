@@ -12,6 +12,7 @@ import AdminLogin from 'pages/AdminLogin/AdminLogin';
 import Unauthorized from 'pages/Unauthorized/Unauthorized';
 import ProductPage from 'pages/ProductPage/ProductPage';
 import CartPage from 'pages/CartPage/CartPage';
+import OrderPage from 'pages/OrderPage/OrderPage';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/products/:productId' element={<ProductPage />} />
         <Route path='/users/:userId' element={<User />} />
         <Route path='/cart' element={<CartPage />} />
+        <Route path='/orders/:orderId' element={<OrderPage />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/admin/login' element={<AdminLogin />} />
         <Route path='/admin/products' element={<ProductManagement />} />
