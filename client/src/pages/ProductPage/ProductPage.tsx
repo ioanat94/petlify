@@ -14,6 +14,7 @@ const ProductPage = () => {
   const product = useAppSelector(
     (state: RootState) => state.products.singleProduct
   );
+  const user = useAppSelector((state: RootState) => state.auth.loggedInUser);
 
   const [chosenSize, setChosenSize] = useState(product.sizes[0]);
   const [chosenVariant, setChosenVariant] = useState(product.variants[0]);
@@ -111,7 +112,8 @@ const ProductPage = () => {
               <p className='text-2xl font-bold'>{product.price}€</p>
               <button
                 onClick={() => handleAddToCart(product)}
-                className='w-max px-4 py-1 text-mainBlue font-bold border-2 border-mainBlue rounded-lg transition-all hover:border-white hover:bg-mainBlue hover:text-white'
+                className='w-max px-4 py-1 text-mainBlue font-bold border-2 border-mainBlue rounded-lg transition-all hover:border-white hover:bg-mainBlue hover:text-white disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200'
+                disabled={user.isBanned}
               >
                 BUY
               </button>

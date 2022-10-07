@@ -11,6 +11,7 @@ function setInfo() {
       lastname: '',
       email: '',
       image: '',
+      isBanned: true,
     };
     return { token, loggedInUser };
   }
@@ -24,6 +25,7 @@ function setInfo() {
     lastname: '',
     email: '',
     image: '',
+    isBanned: true,
   };
 
   return { token, loggedInUser };
@@ -35,6 +37,7 @@ type LoggedInUser = {
   lastname: string;
   email: string;
   image: string;
+  isBanned: boolean;
 };
 
 export interface UsersState {
