@@ -4,13 +4,17 @@ function setCart() {
   if (!localStorage.getItem('cart')) {
     const items: [] = [];
     const count = 0;
-    return { items, count };
+    const paid = false;
+    return { items, count, paid };
   }
 
-  const items: [] = JSON.parse(localStorage.getItem('cart') || '[]');
-  const count: number = items.length || 0;
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-  return { items, count };
+  const items: [] = cart.items;
+  const count: number = items.length || 0;
+  const paid: boolean = cart.paid;
+
+  return { items, count, paid };
 }
 
 export type CartProduct = {
@@ -26,11 +30,13 @@ export type CartProduct = {
 export interface CartState {
   items: CartProduct[];
   count: number;
+  paid: boolean;
 }
 
 const initialState: CartState = {
   items: setCart().items || [],
   count: setCart().count || 0,
+  paid: setCart().paid || false,
 };
 
 export const cartSlice = createSlice({
@@ -40,23 +46,39 @@ export const cartSlice = createSlice({
     addToCart: (state: CartState, action: PayloadAction<CartProduct>) => {
       state.items = [...state.items, action.payload];
       state.count += 1;
-      localStorage.setItem('cart', JSON.stringify(state.items));
+      state.paid = false;
+      localStorage.setItem(
+        'cart',
+        JSON.stringify({ items: state.items, paid: state.paid })
+      );
     },
     removeFromCart: (state: CartState, action: PayloadAction<string>) => {
       state.items = state.items.filter(
         (item) => item.productId !== action.payload
       );
       state.count -= 1;
-      localStorage.setItem('cart', JSON.stringify(state.items));
+      localStorage.setItem('cart', JSON.stringify({ items: state.items }));
     },
     emptyCart: (state: CartState) => {
       state.items = [];
       state.count = 0;
-      localStorage.setItem('cart', JSON.stringify(state.items));
+      state.paid = false;
+      localStorage.setItem(
+        'cart',
+        JSON.stringify({ items: state.items, paid: state.paid })
+      );
+    },
+    setPaid: (state: CartState, action: PayloadAction<boolean>) => {
+      state.paid = action.payload;
+      localStorage.setItem(
+        'cart',
+        JSON.stringify({ items: state.items, paid: state.paid })
+      );
     },
   },
 });
 
-export const { addToCart, removeFromCart, emptyCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, emptyCart, setPaid } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
