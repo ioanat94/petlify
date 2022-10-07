@@ -1,6 +1,5 @@
 import Order from '../../models/Order'
 import OrderService from '../../services/order.service'
-
 import connect, { MongodHelper } from '../../helpers/db-helper'
 
 const nonExistingOrderId = '5e57b77b5744fa0b461c7906'

@@ -1,6 +1,5 @@
 import Admin from '../../models/Admin'
 import AdminService from '../../services/admin.service'
-
 import connect, { MongodHelper } from '../../helpers/db-helper'
 
 const nonExistingAdminId = '5e57b77b5744fa0b461c7906'

@@ -1,6 +1,5 @@
 import Product from '../../models/Product'
 import ProductService from '../../services/product.service'
-
 import connect, { MongodHelper } from '../../helpers/db-helper'
 
 const nonExistingProductId = '5e57b77b5744fa0b461c7906'

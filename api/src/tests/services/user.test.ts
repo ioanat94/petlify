@@ -1,6 +1,5 @@
 import User from '../../models/User'
 import UserService from '../../services/user.service'
-
 import connect, { MongodHelper } from '../../helpers/db-helper'
 
 const nonExistingUserId = '5e57b77b5744fa0b461c7906'
