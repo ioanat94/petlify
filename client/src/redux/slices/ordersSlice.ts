@@ -89,7 +89,10 @@ export const ordersSlice = createSlice({
     builder.addCase(
       updateOrderThunk.fulfilled,
       (state: OrdersState, action) => {
-        state.singleOrder = action.payload.data;
+        const updatedOrder = state.allOrders.find(
+          (order) => order._id === action.payload.data._id
+        )!;
+        updatedOrder.status = action.payload.data.status;
         state.isLoading = false;
       }
     );

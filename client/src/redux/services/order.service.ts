@@ -13,7 +13,7 @@ const URL = 'http://localhost:4000/api/v1/orders';
 export const fetchOrdersThunk = createAsyncThunk(
   'orders/fetch',
 
-  async (query?: string) => {
+  async ({ token, query }: { token?: string; query?: string }) => {
     try {
       const res = await axios.get(`${URL}?user=${query}`);
 

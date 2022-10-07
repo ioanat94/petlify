@@ -32,7 +32,7 @@ const User = () => {
 
   useEffect(() => {
     dispatch(fetchUserThunk({ userId, token }));
-    dispatch(fetchOrdersThunk(userId));
+    dispatch(fetchOrdersThunk({ query: userId }));
   }, [dispatch, userId, token]);
 
   const handleRenderOrders = () => {

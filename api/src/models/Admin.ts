@@ -8,6 +8,8 @@ export type AdminDocument = Document & {
   roles: (
     | 'products-read'
     | 'products-write'
+    | 'orders-read'
+    | 'orders-write'
     | 'users-read'
     | 'users-write'
     | 'admins-read'
@@ -39,6 +41,8 @@ const adminSchema = new mongoose.Schema({
     enum: [
       'products-read',
       'products-write',
+      'orders-read',
+      'orders-write',
       'users-read',
       'users-write',
       'admins-read',

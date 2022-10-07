@@ -73,6 +73,8 @@ const EditAdmin = () => {
     productsRead: () => (admin.roles.includes('products-read') ? true : false),
     productsWrite: () =>
       admin.roles.includes('products-write') ? true : false,
+    ordersRead: () => (admin.roles.includes('orders-read') ? true : false),
+    ordersWrite: () => (admin.roles.includes('orders-write') ? true : false),
     usersRead: () => (admin.roles.includes('users-read') ? true : false),
     usersWrite: () => (admin.roles.includes('users-write') ? true : false),
     adminsRead: () => (admin.roles.includes('admins-read') ? true : false),
@@ -200,6 +202,30 @@ const EditAdmin = () => {
                     <div className='flex items-center gap-2'>
                       <input
                         type='checkbox'
+                        id='orders-read'
+                        name='roles'
+                        value='orders-read'
+                        onChange={handleCheckbox}
+                        defaultChecked={checkRoles.ordersRead()}
+                      />
+                      <label htmlFor='orders-read'>Orders - Read</label>
+                    </div>
+                    <div className='flex items-center gap-2'>
+                      <input
+                        type='checkbox'
+                        id='orders-write'
+                        name='roles'
+                        value='orders-write'
+                        onChange={handleCheckbox}
+                        defaultChecked={checkRoles.ordersWrite()}
+                      />
+                      <label htmlFor='orders-write'>Orders - Write</label>
+                    </div>
+                  </div>
+                  <div className='flex flex-col'>
+                    <div className='flex items-center gap-2'>
+                      <input
+                        type='checkbox'
                         id='users-read'
                         name='roles'
                         value='users-read'
@@ -208,8 +234,6 @@ const EditAdmin = () => {
                       />
                       <label htmlFor='users-read'>Users - Read</label>
                     </div>
-                  </div>
-                  <div className='flex flex-col'>
                     <div className='flex items-center gap-2'>
                       <input
                         type='checkbox'

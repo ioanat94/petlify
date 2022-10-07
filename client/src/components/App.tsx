@@ -13,6 +13,7 @@ import Unauthorized from 'pages/Unauthorized/Unauthorized';
 import ProductPage from 'pages/ProductPage/ProductPage';
 import CartPage from 'pages/CartPage/CartPage';
 import OrderPage from 'pages/OrderPage/OrderPage';
+import OrderManagement from 'pages/OrderManagement/OrderManagement';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='/admin/products' element={<ProductManagement />} />
         <Route path='/admin/products/:productId' element={<EditProduct />} />
         <Route path='/admin/users' element={<UserManagement />} />
+        <Route path='/admin/orders' element={<OrderManagement />} />
         <Route path='/admin/admins' element={<AdminManagement />} />
         <Route path='/admin/admins/:adminId' element={<EditAdmin />} />
         <Route path='/admin/unauthorized' element={<Unauthorized />} />

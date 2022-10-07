@@ -139,6 +139,28 @@ const AddAdminPopup = () => {
             <div className='flex items-center gap-2'>
               <input
                 type='checkbox'
+                id='orders-read'
+                name='roles'
+                value='orders-read'
+                onChange={handleCheckbox}
+              />
+              <label htmlFor='orders-read'>Orders - Read</label>
+            </div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='checkbox'
+                id='orders-write'
+                name='roles'
+                value='orders-write'
+                onChange={handleCheckbox}
+              />
+              <label htmlFor='orders-write'>Orders - Write</label>
+            </div>
+          </div>
+          <div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='checkbox'
                 id='users-read'
                 name='roles'
                 value='users-read'
@@ -146,8 +168,6 @@ const AddAdminPopup = () => {
               />
               <label htmlFor='users-read'>Users - Read</label>
             </div>
-          </div>
-          <div>
             <div className='flex items-center gap-2'>
               <input
                 type='checkbox'

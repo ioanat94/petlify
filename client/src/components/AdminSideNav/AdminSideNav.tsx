@@ -8,6 +8,10 @@ const AdminSideNav = () => {
         <Link to='/admin/products'>Manage products</Link>
       </li>
       <li className='flex items-center gap-4'>
+        <img src={require('assets/mng-orders.png')} alt='' width='30px' />
+        <Link to='/admin/orders'>Manage orders</Link>
+      </li>
+      <li className='flex items-center gap-4'>
         <img src={require('assets/mng-user.png')} alt='' width='30px' />
         <Link to='/admin/users'>Manage users</Link>
       </li>
