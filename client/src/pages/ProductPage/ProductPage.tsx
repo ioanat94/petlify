@@ -5,10 +5,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchProductThunk } from 'redux/services/product.service';
 import { RootState } from 'redux/store';
-import Footer from 'components/Footer/Footer';
-import Navbar from 'components/Navbar/Navbar';
 import { addToCart } from 'redux/slices/cartSlice';
 import { Product } from 'redux/slices/productsSlice';
+import Footer from 'components/Footer/Footer';
+import Navbar from 'components/Navbar/Navbar';
 
 const ProductPage = () => {
   const product = useAppSelector(

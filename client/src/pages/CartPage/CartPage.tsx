@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   PayPalButtons,
   PayPalScriptProvider,
@@ -8,10 +9,9 @@ import {
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { CartProduct, emptyCart, removeFromCart } from 'redux/slices/cartSlice';
 import { RootState } from 'redux/store';
+import { createOrderThunk } from 'redux/services/order.service';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
-import { createOrderThunk } from 'redux/services/order.service';
-import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
   const items = useAppSelector((state: RootState) => state.cart.items);

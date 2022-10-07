@@ -4,10 +4,10 @@ import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchUserThunk, updateUserThunk } from 'redux/services/user.service';
 import { RootState } from 'redux/store';
+import { fetchOrdersThunk } from 'redux/services/order.service';
 import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import SomethingWentWrong from 'components/SomethingWentWrong/SomethingWentWrong';
-import { fetchOrdersThunk } from 'redux/services/order.service';
 
 type UserInfo = {
   firstname: string;
