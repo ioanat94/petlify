@@ -4,6 +4,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchTokenThunk } from 'redux/services/auth.service';
 import { RootState } from 'redux/store';
+import Searchbar from 'components/Searchbar/Searchbar';
 
 const Navbar = () => {
   const { auth, cart } = useAppSelector((state: RootState) => state);
@@ -24,6 +25,17 @@ const Navbar = () => {
           <p className='text-2xl text-mainYellow font-medium'>Petlify</p>
         </div>
       </Link>
+      <div className='text-mainYellow flex gap-6'>
+        <div className='flex items-center gap-2'>
+          <img src={require('../../assets/check.png')} alt='' width='25px' />
+          <p>Free delivery for all purchases</p>
+        </div>
+        <div className='flex items-center gap-2'>
+          <img src={require('../../assets/check.png')} alt='' width='25px' />
+          <p>Always expert service</p>
+        </div>
+      </div>
+      <Searchbar />
       <div className='flex items-center gap-6'>
         <Link to={`/users/${user._id}`}>
           <img src={user.image} alt='' className='w-8 h-8 rounded-full' />
