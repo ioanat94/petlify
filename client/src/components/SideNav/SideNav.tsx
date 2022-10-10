@@ -13,7 +13,7 @@ const SideNav = () => {
     ));
   };
   return (
-    <ul className='border-2 rounded-xl border-mainYellow p-6 pr-20 h-max'>
+    <ul className='border-2 rounded-xl border-mainYellow px-6 py-4 pr-20 h-max'>
       <li className='text-mainBlue text-xl font-medium'>
         <Link to='/?pet=cats'>Cats</Link>
       </li>

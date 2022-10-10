@@ -13,7 +13,7 @@ const Searchbar = () => {
   };
 
   return (
-    <div className='flex items-center gap-10'>
+    <div className='flex items-center gap-6'>
       <input
         type='search'
         placeholder='Search product...'
