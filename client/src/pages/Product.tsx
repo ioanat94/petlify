@@ -91,7 +91,7 @@ const ProductPage = () => {
     <>
       <Navbar />
       <div className='min-h-[calc(100vh-128px)]'>
-        <div className='flex justify-center gap-20 py-20'>
+        <div className='flex justify-center gap-20 items-center pt-28'>
           <img src={product.img} alt='' width='600px' />
           <div className='flex flex-col gap-4'>
             <h4 className='text-mainBlue font-bold text-3xl'>{product.name}</h4>
@@ -125,6 +125,32 @@ const ProductPage = () => {
               <span className='border rounded-full border-mainYellow px-2 py-1'>
                 #{product.categories.subcategory}
               </span>
+            </div>
+            <div className='flex flex-col gap-4 pt-10'>
+              <div className='flex items-center gap-10'>
+                <img
+                  src={require('../assets/free-shipping.jpg')}
+                  alt=''
+                  width='200px'
+                />
+                <img
+                  src={require('../assets/posti.png')}
+                  alt=''
+                  width='100px'
+                />
+              </div>
+              <div className='flex items-center gap-24 pl-10'>
+                <img
+                  src={require('../assets/paypal.png')}
+                  alt=''
+                  width='100px'
+                />
+                <img
+                  src={require('../assets/cash-on-delivery.png')}
+                  alt=''
+                  width='80px'
+                />
+              </div>
             </div>
           </div>
         </div>
