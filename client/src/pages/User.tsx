@@ -17,8 +17,9 @@ type UserInfo = {
 };
 
 const User = () => {
-  const user = useAppSelector((state: RootState) => state.users.singleUser);
-  const token = useAppSelector((state: RootState) => state.auth.token);
+  const { users, auth } = useAppSelector((state: RootState) => state);
+  const user = users.singleUser;
+  const token = auth.token;
 
   const [userData, setUserData] = useState<UserInfo>({
     firstname: '',

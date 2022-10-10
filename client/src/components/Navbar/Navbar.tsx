@@ -6,8 +6,9 @@ import { fetchTokenThunk } from 'redux/services/auth.service';
 import { RootState } from 'redux/store';
 
 const Navbar = () => {
-  const user = useAppSelector((state: RootState) => state.auth.loggedInUser);
-  const count = useAppSelector((state: RootState) => state.cart.count);
+  const { auth, cart } = useAppSelector((state: RootState) => state);
+  const user = auth.loggedInUser;
+  const count = cart.count;
 
   const dispatch = useAppDispatch();
 

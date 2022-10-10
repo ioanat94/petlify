@@ -10,12 +10,9 @@ import { Product } from 'redux/slices/productsSlice';
 import { RootState } from 'redux/store';
 
 const ProductsTable = () => {
-  const products = useAppSelector(
-    (state: RootState) => state.products.allProducts
-  );
-  const loggedInAdmin = useAppSelector(
-    (state: RootState) => state.adminAuth.loggedInAdmin
-  );
+  const { products, adminAuth } = useAppSelector((state: RootState) => state);
+  const allProducts = products.allProducts;
+  const loggedInAdmin = adminAuth.loggedInAdmin;
 
   const tableHeaders = [
     'ID',
@@ -102,7 +99,7 @@ const ProductsTable = () => {
       <thead>
         <tr>{handleRenderHeaders(tableHeaders)}</tr>
       </thead>
-      <tbody>{handleRenderRows(products)}</tbody>
+      <tbody>{handleRenderRows(allProducts)}</tbody>
     </table>
   );
 };

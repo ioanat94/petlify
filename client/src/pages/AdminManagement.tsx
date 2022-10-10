@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useAppSelector } from 'redux/hooks';
+import { RootState } from 'redux/store';
 import AddAdminPopup from 'components/AddAdminPopup/AddAdminPopup';
 import AdminsTable from 'components/AdminsTable/AdminsTable';
 import AdminNavbar from 'components/AdminNavbar/AdminNavbar';
 import AdminSideNav from 'components/AdminSideNav/AdminSideNav';
-import { useAppSelector } from 'redux/hooks';
-import { RootState } from 'redux/store';
 import AdminSearchbar from 'components/AdminSearchbar/AdminSearchbar';
 
 const AdminManagement = () => {
@@ -15,13 +15,10 @@ const AdminManagement = () => {
   const handleSetVisible = () => {
     setIsVisible(!isVisible);
   };
-  const loggedInAdmin = useAppSelector(
-    (state: RootState) => state.adminAuth.loggedInAdmin
-  );
 
-  const adminToken = useAppSelector(
-    (state: RootState) => state.adminAuth.adminToken
-  );
+  const { adminAuth } = useAppSelector((state: RootState) => state);
+  const loggedInAdmin = adminAuth.loggedInAdmin;
+  const adminToken = adminAuth.adminToken;
 
   const navigate = useNavigate();
 

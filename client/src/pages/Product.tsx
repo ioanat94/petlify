@@ -11,10 +11,9 @@ import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
 
 const ProductPage = () => {
-  const product = useAppSelector(
-    (state: RootState) => state.products.singleProduct
-  );
-  const user = useAppSelector((state: RootState) => state.auth.loggedInUser);
+  const { products, auth } = useAppSelector((state: RootState) => state);
+  const product = products.singleProduct;
+  const user = auth.loggedInUser;
 
   const [chosenSize, setChosenSize] = useState(product.sizes[0]);
   const [chosenVariant, setChosenVariant] = useState(product.variants[0]);

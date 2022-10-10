@@ -1,19 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Home from 'pages/Home/Home';
-import Admin from 'pages/Admin/Admin';
-import ProductManagement from 'pages/ProductManagement/ProductManagement';
-import EditProduct from 'pages/EditProduct/EditProduct';
-import UserManagement from 'pages/UserManagement/UserManagement';
-import User from 'pages/User/User';
-import AdminManagement from 'pages/AdminManagement/AdminManagement';
-import EditAdmin from 'pages/EditAdmin/EditAdmin';
-import AdminLogin from 'pages/AdminLogin/AdminLogin';
-import Unauthorized from 'pages/Unauthorized/Unauthorized';
-import ProductPage from 'pages/ProductPage/ProductPage';
-import CartPage from 'pages/CartPage/CartPage';
-import OrderPage from 'pages/OrderPage/OrderPage';
-import OrderManagement from 'pages/OrderManagement/OrderManagement';
+import Home from 'pages/Home';
+import Admin from 'pages/Admin';
+import ProductManagement from 'pages/ProductManagement';
+import EditProduct from 'pages/EditProduct';
+import UserManagement from 'pages/UserManagement';
+import User from 'pages/User';
+import AdminManagement from 'pages/AdminManagement';
+import EditAdmin from 'pages/EditAdmin';
+import AdminLogin from 'pages/AdminLogin';
+import Unauthorized from 'pages/Unauthorized';
+import ProductPage from 'pages/Product';
+import CartPage from 'pages/Cart';
+import OrderPage from 'pages/Order';
+import OrderManagement from 'pages/OrderManagement';
 
 const App = () => {
   return (

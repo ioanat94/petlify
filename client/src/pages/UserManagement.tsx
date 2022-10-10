@@ -9,12 +9,9 @@ import UsersTable from 'components/UsersTable/UsersTable';
 import AdminSearchbar from 'components/AdminSearchbar/AdminSearchbar';
 
 const UserManagement = () => {
-  const adminToken = useAppSelector(
-    (state: RootState) => state.adminAuth.adminToken
-  );
-  const loggedInAdmin = useAppSelector(
-    (state: RootState) => state.adminAuth.loggedInAdmin
-  );
+  const { adminAuth } = useAppSelector((state: RootState) => state);
+  const adminToken = adminAuth.adminToken;
+  const loggedInAdmin = adminAuth.loggedInAdmin;
 
   const navigate = useNavigate();
 

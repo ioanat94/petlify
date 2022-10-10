@@ -18,6 +18,10 @@ export const store = configureStore({
     cart: cartReducer,
     orders: ordersReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type AppDispatch = typeof store.dispatch;

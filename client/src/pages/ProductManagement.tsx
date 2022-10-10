@@ -16,12 +16,9 @@ const ProductManagement = () => {
     setIsVisible(!isVisible);
   };
 
-  const adminToken = useAppSelector(
-    (state: RootState) => state.adminAuth.adminToken
-  );
-  const loggedInAdmin = useAppSelector(
-    (state: RootState) => state.adminAuth.loggedInAdmin
-  );
+  const { adminAuth } = useAppSelector((state: RootState) => state);
+  const adminToken = adminAuth.adminToken;
+  const loggedInAdmin = adminAuth.loggedInAdmin;
 
   const navigate = useNavigate();
 

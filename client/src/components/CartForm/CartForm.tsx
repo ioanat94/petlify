@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -8,20 +8,17 @@ import { RootState } from 'redux/store';
 import PaypalButton from 'components/PaypalButton/PaypalButton';
 
 const CartForm = () => {
-  const user = useAppSelector((state: RootState) => state.auth.loggedInUser);
-  const items = useAppSelector((state: RootState) => state.cart.items);
-  const paid = useAppSelector((state: RootState) => state.cart.paid);
+  const { auth, cart } = useAppSelector((state: RootState) => state);
+  const user = auth.loggedInUser;
+  const items = cart.items;
+  const paid = cart.paid;
 
   const [cash, setCash] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0);
 
-  useEffect(() => {
-    let cartTotal = 0;
-    items.map((item) => {
-      return (cartTotal += item.price);
-    });
-    setTotalPrice(cartTotal);
-  }, [items]);
+  let totalPrice = 0;
+  items.map((item) => {
+    return (totalPrice += item.price);
+  });
 
   const [address, setAddress] = useState({
     street: '',

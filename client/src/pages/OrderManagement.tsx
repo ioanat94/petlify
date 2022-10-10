@@ -9,12 +9,9 @@ import AdminSideNav from 'components/AdminSideNav/AdminSideNav';
 import OrdersTable from 'components/OrdersTable/OrdersTable';
 
 const OrderManagement = () => {
-  const adminToken = useAppSelector(
-    (state: RootState) => state.adminAuth.adminToken
-  );
-  const loggedInAdmin = useAppSelector(
-    (state: RootState) => state.adminAuth.loggedInAdmin
-  );
+  const { adminAuth } = useAppSelector((state: RootState) => state);
+  const adminToken = adminAuth.adminToken;
+  const loggedInAdmin = adminAuth.loggedInAdmin;
 
   const navigate = useNavigate();
 

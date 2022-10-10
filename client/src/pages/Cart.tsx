@@ -6,7 +6,7 @@ import EmptyCart from 'components/EmptyCart/EmptyCart';
 import CartTable from 'components/CartTable/CartTable';
 import CartForm from 'components/CartForm/CartForm';
 
-const CartPage = () => {
+const Cart = () => {
   const items = useAppSelector((state: RootState) => state.cart.items);
 
   const checkEmptyCart = () => {
@@ -31,4 +31,4 @@ const CartPage = () => {
     </>
   );
 };
-export default CartPage;
+export default Cart;

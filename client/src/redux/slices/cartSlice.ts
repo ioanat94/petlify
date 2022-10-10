@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-function setCart() {
+const setCart = () => {
   if (!localStorage.getItem('cart')) {
     const items: [] = [];
     const count = 0;
@@ -15,7 +15,7 @@ function setCart() {
   const paid: boolean = cart.paid;
 
   return { items, count, paid };
-}
+};
 
 export type CartProduct = {
   productId: string;

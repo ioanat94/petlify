@@ -8,9 +8,10 @@ import Footer from 'components/Footer/Footer';
 import Navbar from 'components/Navbar/Navbar';
 import SomethingWentWrong from 'components/SomethingWentWrong/SomethingWentWrong';
 
-const OrderPage = () => {
-  const user = useAppSelector((state: RootState) => state.auth.loggedInUser);
-  const order = useAppSelector((state: RootState) => state.orders.singleOrder);
+const Order = () => {
+  const { auth, orders } = useAppSelector((state: RootState) => state);
+  const user = auth.loggedInUser;
+  const order = orders.singleOrder;
 
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -54,7 +55,7 @@ const OrderPage = () => {
             <p className='text-lg text-mainBlue font-semibold'>Status</p>
             <div className='flex gap-20'>
               <img
-                src={require('../../assets/processing.png')}
+                src={require('../assets/processing.png')}
                 alt=''
                 width='75px'
                 className={`${
@@ -62,7 +63,7 @@ const OrderPage = () => {
                 }`}
               />
               <img
-                src={require('../../assets/confirmed.png')}
+                src={require('../assets/confirmed.png')}
                 alt=''
                 width='75px'
                 className={`${
@@ -70,7 +71,7 @@ const OrderPage = () => {
                 } ${order.status === 'confirmed' ? 'animate-pulse' : ''}`}
               />
               <img
-                src={require('../../assets/shipping.png')}
+                src={require('../assets/shipping.png')}
                 alt=''
                 width='75px'
                 className={`${
@@ -80,7 +81,7 @@ const OrderPage = () => {
                 } ${order.status === 'shipping' ? 'animate-pulse' : ''}`}
               />
               <img
-                src={require('../../assets/delivered.png')}
+                src={require('../assets/delivered.png')}
                 alt=''
                 width='75px'
                 className={`${
@@ -97,4 +98,4 @@ const OrderPage = () => {
     </div>
   );
 };
-export default OrderPage;
+export default Order;

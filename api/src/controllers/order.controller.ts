@@ -41,15 +41,21 @@ export const findAll = async (
 ) => {
   try {
     const user = req.query.user
+    let search: string
 
-    const orders = await orderService.findAll()
-    let ordersRef = [...orders]
-
-    if (user) {
-      ordersRef = ordersRef.filter((order) => order.user.toString() === user)
+    if ((user as string).includes('search')) {
+      search = (user as string).substring(8)
+    } else {
+      search = user as string
     }
 
-    res.json(ordersRef)
+    let orders = await orderService.findAll()
+
+    if (user) {
+      orders = orders.filter((order) => order.user.toString() === search)
+    }
+
+    res.json(orders)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', 400, error))

@@ -11,13 +11,10 @@ import { User } from 'redux/slices/usersSlice';
 import { RootState } from 'redux/store';
 
 const UsersTable = () => {
-  const users = useAppSelector((state: RootState) => state.users.allUsers);
-  const token = useAppSelector(
-    (state: RootState) => state.adminAuth.adminToken
-  );
-  const loggedInAdmin = useAppSelector(
-    (state: RootState) => state.adminAuth.loggedInAdmin
-  );
+  const { users, adminAuth } = useAppSelector((state: RootState) => state);
+  const allUsers = users.allUsers;
+  const token = adminAuth.adminToken;
+  const loggedInAdmin = adminAuth.loggedInAdmin;
 
   const tableHeaders = [
     'ID',
@@ -94,7 +91,7 @@ const UsersTable = () => {
       <thead>
         <tr>{handleRenderHeaders(tableHeaders)}</tr>
       </thead>
-      <tbody>{handleRenderRows(users)}</tbody>
+      <tbody>{handleRenderRows(allUsers)}</tbody>
     </table>
   );
 };

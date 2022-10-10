@@ -12,17 +12,11 @@ import AdminNavbar from 'components/AdminNavbar/AdminNavbar';
 import AdminSideNav from 'components/AdminSideNav/AdminSideNav';
 
 const EditAdmin = () => {
-  const admin = useAppSelector((state: RootState) => state.admins.singleAdmin);
-  const isLoading = useAppSelector(
-    (state: RootState) => state.admins.isLoading
-  );
-
-  const adminToken = useAppSelector(
-    (state: RootState) => state.adminAuth.adminToken
-  );
-  const loggedInAdmin = useAppSelector(
-    (state: RootState) => state.adminAuth.loggedInAdmin
-  );
+  const { admins, adminAuth } = useAppSelector((state: RootState) => state);
+  const admin = admins.singleAdmin;
+  const isLoading = admins.isLoading;
+  const adminToken = adminAuth.adminToken;
+  const loggedInAdmin = adminAuth.loggedInAdmin;
 
   const navigate = useNavigate();
 

@@ -11,13 +11,10 @@ import { Order } from 'redux/slices/ordersSlice';
 import { RootState } from 'redux/store';
 
 const OrdersTable = () => {
-  const orders = useAppSelector((state: RootState) => state.orders.allOrders);
-  const token = useAppSelector(
-    (state: RootState) => state.adminAuth.adminToken
-  );
-  const loggedInAdmin = useAppSelector(
-    (state: RootState) => state.adminAuth.loggedInAdmin
-  );
+  const { orders, adminAuth } = useAppSelector((state: RootState) => state);
+  const allOrders = orders.allOrders;
+  const token = adminAuth.adminToken;
+  const loggedInAdmin = adminAuth.loggedInAdmin;
 
   const tableHeaders = [
     'ID',
@@ -103,7 +100,7 @@ const OrdersTable = () => {
       <thead>
         <tr>{handleRenderHeaders(tableHeaders)}</tr>
       </thead>
-      <tbody>{handleRenderRows(orders)}</tbody>
+      <tbody>{handleRenderRows(allOrders)}</tbody>
     </table>
   );
 };
