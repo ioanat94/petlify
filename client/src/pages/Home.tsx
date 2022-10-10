@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <Navbar />
       <div className='flex px-16 py-10 gap-20 min-h-[calc(100vh-128px)]'>
-        <div className='flex flex-col gap-10 items-center'>
+        <div className='flex flex-col gap-10 items-center h-screen sticky top-28'>
           <SideNav />
           <img
             src={require('../assets/sideimg.png')}
