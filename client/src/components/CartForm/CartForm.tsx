@@ -27,7 +27,7 @@ const CartForm = () => {
     country: '',
   });
 
-  let productIds: any[] = [];
+  let productIds: string[] = [];
   items.map((item) => productIds.push(item.id));
 
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ const CartForm = () => {
 
   const handleSetCash = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    setCash(!cash);
+    setCash((prev) => !prev);
     dispatch(setPaid(!paid));
   };
 

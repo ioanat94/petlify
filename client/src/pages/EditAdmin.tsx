@@ -64,15 +64,14 @@ const EditAdmin = () => {
   };
 
   const checkRoles = {
-    productsRead: () => (admin.roles.includes('products-read') ? true : false),
-    productsWrite: () =>
-      admin.roles.includes('products-write') ? true : false,
-    ordersRead: () => (admin.roles.includes('orders-read') ? true : false),
-    ordersWrite: () => (admin.roles.includes('orders-write') ? true : false),
-    usersRead: () => (admin.roles.includes('users-read') ? true : false),
-    usersWrite: () => (admin.roles.includes('users-write') ? true : false),
-    adminsRead: () => (admin.roles.includes('admins-read') ? true : false),
-    adminsWrite: () => (admin.roles.includes('admins-write') ? true : false),
+    canReadProducts: () => admin.roles.includes('products-read'),
+    canWriteProducts: () => admin.roles.includes('products-write'),
+    canReadOrders: () => admin.roles.includes('orders-read'),
+    canWriteOrders: () => admin.roles.includes('orders-write'),
+    canReadUsers: () => admin.roles.includes('users-read'),
+    canWriteUsers: () => admin.roles.includes('users-write'),
+    canReadAdmins: () => admin.roles.includes('admins-read'),
+    canWriteAdmins: () => admin.roles.includes('admins-write'),
   };
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -178,7 +177,7 @@ const EditAdmin = () => {
                         name='roles'
                         value='products-read'
                         onChange={handleCheckbox}
-                        defaultChecked={checkRoles.productsRead()}
+                        defaultChecked={checkRoles.canReadProducts()}
                       />
                       <label htmlFor='products-read'>Products - Read</label>
                     </div>
@@ -189,7 +188,7 @@ const EditAdmin = () => {
                         name='roles'
                         value='products-write'
                         onChange={handleCheckbox}
-                        defaultChecked={checkRoles.productsWrite()}
+                        defaultChecked={checkRoles.canWriteProducts()}
                       />
                       <label htmlFor='products-write'>Products - Write</label>
                     </div>
@@ -200,7 +199,7 @@ const EditAdmin = () => {
                         name='roles'
                         value='orders-read'
                         onChange={handleCheckbox}
-                        defaultChecked={checkRoles.ordersRead()}
+                        defaultChecked={checkRoles.canReadOrders()}
                       />
                       <label htmlFor='orders-read'>Orders - Read</label>
                     </div>
@@ -211,7 +210,7 @@ const EditAdmin = () => {
                         name='roles'
                         value='orders-write'
                         onChange={handleCheckbox}
-                        defaultChecked={checkRoles.ordersWrite()}
+                        defaultChecked={checkRoles.canWriteOrders()}
                       />
                       <label htmlFor='orders-write'>Orders - Write</label>
                     </div>
@@ -224,7 +223,7 @@ const EditAdmin = () => {
                         name='roles'
                         value='users-read'
                         onChange={handleCheckbox}
-                        defaultChecked={checkRoles.usersRead()}
+                        defaultChecked={checkRoles.canReadUsers()}
                       />
                       <label htmlFor='users-read'>Users - Read</label>
                     </div>
@@ -235,7 +234,7 @@ const EditAdmin = () => {
                         name='roles'
                         value='users-write'
                         onChange={handleCheckbox}
-                        defaultChecked={checkRoles.usersWrite()}
+                        defaultChecked={checkRoles.canWriteUsers()}
                       />
                       <label htmlFor='users-write'>Users - Write</label>
                     </div>
@@ -246,7 +245,7 @@ const EditAdmin = () => {
                         name='roles'
                         value='admins-read'
                         onChange={handleCheckbox}
-                        defaultChecked={checkRoles.adminsRead()}
+                        defaultChecked={checkRoles.canReadAdmins()}
                       />
                       <label htmlFor='admins-read'>Admins - Read</label>
                     </div>
@@ -257,7 +256,7 @@ const EditAdmin = () => {
                         name='roles'
                         value='admins-write'
                         onChange={handleCheckbox}
-                        defaultChecked={checkRoles.adminsWrite()}
+                        defaultChecked={checkRoles.canWriteAdmins()}
                       />
                       <label htmlFor='admins-write'>Admins - Write</label>
                     </div>

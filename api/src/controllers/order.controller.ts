@@ -43,10 +43,14 @@ export const findAll = async (
     const user = req.query.user
     let search: string
 
-    if ((user as string).includes('search')) {
-      search = (user as string).substring(8)
-    } else {
-      search = user as string
+    if (typeof user === 'string') {
+      const adminSearch = user.includes('search')
+
+      if (adminSearch) {
+        search = user.substring(8)
+      } else {
+        search = user
+      }
     }
 
     let orders = await orderService.findAll()
