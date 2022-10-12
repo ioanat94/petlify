@@ -18,47 +18,77 @@ const Navbar = () => {
   };
 
   return (
-    <div className='flex items-center justify-between px-6 h-16 bg-mainBlue sticky top-0 z-[99]'>
-      <div className='flex gap-10'>
-        <Link to='/'>
-          <div className='flex items-center gap-4'>
-            <img src={require('assets/logo.png')} alt='' className='w-12' />
-            <p className='text-2xl text-mainYellow font-medium'>Petlify</p>
+    <div className='flex flex-col bg-mainBlue pb-4 lg:pb-0 sticky top-0 z-[99]'>
+      <div className='flex items-center justify-between px-6 h-16'>
+        <div className='flex gap-12'>
+          <Link to='/'>
+            <div className='flex items-center gap-4'>
+              <img
+                src={require('assets/logo.png')}
+                alt=''
+                className='max-w-[48px]'
+              />
+              <p className='text-2xl text-mainYellow font-medium hidden md:block'>
+                Petlify
+              </p>
+            </div>
+          </Link>
+          <div className='text-mainYellow gap-2 text-sm hidden xl:flex'>
+            <div className='flex items-center gap-2'>
+              <img
+                src={require('../../assets/check.png')}
+                alt=''
+                width='20px'
+              />
+              <p>Free delivery for all purchases</p>
+            </div>
+            <div className='flex items-center gap-2'>
+              <img
+                src={require('../../assets/check.png')}
+                alt=''
+                width='20px'
+              />
+              <p>Always expert service</p>
+            </div>
           </div>
-        </Link>
-        <div className='text-mainYellow flex gap-6 text-sm'>
-          <div className='flex items-center gap-2'>
-            <img src={require('../../assets/check.png')} alt='' width='20px' />
-            <p>Free delivery for all purchases</p>
+        </div>
+        <div className='flex gap-10'>
+          <div className='hidden lg:block'>
+            <Searchbar />
           </div>
-          <div className='flex items-center gap-2'>
-            <img src={require('../../assets/check.png')} alt='' width='20px' />
-            <p>Always expert service</p>
+          <div className='flex items-center gap-4 md:gap-6'>
+            <Link to={`/users/${user._id}`}>
+              <img
+                src={user.image}
+                alt=''
+                className='max-w-[32px] h-8 rounded-full ml-4 md:ml-0'
+              />
+            </Link>
+            <div className='relative mr-2 md:mr-0'>
+              <Link to='/cart'>
+                <img
+                  src={require('assets/cart.png')}
+                  alt=''
+                  className='max-w-[32px]'
+                />
+              </Link>
+              <span className='absolute -top-2 -right-4 text-mainBlue font-semibold bg-mainYellow rounded-full px-2'>
+                {count}
+              </span>
+            </div>
+
+            <GoogleLogin
+              width='100px'
+              onSuccess={handleGoogleOnSuccess}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
           </div>
         </div>
       </div>
-      <div className='flex gap-10'>
+      <div className='block self-center lg:hidden'>
         <Searchbar />
-        <div className='flex items-center gap-6'>
-          <Link to={`/users/${user._id}`}>
-            <img src={user.image} alt='' className='w-8 h-8 rounded-full' />
-          </Link>
-          <div className='relative'>
-            <Link to='/cart'>
-              <img src={require('assets/cart.png')} alt='' className='w-8' />
-            </Link>
-            <span className='absolute -top-2 -right-4 text-mainBlue font-semibold bg-mainYellow rounded-full px-2'>
-              {count}
-            </span>
-          </div>
-
-          <GoogleLogin
-            onSuccess={handleGoogleOnSuccess}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-          />
-        </div>
       </div>
     </div>
   );

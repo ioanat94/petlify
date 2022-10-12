@@ -17,7 +17,7 @@ const Searchbar = () => {
       <input
         type='search'
         placeholder='Search product...'
-        className='w-96 h-10 border-2 rounded border-mainBlue indent-2 text-mainBlue'
+        className='w-64 md:w-80 h-10 border-2 rounded border-mainBlue indent-2 text-mainBlue'
         onChange={handleSetSearch}
       />
 
