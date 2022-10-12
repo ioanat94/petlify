@@ -33,9 +33,11 @@ const Order = () => {
     <div>
       <Navbar />
       {order.user === user._id ? (
-        <div className='flex flex-col gap-20 items-center min-h-[calc(100vh-128px)] pt-20'>
-          <p className='text-3xl font-bold text-mainBlue'>Order #{order._id}</p>
-          <div className='flex items-center gap-20'>
+        <div className='flex flex-col gap-6 md:gap-20 items-center min-h-[calc(100vh-128px)] px-4 pt-10 pb-10  md:px-0 md:pt-20 md:pb-0'>
+          <p className='text-3xl font-bold text-mainBlue text-center break-all'>
+            Order #{order._id}
+          </p>
+          <div className='flex items-center md:gap-20'>
             <div className='flex flex-col gap-2'>
               <p className='text-lg text-mainBlue font-semibold'>Order Date</p>
               <p>{order.date.toString().substring(0, 10)}</p>
@@ -53,7 +55,7 @@ const Order = () => {
           </div>
           <div className='flex flex-col gap-10 items-center'>
             <p className='text-lg text-mainBlue font-semibold'>Status</p>
-            <div className='flex gap-20'>
+            <div className='flex flex-col md:flex-row gap-10 md:gap-20'>
               <img
                 src={require('../assets/processing.png')}
                 alt=''
