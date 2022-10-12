@@ -91,7 +91,7 @@ const ProductPage = () => {
     <>
       <Navbar />
       <div className='min-h-[calc(100vh-128px)]'>
-        <div className='flex justify-center gap-20 items-center pt-28'>
+        <div className='flex flex-col lg:flex-row justify-center gap-20 items-center pt-10 pb-10 lg:pb-0 lg:pt-28 px-6 lg:px-0'>
           <img src={product.img} alt='' width='600px' />
           <div className='flex flex-col gap-4'>
             <h4 className='text-mainBlue font-bold text-3xl'>{product.name}</h4>
