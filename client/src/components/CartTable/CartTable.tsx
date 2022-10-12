@@ -53,12 +53,14 @@ const CartTable = () => {
   };
 
   return (
-    <table className='w-2/3 min-w-[700px]'>
-      <thead>
-        <tr>{renderHeaders(tableHeaders)}</tr>
-      </thead>
-      <tbody>{renderRows(items)}</tbody>
-    </table>
+    <div className='overflow-auto'>
+      <table className='w-2/3 min-w-[700px]'>
+        <thead>
+          <tr>{renderHeaders(tableHeaders)}</tr>
+        </thead>
+        <tbody>{renderRows(items)}</tbody>
+      </table>
+    </div>
   );
 };
 export default CartTable;

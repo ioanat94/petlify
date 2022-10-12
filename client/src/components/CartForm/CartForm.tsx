@@ -77,7 +77,11 @@ const CartForm = () => {
   };
 
   return (
-    <form action='' onSubmit={handlePlaceOrder} className='flex gap-20'>
+    <form
+      action=''
+      onSubmit={handlePlaceOrder}
+      className='flex flex-col items-center lg:flex-row gap-10 md:gap-20 pb-10 md:pb-0'
+    >
       <div className='flex flex-col gap-2'>
         <label htmlFor='street' className='font-semibold'>
           Street and number
@@ -86,7 +90,7 @@ const CartForm = () => {
           required
           type='text'
           id='street'
-          className='border border-mainBlue w-96 rounded indent-1'
+          className='border border-mainBlue w-80 md:w-96 rounded indent-1'
           onChange={(e) => handleSetStreet(e)}
         />
         <label htmlFor='postal' className='font-semibold'>
@@ -96,7 +100,7 @@ const CartForm = () => {
           required
           type='text'
           id='postal'
-          className='border border-mainBlue w-96 rounded indent-1'
+          className='border border-mainBlue w-80 md:w-96 rounded indent-1'
           onChange={(e) => handleSetPostal(e)}
         />
         <label htmlFor='city' className='font-semibold'>
@@ -106,7 +110,7 @@ const CartForm = () => {
           required
           type='text'
           id='city'
-          className='border border-mainBlue w-96 rounded indent-1'
+          className='border border-mainBlue w-80 md:w-96 rounded indent-1'
           onChange={(e) => handleSetCity(e)}
         />
         <label htmlFor='country' className='font-semibold'>
@@ -116,17 +120,17 @@ const CartForm = () => {
           required
           type='text'
           id='country'
-          className='border border-mainBlue w-96 rounded indent-1'
+          className='border border-mainBlue w-80 md:w-96 rounded indent-1'
           onChange={(e) => handleSetCountry(e)}
         />
       </div>
-      <div className='flex flex-col gap-10 self-center'>
+      <div className='flex flex-col gap-6 md:gap-10 self-center'>
         <p className='text-lg font-bold'>
           Total: <span>{totalPrice.toFixed(2)}€</span>
         </p>
         <div className='flex flex-col gap-2'>
           <p className='font-semibold'>Choose payment method:</p>
-          <div className='flex gap-4'>
+          <div className='flex flex-col md:flex-row gap-4'>
             <button
               onClick={handleSetCash}
               className={`w-max py-1 px-3 border-2 border-mainBlue font-semibold rounded ${

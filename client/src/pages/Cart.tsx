@@ -21,7 +21,7 @@ const Cart = () => {
       ) : (
         <div className='min-h-[calc(100vh-128px)] pt-16 px-10 flex flex-col gap-10'>
           <CartTable />
-          <div className='flex gap-20'>
+          <div>
             <CartForm />
           </div>
         </div>
