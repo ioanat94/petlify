@@ -69,7 +69,7 @@ const User = () => {
       <Navbar />
       {userId === user._id ? (
         <div className='flex flex-col gap-10 items-center min-h-[calc(100vh-128px)]'>
-          <div className='flex items-center justify-evenly mt-20 h-max w-[750px]'>
+          <div className='flex flex-col gap-10 md:flex-row md:gap-20 items-center justify-evenly mt-10 md:mt-20 h-max max-w-[750px]'>
             <img
               src={user.image}
               alt=''

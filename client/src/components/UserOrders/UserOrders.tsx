@@ -16,7 +16,7 @@ const UserOrders = ({ userId, token }: { userId: string; token: string }) => {
 
   const handleRenderOrders = () => {
     return orders.map((order) => (
-      <div className='flex justify-between items-center border-2 border-mainBlue rounded-lg py-4 px-8'>
+      <div className='flex flex-col gap-4 md:flex-row md:gap-0 justify-between items-center border-2 border-mainBlue rounded-lg py-4 px-4 md:px-8'>
         <div>
           <p className='font-semibold'>
             Order ID: <span className='font-normal'>{order._id}</span>
@@ -48,7 +48,7 @@ const UserOrders = ({ userId, token }: { userId: string; token: string }) => {
   };
 
   return (
-    <div className='w-[600px] flex flex-col gap-4 pb-20'>
+    <div className='max-w-[600px] flex flex-col gap-4 px-2 md:px-0 pb-10 md:pb-20'>
       <p className='text-mainBlue text-xl font-semibold'>My Orders</p>
       <div className='flex flex-col gap-4'>{handleRenderOrders()}</div>
     </div>
