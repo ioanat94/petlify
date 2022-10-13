@@ -80,7 +80,7 @@ const OrdersTable = () => {
         <td>{order.value}€</td>
         <td>{order.status[0].toUpperCase() + order.status.substring(1)}</td>
         {checkWritePerms() && (
-          <td className='flex gap-2 pt-11'>
+          <td className='flex gap-2 pl-4 pt-11 w-[70px]'>
             {order.status !== 'delivered' && (
               <button onClick={() => handleAdvance(order)}>
                 <img src={require('assets/advance.png')} alt='' width='24px' />
@@ -96,12 +96,14 @@ const OrdersTable = () => {
   };
 
   return (
-    <table className='min-w-[1000px]'>
-      <thead>
-        <tr>{handleRenderHeaders(tableHeaders)}</tr>
-      </thead>
-      <tbody>{handleRenderRows(allOrders)}</tbody>
-    </table>
+    <div className='overflow-auto'>
+      <table className='min-w-[1000px]'>
+        <thead>
+          <tr>{handleRenderHeaders(tableHeaders)}</tr>
+        </thead>
+        <tbody>{handleRenderRows(allOrders)}</tbody>
+      </table>
+    </div>
   );
 };
 export default OrdersTable;

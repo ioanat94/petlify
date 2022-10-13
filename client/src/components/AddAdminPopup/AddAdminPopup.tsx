@@ -70,9 +70,9 @@ const AddAdminPopup = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex flex-col gap-4 border border-adminLightBlue rounded-xl px-10 py-6 w-max'
+      className='flex flex-col gap-4 border border-adminLightBlue rounded-xl px-6 md:px-10 py-4 md:py-6 md:w-max'
     >
-      <div className='flex justify-between'>
+      <div className='flex flex-col md:flex-row justify-between'>
         <label htmlFor='firstname'>First Name</label>
         <input
           type='text'
@@ -82,7 +82,7 @@ const AddAdminPopup = () => {
           onChange={handleSetFirstName}
         />
       </div>
-      <div className='flex justify-between'>
+      <div className='flex flex-col md:flex-row justify-between'>
         <label htmlFor='lastname'>Last Name</label>
         <input
           type='text'
@@ -92,7 +92,7 @@ const AddAdminPopup = () => {
           onChange={handleSetLastName}
         />
       </div>
-      <div className='flex justify-between'>
+      <div className='flex flex-col md:flex-row justify-between'>
         <label htmlFor='email'>Email</label>
         <input
           type='email'
@@ -102,7 +102,7 @@ const AddAdminPopup = () => {
           onChange={handleSetEmail}
         />
       </div>
-      <div className='flex justify-between'>
+      <div className='flex flex-col md:flex-row justify-between'>
         <label htmlFor='password'>Password</label>
         <input
           type='password'
@@ -114,7 +114,7 @@ const AddAdminPopup = () => {
       </div>
       <div className='flex flex-col gap-2'>
         <p>Roles</p>
-        <div className='flex gap-10'>
+        <div className='flex flex-col md:flex-row md:gap-10'>
           <div className='flex flex-col'>
             <div className='flex items-center gap-2'>
               <input

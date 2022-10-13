@@ -95,12 +95,14 @@ const ProductsTable = () => {
   };
 
   return (
-    <table className='min-w-[1000px]'>
-      <thead>
-        <tr>{handleRenderHeaders(tableHeaders)}</tr>
-      </thead>
-      <tbody>{handleRenderRows(allProducts)}</tbody>
-    </table>
+    <div className='overflow-auto'>
+      <table className='min-w-[1000px]'>
+        <thead>
+          <tr>{handleRenderHeaders(tableHeaders)}</tr>
+        </thead>
+        <tbody>{handleRenderRows(allProducts)}</tbody>
+      </table>
+    </div>
   );
 };
 export default ProductsTable;

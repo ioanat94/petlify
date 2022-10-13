@@ -126,9 +126,9 @@ const AddProductPopup = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex flex-col gap-4 border border-adminLightBlue rounded-xl px-10 py-6 w-max'
+      className='flex flex-col gap-4 border border-adminLightBlue rounded-xl px-6 md:px-10 py-4 md:py-6 md:w-max'
     >
-      <div className='flex justify-between'>
+      <div className='flex flex-col md:flex-row justify-between'>
         <label htmlFor='name'>Name</label>
         <input
           type='text'
@@ -138,7 +138,7 @@ const AddProductPopup = () => {
           onChange={handleSetName}
         />
       </div>
-      <div className='flex justify-between'>
+      <div className='flex flex-col md:flex-row justify-between'>
         <label htmlFor='img'>Image URL</label>
         <input
           type='text'
@@ -148,7 +148,7 @@ const AddProductPopup = () => {
           onChange={handleSetImg}
         />
       </div>
-      <div className='flex justify-between'>
+      <div className='flex flex-col md:flex-row justify-between'>
         <label htmlFor='desc'>Description</label>
         <input
           type='text'
@@ -186,62 +186,66 @@ const AddProductPopup = () => {
         </div>
         <p>Subcategory</p>
         <div className='flex gap-4'>
-          <div className='flex gap-2'>
-            <input
-              type='radio'
-              id='food'
-              name='subcategory'
-              value='food'
-              required
-              onChange={handleSetSubcategory}
-            />
-            <label htmlFor='food'>Food</label>
+          <div className='flex flex-col md:flex-row md:items-center gap-4'>
+            <div className='flex gap-2'>
+              <input
+                type='radio'
+                id='food'
+                name='subcategory'
+                value='food'
+                required
+                onChange={handleSetSubcategory}
+              />
+              <label htmlFor='food'>Food</label>
+            </div>
+            <div className='flex gap-2'>
+              <input
+                type='radio'
+                id='toys'
+                name='subcategory'
+                value='toys'
+                onChange={handleSetSubcategory}
+              />
+              <label htmlFor='toys'>Toys</label>
+            </div>
+            <div className='flex gap-2'>
+              <input
+                type='radio'
+                id='hygene'
+                name='subcategory'
+                value='hygene'
+                onChange={handleSetSubcategory}
+              />
+              <label htmlFor='hygene'>Hygene</label>
+            </div>
           </div>
-          <div className='flex gap-2'>
-            <input
-              type='radio'
-              id='toys'
-              name='subcategory'
-              value='toys'
-              onChange={handleSetSubcategory}
-            />
-            <label htmlFor='toys'>Toys</label>
-          </div>
-          <div className='flex gap-2'>
-            <input
-              type='radio'
-              id='hygene'
-              name='subcategory'
-              value='hygene'
-              onChange={handleSetSubcategory}
-            />
-            <label htmlFor='hygene'>Hygene</label>
-          </div>
-          <div className='flex gap-2'>
-            <input
-              type='radio'
-              id='beds'
-              name='subcategory'
-              value='beds'
-              onChange={handleSetSubcategory}
-            />
-            <label htmlFor='beds'>Beds</label>
-          </div>
-          <div className='flex gap-2'>
-            <input
-              type='radio'
-              id='other'
-              name='subcategory'
-              value='other'
-              onChange={handleSetSubcategory}
-            />
-            <label htmlFor='other'>Other</label>
+          <div className='flex flex-col md:flex-row md:items-center gap-4'>
+            <div className='flex gap-2'>
+              <input
+                type='radio'
+                id='beds'
+                name='subcategory'
+                value='beds'
+                onChange={handleSetSubcategory}
+              />
+              <label htmlFor='beds'>Beds</label>
+            </div>
+            <div className='flex gap-2'>
+              <input
+                type='radio'
+                id='other'
+                name='subcategory'
+                value='other'
+                onChange={handleSetSubcategory}
+              />
+              <label htmlFor='other'>Other</label>
+            </div>
           </div>
         </div>
       </div>
       <div className='flex flex-col gap-2'>
         <label htmlFor='variants'>Variants</label>
-        <div className='flex items-center gap-8'>
+        <div className='flex flex-col md:flex-row md:items-center gap-8'>
           <input
             type='text'
             id='variants'
@@ -292,7 +296,7 @@ const AddProductPopup = () => {
           </div>
         </div>
       </div>
-      <div className='flex justify-between'>
+      <div className='flex flex-col md:flex-row justify-between'>
         <label htmlFor='price'>Price</label>
         <input
           type='number'

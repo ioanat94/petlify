@@ -74,12 +74,14 @@ const AdminsTable = () => {
   };
 
   return (
-    <table>
-      <thead>
-        <tr>{handleRenderHeaders(tableHeaders)}</tr>
-      </thead>
-      <tbody>{handleRenderRows(allAdmins)}</tbody>
-    </table>
+    <div className='overflow-auto'>
+      <table>
+        <thead>
+          <tr>{handleRenderHeaders(tableHeaders)}</tr>
+        </thead>
+        <tbody>{handleRenderRows(allAdmins)}</tbody>
+      </table>
+    </div>
   );
 };
 export default AdminsTable;

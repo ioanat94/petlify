@@ -87,12 +87,14 @@ const UsersTable = () => {
   };
 
   return (
-    <table className='min-w-[1000px]'>
-      <thead>
-        <tr>{handleRenderHeaders(tableHeaders)}</tr>
-      </thead>
-      <tbody>{handleRenderRows(allUsers)}</tbody>
-    </table>
+    <div className='overflow-auto'>
+      <table className='min-w-[1000px]'>
+        <thead>
+          <tr>{handleRenderHeaders(tableHeaders)}</tr>
+        </thead>
+        <tbody>{handleRenderRows(allUsers)}</tbody>
+      </table>
+    </div>
   );
 };
 export default UsersTable;

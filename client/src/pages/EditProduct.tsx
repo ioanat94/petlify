@@ -175,21 +175,21 @@ const EditProduct = () => {
   return (
     <div>
       <AdminNavbar />
-      <div className='flex min-h-[calc(100vh-64px)] bg-adminBlue'>
+      <div className='flex flex-col pb-10 md:pb-0 md:flex-row min-h-[calc(100vh-64px)] bg-adminBlue'>
         <AdminSideNav />
         {!isLoading && (
-          <div className='flex flex-col gap-4 p-10 text-white min-w-[700px]'>
+          <div className='flex flex-col gap-4 px-10 md:p-10 text-white md:min-w-[700px]'>
             <p className='text-3xl font-medium'>Edit Product</p>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-              <div className='flex flex-row-reverse items-center justify-between'>
+              <div className='flex flex-col gap-4 md:gap-0 md:flex-row-reverse md:items-center justify-between'>
                 <img
                   src={product.img}
                   alt=''
                   width='150px'
                   className='self-start'
                 />
-                <div className='flex flex-col gap-4 w-2/3'>
-                  <div className='flex justify-between'>
+                <div className='flex flex-col gap-4 md:w-2/3'>
+                  <div className='flex flex-col md:flex-row justify-between'>
                     <label htmlFor='name'>Name</label>
                     <input
                       type='text'
@@ -200,7 +200,7 @@ const EditProduct = () => {
                       onChange={handleSetName}
                     />
                   </div>
-                  <div className='flex justify-between'>
+                  <div className='flex flex-col md:flex-row justify-between'>
                     <label htmlFor='img'>Image URL</label>
                     <input
                       type='text'
@@ -211,7 +211,7 @@ const EditProduct = () => {
                       onChange={handleSetImg}
                     />
                   </div>
-                  <div className='flex justify-between'>
+                  <div className='flex flex-col md:flex-row justify-between'>
                     <label htmlFor='desc'>Description</label>
                     <input
                       type='text'
@@ -252,67 +252,71 @@ const EditProduct = () => {
                     </div>
                     <p>Subcategory</p>
                     <div className='flex gap-4'>
-                      <div className='flex gap-2'>
-                        <input
-                          type='radio'
-                          id='food'
-                          name='subcategory'
-                          value='food'
-                          defaultChecked={checkSubcategory.food()}
-                          required
-                          onChange={handleSetSubcategory}
-                        />
-                        <label htmlFor='food'>Food</label>
+                      <div className='flex flex-col md:flex-row md:items-center gap-4'>
+                        <div className='flex gap-2'>
+                          <input
+                            type='radio'
+                            id='food'
+                            name='subcategory'
+                            value='food'
+                            defaultChecked={checkSubcategory.food()}
+                            required
+                            onChange={handleSetSubcategory}
+                          />
+                          <label htmlFor='food'>Food</label>
+                        </div>
+                        <div className='flex gap-2'>
+                          <input
+                            type='radio'
+                            id='toys'
+                            name='subcategory'
+                            value='toys'
+                            defaultChecked={checkSubcategory.toys()}
+                            onChange={handleSetSubcategory}
+                          />
+                          <label htmlFor='toys'>Toys</label>
+                        </div>
+                        <div className='flex gap-2'>
+                          <input
+                            type='radio'
+                            id='hygene'
+                            name='subcategory'
+                            value='hygene'
+                            defaultChecked={checkSubcategory.hygene()}
+                            onChange={handleSetSubcategory}
+                          />
+                          <label htmlFor='hygene'>Hygene</label>
+                        </div>
                       </div>
-                      <div className='flex gap-2'>
-                        <input
-                          type='radio'
-                          id='toys'
-                          name='subcategory'
-                          value='toys'
-                          defaultChecked={checkSubcategory.toys()}
-                          onChange={handleSetSubcategory}
-                        />
-                        <label htmlFor='toys'>Toys</label>
-                      </div>
-                      <div className='flex gap-2'>
-                        <input
-                          type='radio'
-                          id='hygene'
-                          name='subcategory'
-                          value='hygene'
-                          defaultChecked={checkSubcategory.hygene()}
-                          onChange={handleSetSubcategory}
-                        />
-                        <label htmlFor='hygene'>Hygene</label>
-                      </div>
-                      <div className='flex gap-2'>
-                        <input
-                          type='radio'
-                          id='beds'
-                          name='subcategory'
-                          value='beds'
-                          defaultChecked={checkSubcategory.beds()}
-                          onChange={handleSetSubcategory}
-                        />
-                        <label htmlFor='beds'>Beds</label>
-                      </div>
-                      <div className='flex gap-2'>
-                        <input
-                          type='radio'
-                          id='other'
-                          name='subcategory'
-                          value='other'
-                          defaultChecked={checkSubcategory.other()}
-                          onChange={handleSetSubcategory}
-                        />
-                        <label htmlFor='other'>Other</label>
+                      <div className='flex flex-col md:flex-row md:items-center gap-4'>
+                        <div className='flex gap-2'>
+                          <input
+                            type='radio'
+                            id='beds'
+                            name='subcategory'
+                            value='beds'
+                            defaultChecked={checkSubcategory.beds()}
+                            onChange={handleSetSubcategory}
+                          />
+                          <label htmlFor='beds'>Beds</label>
+                        </div>
+                        <div className='flex gap-2'>
+                          <input
+                            type='radio'
+                            id='other'
+                            name='subcategory'
+                            value='other'
+                            defaultChecked={checkSubcategory.other()}
+                            onChange={handleSetSubcategory}
+                          />
+                          <label htmlFor='other'>Other</label>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div className='flex flex-col gap-2'>
                     <label htmlFor='variants'>Variants</label>
-                    <div className='flex items-center gap-8'>
+                    <div className='flex flex-col md:flex-row md:items-center gap-8'>
                       <input
                         type='text'
                         id='variants'
@@ -373,7 +377,7 @@ const EditProduct = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='flex justify-between'>
+                  <div className='flex flex-col md:flex-row justify-between'>
                     <label htmlFor='price'>Price</label>
                     <input
                       type='number'

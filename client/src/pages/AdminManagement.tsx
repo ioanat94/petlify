@@ -40,9 +40,9 @@ const AdminManagement = () => {
   return (
     <>
       <AdminNavbar />
-      <div className='flex min-h-[calc(100vh-64px)] bg-adminBlue'>
+      <div className='flex flex-col md:flex-row min-h-[calc(100vh-64px)] bg-adminBlue'>
         <AdminSideNav />
-        <div className='text-white p-10 flex flex-col gap-8 w-full'>
+        <div className='text-white px-8 md:p-10 flex flex-col gap-8 w-full'>
           <div className='text-3xl font-medium'>Admin Management</div>
           {checkWritePerms() && (
             <button

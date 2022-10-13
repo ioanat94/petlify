@@ -118,13 +118,13 @@ const EditAdmin = () => {
   return (
     <div>
       <AdminNavbar />
-      <div className='flex min-h-[calc(100vh-64px)] bg-adminBlue'>
+      <div className='flex flex-col md:flex-row min-h-[calc(100vh-64px)] bg-adminBlue'>
         <AdminSideNav />
         {!isLoading && (
-          <div className='flex flex-col gap-4 p-10 text-white min-w-[550px]'>
+          <div className='flex flex-col gap-4 px-10 md:p-10 text-white md:min-w-[550px]'>
             <p className='text-3xl font-medium'>Edit Admin</p>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-              <div className='flex justify-between'>
+              <div className='flex flex-col md:flex-row justify-between'>
                 <label htmlFor='firstname'>First Name</label>
                 <input
                   type='text'
@@ -135,7 +135,7 @@ const EditAdmin = () => {
                   onChange={handleSetFirstName}
                 />
               </div>
-              <div className='flex justify-between'>
+              <div className='flex flex-col md:flex-row justify-between'>
                 <label htmlFor='lastname'>Last Name</label>
                 <input
                   type='text'
@@ -146,7 +146,7 @@ const EditAdmin = () => {
                   onChange={handleSetLastName}
                 />
               </div>
-              <div className='flex justify-between'>
+              <div className='flex flex-col md:flex-row justify-between'>
                 <label htmlFor='email'>Email</label>
                 <input
                   type='email'
@@ -157,7 +157,7 @@ const EditAdmin = () => {
                   onChange={handleSetEmail}
                 />
               </div>
-              <div className='flex justify-between'>
+              <div className='flex flex-col md:flex-row justify-between'>
                 <label htmlFor='password'>Password</label>
                 <input
                   type='password'
@@ -168,7 +168,7 @@ const EditAdmin = () => {
               </div>
               <div className='flex flex-col gap-2'>
                 <p>Roles</p>
-                <div className='flex gap-32'>
+                <div className='flex flex-col md:flex-row md:gap-32'>
                   <div className='flex flex-col'>
                     <div className='flex items-center gap-2'>
                       <input

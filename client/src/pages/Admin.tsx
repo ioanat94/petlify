@@ -24,11 +24,10 @@ const Admin = () => {
   return (
     <>
       <AdminNavbar />
-      <div className='flex min-h-[calc(100vh-64px)] bg-adminBlue'>
+      <div className='flex flex-col md:flex-row min-h-[calc(100vh-64px)] bg-adminBlue'>
         <AdminSideNav />
-        <div className='text-white p-10 leading-7'>
+        <div className='text-white px-10 md:p-10 leading-7'>
           <p className='text-3xl font-medium'>Welcome!</p>
-          <br />
           <br />
           <p>
             This is <span className='text-mainYellow'>Petlify's</span> admin
