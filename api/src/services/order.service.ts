@@ -16,7 +16,7 @@ const findById = async (orderId: string): Promise<OrderDocument> => {
 }
 
 const findAll = async (): Promise<OrderDocument[]> => {
-  return Order.find().sort({ createdAt: -1 })
+  return Order.find().sort({ _id: -1 })
 }
 
 const update = async (

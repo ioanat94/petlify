@@ -16,7 +16,7 @@ const findById = async (userId: string): Promise<UserDocument> => {
 }
 
 const findAll = async (): Promise<UserDocument[]> => {
-  return User.find().sort({ name: 1 })
+  return User.find().sort({ _id: -1 })
 }
 
 const update = async (

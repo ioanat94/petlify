@@ -26,7 +26,7 @@ const findByEmail = async (email: string): Promise<AdminDocument> => {
 }
 
 const findAll = async (): Promise<AdminDocument[]> => {
-  return Admin.find().sort({ name: 1 })
+  return Admin.find().sort({ _id: -1 })
 }
 
 const update = async (
