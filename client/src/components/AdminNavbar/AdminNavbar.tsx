@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { logout } from 'redux/slices/authAdminSlice';
@@ -9,10 +10,28 @@ const AdminNavbar = () => {
     (state: RootState) => state.adminAuth.adminToken
   );
 
+  const options = {
+    position: 'top-center',
+    style: {
+      marginTop: '60px',
+      backgroundColor: 'white',
+      color: '#0f172a',
+      fontFamily: 'Montserrat, sans-serif',
+      fontSize: '16px',
+      textAlign: 'center',
+    },
+    closeStyle: {
+      color: '#0f172a',
+      fontSize: '12px',
+    },
+  };
+  const [openSnackbar] = useSnackbar(options);
+
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
+    openSnackbar('Logout successful.');
   };
 
   return (

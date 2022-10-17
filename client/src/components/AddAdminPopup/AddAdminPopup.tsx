@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch } from 'redux/hooks';
 import { createAdminThunk } from 'redux/services/admin.service';
@@ -12,6 +13,23 @@ const AddAdminPopup = () => {
     password: '',
     roles: [],
   });
+
+  const options = {
+    position: 'top-center',
+    style: {
+      marginTop: '60px',
+      backgroundColor: 'white',
+      color: '#0f172a',
+      fontFamily: 'Montserrat, sans-serif',
+      fontSize: '16px',
+      textAlign: 'center',
+    },
+    closeStyle: {
+      color: '#0f172a',
+      fontSize: '12px',
+    },
+  };
+  const [openSnackbar] = useSnackbar(options);
 
   const dispatch = useAppDispatch();
 
@@ -65,6 +83,7 @@ const AddAdminPopup = () => {
     dispatch(createAdminThunk(newAdmin));
     e.target.reset();
     resetState();
+    openSnackbar('Admin created successfully.');
   };
 
   return (

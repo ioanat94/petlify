@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchAdminTokenThunk } from 'redux/services/adminAuth.service';
@@ -12,6 +13,23 @@ const AdminLogin = () => {
   );
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const options = {
+    position: 'top-center',
+    style: {
+      marginTop: '60px',
+      backgroundColor: 'white',
+      color: '#0f172a',
+      fontFamily: 'Montserrat, sans-serif',
+      fontSize: '16px',
+      textAlign: 'center',
+    },
+    closeStyle: {
+      color: '#0f172a',
+      fontSize: '12px',
+    },
+  };
+  const [openSnackbar] = useSnackbar(options);
 
   const navigate = useNavigate();
 
@@ -34,6 +52,7 @@ const AdminLogin = () => {
   const handleLogin = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(fetchAdminTokenThunk({ email, password }));
+    openSnackbar('Login successful.');
   };
 
   return (

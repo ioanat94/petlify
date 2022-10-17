@@ -12,6 +12,7 @@ const Order = () => {
   const { auth, orders } = useAppSelector((state: RootState) => state);
   const user = auth.loggedInUser;
   const order = orders.singleOrder;
+  const isLoading = orders.isLoading;
 
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -32,7 +33,9 @@ const Order = () => {
   return (
     <div>
       <Navbar />
-      {order.user === user._id ? (
+      {isLoading ? (
+        <div className='min-h-[calc(100vh-128px)]'></div>
+      ) : order.user === user._id ? (
         <div className='flex flex-col gap-6 md:gap-20 items-center min-h-[calc(100vh-128px)] px-4 pt-10 pb-10  md:px-0 md:pt-20 md:pb-0'>
           <p className='text-3xl font-bold text-mainBlue text-center break-all'>
             Order #{order._id}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
@@ -17,6 +18,23 @@ const EditAdmin = () => {
   const isLoading = admins.isLoading;
   const adminToken = adminAuth.adminToken;
   const loggedInAdmin = adminAuth.loggedInAdmin;
+
+  const options = {
+    position: 'top-center',
+    style: {
+      marginTop: '60px',
+      backgroundColor: 'white',
+      color: '#0f172a',
+      fontFamily: 'Montserrat, sans-serif',
+      fontSize: '16px',
+      textAlign: 'center',
+    },
+    closeStyle: {
+      color: '#0f172a',
+      fontSize: '12px',
+    },
+  };
+  const [openSnackbar] = useSnackbar(options);
 
   const navigate = useNavigate();
 
@@ -113,6 +131,7 @@ const EditAdmin = () => {
 
     const data = { adminId: adminId, updatedAdmin: updatedAdmin };
     dispatch(updateAdminThunk(data));
+    openSnackbar('Admin edited successfully.');
   };
 
   return (

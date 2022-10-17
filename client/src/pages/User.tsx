@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchUserThunk, updateUserThunk } from 'redux/services/user.service';
@@ -19,6 +20,7 @@ type UserInfo = {
 const User = () => {
   const { users, auth } = useAppSelector((state: RootState) => state);
   const user = users.singleUser;
+  const isLoading = users.isLoading;
   const token = auth.token;
 
   const [userData, setUserData] = useState<UserInfo>({
@@ -26,6 +28,23 @@ const User = () => {
     lastname: '',
     image: '',
   });
+
+  const options = {
+    position: 'top-center',
+    style: {
+      marginTop: '60px',
+      backgroundColor: '#444a9c',
+      color: '#f4cd57',
+      fontFamily: 'Montserrat, sans-serif',
+      fontSize: '16px',
+      textAlign: 'center',
+    },
+    closeStyle: {
+      color: '#f4cd57',
+      fontSize: '12px',
+    },
+  };
+  const [openSnackbar] = useSnackbar(options);
 
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -62,12 +81,15 @@ const User = () => {
 
     const data = { userId: userId, updatedUser: updatedUser };
     dispatch(updateUserThunk(data));
+    openSnackbar('Profile edited successfully.');
   };
 
   return (
     <div>
       <Navbar />
-      {userId === user._id ? (
+      {isLoading ? (
+        <div className='min-h-[calc(100vh-128px)]'></div>
+      ) : userId === user._id ? (
         <div className='flex flex-col gap-10 items-center min-h-[calc(100vh-128px)]'>
           <div className='flex flex-col gap-10 md:flex-row md:gap-20 items-center justify-evenly mt-10 md:mt-20 h-max max-w-[750px]'>
             <img

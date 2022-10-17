@@ -34,7 +34,8 @@ const UserOrders = ({ userId, token }: { userId: string; token: string }) => {
             </span>
           </p>
           <p className='font-semibold'>
-            Value: <span className='font-normal'>{order.value}€</span>
+            Value:{' '}
+            <span className='font-normal'>{order.value.toFixed(2)}€</span>
           </p>
         </div>
         <Link to={`/orders/${order._id}`}>
