@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchUserThunk, updateUserThunk } from 'redux/services/user.service';
@@ -26,6 +27,23 @@ const User = () => {
     lastname: '',
     image: '',
   });
+
+  const options = {
+    position: 'top-center',
+    style: {
+      marginTop: '60px',
+      backgroundColor: '#444a9c',
+      color: '#f4cd57',
+      fontFamily: 'Montserrat, sans-serif',
+      fontSize: '16px',
+      textAlign: 'center',
+    },
+    closeStyle: {
+      color: '#f4cd57',
+      fontSize: '12px',
+    },
+  };
+  const [openSnackbar] = useSnackbar(options);
 
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -62,6 +80,7 @@ const User = () => {
 
     const data = { userId: userId, updatedUser: updatedUser };
     dispatch(updateUserThunk(data));
+    openSnackbar('Profile edited successfully.');
   };
 
   return (

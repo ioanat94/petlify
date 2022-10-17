@@ -1,3 +1,5 @@
+import { useSnackbar } from 'react-simple-snackbar';
+
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { CartProduct, removeFromCart } from 'redux/slices/cartSlice';
 import { RootState } from 'redux/store';
@@ -7,8 +9,26 @@ const CartTable = () => {
 
   const dispatch = useAppDispatch();
 
+  const options = {
+    position: 'top-center',
+    style: {
+      marginTop: '60px',
+      backgroundColor: '#444a9c',
+      color: '#f4cd57',
+      fontFamily: 'Montserrat, sans-serif',
+      fontSize: '16px',
+      textAlign: 'center',
+    },
+    closeStyle: {
+      color: '#f4cd57',
+      fontSize: '12px',
+    },
+  };
+  const [openSnackbar] = useSnackbar(options);
+
   const handleRemoveProduct = (id: string) => {
     dispatch(removeFromCart(id));
+    openSnackbar('Product removed from cart.');
   };
 
   const tableHeaders = ['ID', 'Image', 'Name', 'Size', 'Variant', 'Price', ''];

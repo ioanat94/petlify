@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
@@ -24,6 +25,23 @@ const AdminsTable = () => {
     'Actions',
   ];
 
+  const options = {
+    position: 'top-center',
+    style: {
+      marginTop: '60px',
+      backgroundColor: 'white',
+      color: '#0f172a',
+      fontFamily: 'Montserrat, sans-serif',
+      fontSize: '16px',
+      textAlign: 'center',
+    },
+    closeStyle: {
+      color: '#0f172a',
+      fontSize: '12px',
+    },
+  };
+  const [openSnackbar] = useSnackbar(options);
+
   const location = useLocation();
   const query = location.search;
 
@@ -35,6 +53,7 @@ const AdminsTable = () => {
 
   const handleDelete = (adminId: string) => {
     dispatch(deleteAdminThunk(adminId));
+    openSnackbar('Admin deleted successfully.');
   };
 
   const checkWritePerms = () => {
@@ -46,31 +65,35 @@ const AdminsTable = () => {
   };
 
   const handleRenderRows = (admins: Admin[]) => {
-    return admins.map((admin) => (
-      <tr key={admin._id}>
-        <td>{admin._id}</td>
-        <td>{admin.firstname}</td>
-        <td>{admin.lastname}</td>
-        <td>{admin.email}</td>
-        <td className='py-4'>
-          <ul>
-            {admin.roles.map((role) => (
-              <li>- {role}</li>
-            ))}
-          </ul>
-        </td>
-        {checkWritePerms() && (
-          <td className='flex gap-2 pt-4'>
-            <Link to={`/admin/admins/${admin._id}`}>
-              <img src={require('assets/edit.png')} alt='' width='24px' />
-            </Link>
-            <button onClick={() => handleDelete(admin._id!)}>
-              <img src={require('assets/delete.png')} alt='' width='24px' />
-            </button>
+    return admins.length > 0 ? (
+      admins.map((admin) => (
+        <tr key={admin._id}>
+          <td>{admin._id}</td>
+          <td>{admin.firstname}</td>
+          <td>{admin.lastname}</td>
+          <td>{admin.email}</td>
+          <td className='py-4'>
+            <ul>
+              {admin.roles.map((role) => (
+                <li>- {role}</li>
+              ))}
+            </ul>
           </td>
-        )}
-      </tr>
-    ));
+          {checkWritePerms() && (
+            <td className='flex gap-2 pt-4'>
+              <Link to={`/admin/admins/${admin._id}`}>
+                <img src={require('assets/edit.png')} alt='' width='24px' />
+              </Link>
+              <button onClick={() => handleDelete(admin._id!)}>
+                <img src={require('assets/delete.png')} alt='' width='24px' />
+              </button>
+            </td>
+          )}
+        </tr>
+      ))
+    ) : (
+      <div className='text-xl font-semibold pt-10'>No admins found.</div>
+    );
   };
 
   return (
