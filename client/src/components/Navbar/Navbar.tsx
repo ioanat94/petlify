@@ -15,7 +15,7 @@ const Navbar = () => {
   const options = {
     position: 'top-center',
     style: {
-      marginTop: '60px',
+      marginTop: '110px',
       backgroundColor: '#444a9c',
       color: '#f4cd57',
       fontFamily: 'Montserrat, sans-serif',
@@ -37,7 +37,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className='flex flex-col bg-mainBlue pb-4 lg:pb-0 sticky top-0 z-[99]'>
+    <div className='flex flex-col bg-mainBlue pb-4 lg:pb-0 sticky top-0 z-[9]'>
       <div className='flex items-center justify-between px-6 h-16'>
         <div className='flex gap-12'>
           <Link to='/'>

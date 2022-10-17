@@ -12,7 +12,7 @@ const CartTable = () => {
   const options = {
     position: 'top-center',
     style: {
-      marginTop: '60px',
+      marginTop: '110px',
       backgroundColor: '#444a9c',
       color: '#f4cd57',
       fontFamily: 'Montserrat, sans-serif',

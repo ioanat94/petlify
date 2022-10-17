@@ -17,7 +17,7 @@ const AddAdminPopup = () => {
   const options = {
     position: 'top-center',
     style: {
-      marginTop: '60px',
+      marginTop: '110px',
       backgroundColor: 'white',
       color: '#0f172a',
       fontFamily: 'Montserrat, sans-serif',
