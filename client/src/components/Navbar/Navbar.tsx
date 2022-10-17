@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchTokenThunk } from 'redux/services/auth.service';
@@ -12,28 +11,10 @@ const Navbar = () => {
   const user = auth.loggedInUser;
   const count = cart.count;
 
-  const options = {
-    position: 'top-center',
-    style: {
-      marginTop: '60px',
-      backgroundColor: '#444a9c',
-      color: '#f4cd57',
-      fontFamily: 'Montserrat, sans-serif',
-      fontSize: '16px',
-      textAlign: 'center',
-    },
-    closeStyle: {
-      color: '#f4cd57',
-      fontSize: '12px',
-    },
-  };
-  const [openSnackbar] = useSnackbar(options);
-
   const dispatch = useAppDispatch();
 
   const handleGoogleOnSuccess = (res: any) => {
     dispatch(fetchTokenThunk(res.credential));
-    openSnackbar('Login successful.');
   };
 
   return (

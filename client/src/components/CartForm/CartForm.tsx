@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { createOrderThunk } from 'redux/services/order.service';
@@ -15,23 +14,6 @@ const CartForm = () => {
   const paid = cart.paid;
 
   const [cash, setCash] = useState(false);
-
-  const options = {
-    position: 'top-center',
-    style: {
-      marginTop: '60px',
-      backgroundColor: '#444a9c',
-      color: '#f4cd57',
-      fontFamily: 'Montserrat, sans-serif',
-      fontSize: '16px',
-      textAlign: 'center',
-    },
-    closeStyle: {
-      color: '#f4cd57',
-      fontSize: '12px',
-    },
-  };
-  const [openSnackbar] = useSnackbar(options);
 
   let totalPrice = 0;
   items.map((item) => {
@@ -91,7 +73,6 @@ const CartForm = () => {
 
     dispatch(createOrderThunk(newOrder));
     dispatch(emptyCart());
-    openSnackbar('Order placed successfully.');
     navigate(`/users/${user._id}`);
   };
 

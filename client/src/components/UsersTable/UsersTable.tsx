@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
@@ -27,23 +26,6 @@ const UsersTable = () => {
     'Actions',
   ];
 
-  const options = {
-    position: 'top-center',
-    style: {
-      marginTop: '60px',
-      backgroundColor: 'white',
-      color: '#0f172a',
-      fontFamily: 'Montserrat, sans-serif',
-      fontSize: '16px',
-      textAlign: 'center',
-    },
-    closeStyle: {
-      color: '#0f172a',
-      fontSize: '12px',
-    },
-  };
-  const [openSnackbar] = useSnackbar(options);
-
   const location = useLocation();
   const query = location.search;
 
@@ -55,7 +37,6 @@ const UsersTable = () => {
 
   const handleDelete = (userId: string) => {
     dispatch(deleteUserThunk(userId));
-    openSnackbar('User deleted successfully.');
   };
 
   const handleBan = (userId: string, isBanned: boolean) => {
@@ -66,7 +47,6 @@ const UsersTable = () => {
 
     const data = { userId: userId, updatedUser: updatedUser };
     dispatch(updateUserThunk(data));
-    openSnackbar(`User ${isUserBanned ? 'banned' : 'unbanned'} successfully.`);
   };
 
   const checkWritePerms = () => {
@@ -78,36 +58,32 @@ const UsersTable = () => {
   };
 
   const handleRenderRows = (users: User[]) => {
-    return users.length > 0 ? (
-      users.map((user) => (
-        <tr key={user._id} className='h-28'>
-          <td>{user._id}</td>
-          <td>
-            <img src={user.image} alt='' width='90px' />
+    return users.map((user) => (
+      <tr key={user._id} className='h-28'>
+        <td>{user._id}</td>
+        <td>
+          <img src={user.image} alt='' width='90px' />
+        </td>
+        <td>{user.firstname}</td>
+        <td>{user.lastname}</td>
+        <td>{user.email}</td>
+        <td>{user.isBanned ? 'Yes' : 'No'}</td>
+        {checkWritePerms() && (
+          <td className='flex gap-2 pt-11'>
+            <button onClick={() => handleBan(user._id!, user.isBanned)}>
+              {user.isBanned ? (
+                <p className='text-green-500'>Unban</p>
+              ) : (
+                <p className='text-red-500'>Ban</p>
+              )}
+            </button>
+            <button onClick={() => handleDelete(user._id!)}>
+              <img src={require('assets/delete.png')} alt='' width='24px' />
+            </button>
           </td>
-          <td>{user.firstname}</td>
-          <td>{user.lastname}</td>
-          <td>{user.email}</td>
-          <td>{user.isBanned ? 'Yes' : 'No'}</td>
-          {checkWritePerms() && (
-            <td className='flex gap-2 pt-11'>
-              <button onClick={() => handleBan(user._id!, user.isBanned)}>
-                {user.isBanned ? (
-                  <p className='text-green-500'>Unban</p>
-                ) : (
-                  <p className='text-red-500'>Ban</p>
-                )}
-              </button>
-              <button onClick={() => handleDelete(user._id!)}>
-                <img src={require('assets/delete.png')} alt='' width='24px' />
-              </button>
-            </td>
-          )}
-        </tr>
-      ))
-    ) : (
-      <div className='text-xl font-semibold pt-10'>No users found.</div>
-    );
+        )}
+      </tr>
+    ));
   };
 
   return (

@@ -21,11 +21,9 @@ const ProductList = () => {
   }, [dispatch, query]);
 
   const handleRenderProducts = () => {
-    return products.length > 0 ? (
-      products.map((product) => <ProductCard {...product} key={product._id} />)
-    ) : (
-      <div className='text-xl font-semibold'>No products found.</div>
-    );
+    return products.map((product) => (
+      <ProductCard {...product} key={product._id} />
+    ));
   };
 
   return (

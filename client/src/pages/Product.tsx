@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchProductThunk } from 'redux/services/product.service';
@@ -18,23 +17,6 @@ const ProductPage = () => {
 
   const [chosenSize, setChosenSize] = useState(product.sizes[0]);
   const [chosenVariant, setChosenVariant] = useState(product.variants[0]);
-
-  const options = {
-    position: 'top-center',
-    style: {
-      marginTop: '60px',
-      backgroundColor: '#444a9c',
-      color: '#f4cd57',
-      fontFamily: 'Montserrat, sans-serif',
-      fontSize: '16px',
-      textAlign: 'center',
-    },
-    closeStyle: {
-      color: '#f4cd57',
-      fontSize: '12px',
-    },
-  };
-  const [openSnackbar] = useSnackbar(options);
 
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -103,7 +85,6 @@ const ProductPage = () => {
       price: product.price,
     };
     dispatch(addToCart(productToAdd));
-    openSnackbar('Product added to cart.');
   };
 
   return (

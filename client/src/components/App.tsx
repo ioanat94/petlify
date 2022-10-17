@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SnackbarProvider from 'react-simple-snackbar';
 
 import Home from 'pages/Home';
 import Admin from 'pages/Admin';
@@ -18,26 +17,24 @@ import OrderManagement from 'pages/OrderManagement';
 
 const App = () => {
   return (
-    <SnackbarProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/products/:productId' element={<ProductPage />} />
-          <Route path='/users/:userId' element={<User />} />
-          <Route path='/cart' element={<CartPage />} />
-          <Route path='/orders/:orderId' element={<OrderPage />} />
-          <Route path='/admin' element={<Admin />} />
-          <Route path='/admin/login' element={<AdminLogin />} />
-          <Route path='/admin/products' element={<ProductManagement />} />
-          <Route path='/admin/products/:productId' element={<EditProduct />} />
-          <Route path='/admin/users' element={<UserManagement />} />
-          <Route path='/admin/orders' element={<OrderManagement />} />
-          <Route path='/admin/admins' element={<AdminManagement />} />
-          <Route path='/admin/admins/:adminId' element={<EditAdmin />} />
-          <Route path='/admin/unauthorized' element={<Unauthorized />} />
-        </Routes>
-      </BrowserRouter>
-    </SnackbarProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/products/:productId' element={<ProductPage />} />
+        <Route path='/users/:userId' element={<User />} />
+        <Route path='/cart' element={<CartPage />} />
+        <Route path='/orders/:orderId' element={<OrderPage />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/admin/login' element={<AdminLogin />} />
+        <Route path='/admin/products' element={<ProductManagement />} />
+        <Route path='/admin/products/:productId' element={<EditProduct />} />
+        <Route path='/admin/users' element={<UserManagement />} />
+        <Route path='/admin/orders' element={<OrderManagement />} />
+        <Route path='/admin/admins' element={<AdminManagement />} />
+        <Route path='/admin/admins/:adminId' element={<EditAdmin />} />
+        <Route path='/admin/unauthorized' element={<Unauthorized />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 export default App;

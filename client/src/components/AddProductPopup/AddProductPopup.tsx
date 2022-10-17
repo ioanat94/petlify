@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSnackbar } from 'react-simple-snackbar';
 
 import { useAppDispatch } from 'redux/hooks';
 import { createProductThunk } from 'redux/services/product.service';
@@ -28,23 +27,6 @@ const AddProductPopup = () => {
     sizes: [],
     price: 0,
   });
-
-  const options = {
-    position: 'top-center',
-    style: {
-      marginTop: '60px',
-      backgroundColor: 'white',
-      color: '#0f172a',
-      fontFamily: 'Montserrat, sans-serif',
-      fontSize: '16px',
-      textAlign: 'center',
-    },
-    closeStyle: {
-      color: '#0f172a',
-      fontSize: '12px',
-    },
-  };
-  const [openSnackbar] = useSnackbar(options);
 
   const dispatch = useAppDispatch();
 
@@ -131,7 +113,6 @@ const AddProductPopup = () => {
     dispatch(createProductThunk(newProduct));
     e.target.reset();
     resetState();
-    openSnackbar('Product added successfully.');
   };
 
   const handleRenderVariants = () => {
