@@ -15,6 +15,7 @@ const ProductsTable = () => {
   const allProducts = products.allProducts;
   const isLoading = products.isLoading;
   const loggedInAdmin = adminAuth.loggedInAdmin;
+  const token = adminAuth.adminToken;
 
   const tableHeaders = [
     'ID',
@@ -54,7 +55,7 @@ const ProductsTable = () => {
   }, [dispatch, query]);
 
   const handleDelete = (productId: string) => {
-    dispatch(deleteProductThunk(productId));
+    dispatch(deleteProductThunk({ productId, token }));
     openSnackbar('Product removed successfully.');
   };
 

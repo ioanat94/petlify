@@ -14,10 +14,10 @@ import checkAuth from '../middlewares/checkAuth'
 const router = express.Router()
 
 // Every path we define here will get /api/v1/admins prefix
-router.post('/', validate(adminCreateSchema), createAdmin)
+router.post('/', validate(adminCreateSchema), checkAuth, createAdmin)
 router.get('/', checkAuth, findAll)
-router.get('/:adminId', findById)
-router.put('/:adminId', updateAdmin)
-router.delete('/:adminId', deleteAdmin)
+router.get('/:adminId', checkAuth, findById)
+router.put('/:adminId', checkAuth, updateAdmin)
+router.delete('/:adminId', checkAuth, deleteAdmin)
 
 export default router

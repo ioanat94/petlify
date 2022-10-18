@@ -45,9 +45,13 @@ export const fetchProductThunk = createAsyncThunk(
 
 export const createProductThunk = createAsyncThunk(
   'product/create',
-  async (product: Product) => {
+  async ({ product, token }: { product: Product; token: string }) => {
     try {
-      const res = await axios.post(`${URL}/`, product);
+      const res = await axios.post(`${URL}/`, product, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: res.data,
@@ -61,10 +65,14 @@ export const createProductThunk = createAsyncThunk(
 
 export const updateProductThunk = createAsyncThunk(
   'product/update',
-  async (data: PutType) => {
+  async ({ data, token }: { data: PutType; token: string }) => {
     try {
       const { productId, updatedProduct } = data;
-      const res = await axios.put(`${URL}/${productId}`, updatedProduct);
+      const res = await axios.put(`${URL}/${productId}`, updatedProduct, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: res.data,
@@ -78,9 +86,13 @@ export const updateProductThunk = createAsyncThunk(
 
 export const deleteProductThunk = createAsyncThunk(
   'product/delete',
-  async (productId: string) => {
+  async ({ productId, token }: { productId: string; token: string }) => {
     try {
-      const res = await axios.delete(`${URL}/${productId}`);
+      const res = await axios.delete(`${URL}/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: productId,

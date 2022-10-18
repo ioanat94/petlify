@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useSnackbar } from 'react-simple-snackbar';
 
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { createProductThunk } from 'redux/services/product.service';
+import { RootState } from 'redux/store';
 
 export type ProductData = {
   name: string;
@@ -17,6 +18,10 @@ export type ProductData = {
 };
 
 const AddProductPopup = () => {
+  const token = useAppSelector(
+    (state: RootState) => state.adminAuth.adminToken
+  );
+
   const [productData, setProductData] = useState<ProductData>({
     name: '',
     img: '',
@@ -128,7 +133,7 @@ const AddProductPopup = () => {
       sizes: productData.sizes,
       price: productData.price,
     };
-    dispatch(createProductThunk(newProduct));
+    dispatch(createProductThunk({ product: newProduct, token }));
     e.target.reset();
     resetState();
     openSnackbar('Product added successfully.');

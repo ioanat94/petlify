@@ -1,4 +1,5 @@
 import express from 'express'
+import checkAuth from '../middlewares/checkAuth'
 
 import {
   createOrder,
@@ -14,7 +15,7 @@ const router = express.Router()
 router.post('/', createOrder)
 router.get('/', findAll)
 router.get('/:orderId', findById)
-router.put('/:orderId', updateOrder)
-router.delete('/:orderId', deleteOrder)
+router.put('/:orderId', checkAuth, updateOrder)
+router.delete('/:orderId', checkAuth, deleteOrder)
 
 export default router

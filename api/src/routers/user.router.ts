@@ -15,7 +15,7 @@ const router = express.Router()
 router.post('/', createUser)
 router.get('/', checkAuth, findAll)
 router.get('/:userId', checkAuth, findById)
-router.put('/:userId', updateUser)
-router.delete('/:userId', deleteUser)
+router.put('/:userId', checkAuth, updateUser)
+router.delete('/:userId', checkAuth, deleteUser)
 
 export default router

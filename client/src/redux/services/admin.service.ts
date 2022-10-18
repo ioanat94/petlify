@@ -32,9 +32,13 @@ export const fetchAdminsThunk = createAsyncThunk(
 
 export const fetchAdminThunk = createAsyncThunk(
   'admin/fetch',
-  async (adminId: string) => {
+  async ({ adminId, token }: { adminId: string; token: string }) => {
     try {
-      const res = await axios.get(`${URL}/${adminId}`);
+      const res = await axios.get(`${URL}/${adminId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: res.data,
@@ -48,9 +52,13 @@ export const fetchAdminThunk = createAsyncThunk(
 
 export const createAdminThunk = createAsyncThunk(
   'admin/create',
-  async (admin: Admin) => {
+  async ({ newAdmin, token }: { newAdmin: Admin; token: string }) => {
     try {
-      const res = await axios.post(`${URL}/`, admin);
+      const res = await axios.post(`${URL}/`, newAdmin, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: res.data,
@@ -64,10 +72,14 @@ export const createAdminThunk = createAsyncThunk(
 
 export const updateAdminThunk = createAsyncThunk(
   'admin/update',
-  async (data: PutType) => {
+  async ({ data, token }: { data: PutType; token: string }) => {
     try {
       const { adminId, updatedAdmin } = data;
-      const res = await axios.put(`${URL}/${adminId}`, updatedAdmin);
+      const res = await axios.put(`${URL}/${adminId}`, updatedAdmin, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: res.data,
@@ -81,9 +93,13 @@ export const updateAdminThunk = createAsyncThunk(
 
 export const deleteAdminThunk = createAsyncThunk(
   'admin/delete',
-  async (adminId: string) => {
+  async ({ adminId, token }: { adminId: string; token: string }) => {
     try {
-      const res = await axios.delete(`${URL}/${adminId}`);
+      const res = await axios.delete(`${URL}/${adminId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: adminId,

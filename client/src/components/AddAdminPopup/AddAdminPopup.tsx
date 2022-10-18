@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useSnackbar } from 'react-simple-snackbar';
 
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { createAdminThunk } from 'redux/services/admin.service';
 import { Admin } from 'redux/slices/adminsSlice';
+import { RootState } from 'redux/store';
 
 const AddAdminPopup = () => {
+  const token = useAppSelector(
+    (state: RootState) => state.adminAuth.adminToken
+  );
+
   const [adminData, setAdminData] = useState<Admin>({
     firstname: '',
     lastname: '',
@@ -80,7 +85,7 @@ const AddAdminPopup = () => {
       password: adminData.password,
       roles: adminData.roles,
     };
-    dispatch(createAdminThunk(newAdmin));
+    dispatch(createAdminThunk({ newAdmin, token }));
     e.target.reset();
     resetState();
     openSnackbar('Admin created successfully.');

@@ -62,8 +62,8 @@ const EditAdmin = () => {
   const adminId: string | undefined = params.adminId!;
 
   useEffect(() => {
-    dispatch(fetchAdminThunk(adminId));
-  }, [dispatch, adminId]);
+    dispatch(fetchAdminThunk({ adminId, token: adminToken }));
+  }, [dispatch, adminId, adminToken]);
 
   const handleSetFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAdminData({ ...adminData, firstname: e.target.value });
@@ -130,7 +130,7 @@ const EditAdmin = () => {
     });
 
     const data = { adminId: adminId, updatedAdmin: updatedAdmin };
-    dispatch(updateAdminThunk(data));
+    dispatch(updateAdminThunk({ data, token: adminToken }));
     openSnackbar('Admin edited successfully.');
   };
 

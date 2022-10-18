@@ -80,7 +80,7 @@ const User = () => {
     });
 
     const data = { userId: userId, updatedUser: updatedUser };
-    dispatch(updateUserThunk(data));
+    dispatch(updateUserThunk({ data, token }));
     openSnackbar('Profile edited successfully.');
   };
 

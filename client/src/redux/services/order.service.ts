@@ -61,10 +61,14 @@ export const createOrderThunk = createAsyncThunk(
 
 export const updateOrderThunk = createAsyncThunk(
   'order/update',
-  async (data: PutType) => {
+  async ({ data, token }: { data: PutType; token: string }) => {
     try {
       const { orderId, updatedOrder } = data;
-      const res = await axios.put(`${URL}/${orderId}`, updatedOrder);
+      const res = await axios.put(`${URL}/${orderId}`, updatedOrder, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: res.data,
@@ -78,9 +82,13 @@ export const updateOrderThunk = createAsyncThunk(
 
 export const deleteOrderThunk = createAsyncThunk(
   'order/delete',
-  async (orderId: string) => {
+  async ({ orderId, token }: { orderId: string; token: string }) => {
     try {
-      const res = await axios.delete(`${URL}/${orderId}`);
+      const res = await axios.delete(`${URL}/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: orderId,

@@ -53,7 +53,7 @@ const AdminsTable = () => {
   }, [dispatch, token, query]);
 
   const handleDelete = (adminId: string) => {
-    dispatch(deleteAdminThunk(adminId));
+    dispatch(deleteAdminThunk({ adminId, token }));
     openSnackbar('Admin deleted successfully.');
   };
 

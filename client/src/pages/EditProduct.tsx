@@ -166,7 +166,7 @@ const EditProduct = () => {
     });
 
     const data = { productId: productId, updatedProduct: updatedProduct };
-    dispatch(updateProductThunk(data));
+    dispatch(updateProductThunk({ data, token: adminToken }));
     openSnackbar('Product edited successfully.');
   };
 

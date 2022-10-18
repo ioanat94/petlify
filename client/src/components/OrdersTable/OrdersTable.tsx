@@ -55,7 +55,7 @@ const OrdersTable = () => {
   }, [dispatch, token, query]);
 
   const handleDelete = (orderId: string) => {
-    dispatch(deleteOrderThunk(orderId));
+    dispatch(deleteOrderThunk({ orderId, token }));
     openSnackbar('Order removed successfully.');
   };
 
@@ -72,7 +72,7 @@ const OrdersTable = () => {
     };
 
     const data = { orderId: order._id!, updatedOrder: updatedOrder };
-    dispatch(updateOrderThunk(data));
+    dispatch(updateOrderThunk({ data, token }));
     openSnackbar('Order advanced successfully.');
   };
 

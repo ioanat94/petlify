@@ -55,7 +55,7 @@ const UsersTable = () => {
   }, [dispatch, token, query]);
 
   const handleDelete = (userId: string) => {
-    dispatch(deleteUserThunk(userId));
+    dispatch(deleteUserThunk({ userId, token }));
     openSnackbar('User deleted successfully.');
   };
 
@@ -66,7 +66,7 @@ const UsersTable = () => {
     };
 
     const data = { userId: userId, updatedUser: updatedUser };
-    dispatch(updateUserThunk(data));
+    dispatch(updateUserThunk({ data, token }));
     openSnackbar(`User ${isUserBanned ? 'banned' : 'unbanned'} successfully.`);
   };
 

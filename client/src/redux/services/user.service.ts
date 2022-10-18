@@ -68,10 +68,14 @@ export const createUserThunk = createAsyncThunk(
 
 export const updateUserThunk = createAsyncThunk(
   'user/update',
-  async (data: PutType) => {
+  async ({ data, token }: { data: PutType; token: string }) => {
     try {
       const { userId, updatedUser } = data;
-      const res = await axios.put(`${URL}/${userId}`, updatedUser);
+      const res = await axios.put(`${URL}/${userId}`, updatedUser, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: res.data,
@@ -85,9 +89,13 @@ export const updateUserThunk = createAsyncThunk(
 
 export const deleteUserThunk = createAsyncThunk(
   'user/delete',
-  async (userId: string) => {
+  async ({ userId, token }: { userId: string; token: string }) => {
     try {
-      const res = await axios.delete(`${URL}/${userId}`);
+      const res = await axios.delete(`${URL}/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         data: userId,
