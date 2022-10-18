@@ -4,7 +4,42 @@ import User from '../models/User'
 import userService from '../services/user.service'
 import { BadRequestError } from '../helpers/apiError'
 
+/**
+ * @openapi
+ *  components:
+ *    securitySchemes:
+ *      bearerAuth:
+ *        type: http
+ *        scheme: bearer
+ *        bearerFormat: JWT
+ */
+
 // POST /users
+
+/**
+ * @openapi
+ * '/api/v1/users':
+ *  post:
+ *    tags:
+ *      - Users
+ *    summary: Create a new user
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/User'
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreatedUser'
+ *      400:
+ *        description: Bad Request
+ */
+
 export const createUser = async (
   req: Request,
   res: Response,
@@ -33,6 +68,27 @@ export const createUser = async (
 }
 
 // GET /users
+
+/**
+ * @openapi
+ * '/api/v1/users':
+ *  get:
+ *    tags:
+ *      - Users
+ *    summary: Get all users
+ *    security:
+ *      - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/AllUsers'
+ *      403:
+ *        description: Forbidden
+ */
+
 export const findAll = async (
   req: Request,
   res: Response,
@@ -61,6 +117,36 @@ export const findAll = async (
 }
 
 // GET /users/:userId
+
+/**
+ * @openapi
+ * '/api/v1/users/{userId}':
+ *  get:
+ *    tags:
+ *      - Users
+ *    summary: Get user by ID
+ *    security:
+ *      - bearerAuth: []
+ *    parameters:
+ *      - name: userId
+ *        in: path
+ *        description: User ID
+ *        required: true
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreatedUser'
+ *      400:
+ *        description: Bad Request
+ *      403:
+ *        description: Forbidden
+ *      404:
+ *        description: Not Found
+ */
+
 export const findById = async (
   req: Request,
   res: Response,
@@ -78,6 +164,42 @@ export const findById = async (
 }
 
 // PUT /users/:userId
+
+/**
+ * @openapi
+ * '/api/v1/users/{userId}':
+ *  put:
+ *    tags:
+ *      - Users
+ *    summary: Modify a user
+ *    security:
+ *      - bearerAuth: []
+ *    parameters:
+ *      - name: userId
+ *        in: path
+ *        description: User ID
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/User'
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreatedUser'
+ *      400:
+ *        description: Bad Request
+ *      403:
+ *        description: Forbidden
+ *      404:
+ *        description: Not Found
+ */
+
 export const updateUser = async (
   req: Request,
   res: Response,
@@ -98,6 +220,28 @@ export const updateUser = async (
 }
 
 // DELETE /users/:userId
+
+/**
+ * @openapi
+ * '/api/v1/users/{userId}':
+ *  delete:
+ *    tags:
+ *      - Users
+ *    summary: Delete a user
+ *    security:
+ *      - bearerAuth: []
+ *    parameters:
+ *      - name: userId
+ *        in: path
+ *        description: User ID
+ *        required: true
+ *    responses:
+ *      204:
+ *        description: Success
+ *      403:
+ *        description: Forbidden
+ */
+
 export const deleteUser = async (
   req: Request,
   res: Response,

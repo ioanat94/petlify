@@ -5,7 +5,46 @@ import Admin from '../models/Admin'
 import adminService from '../services/admin.service'
 import { BadRequestError } from '../helpers/apiError'
 
+/**
+ * @openapi
+ *  components:
+ *    securitySchemes:
+ *      bearerAuth:
+ *        type: http
+ *        scheme: bearer
+ *        bearerFormat: JWT
+ */
+
 // POST /admins
+
+/**
+ * @openapi
+ * '/api/v1/admins':
+ *  post:
+ *    tags:
+ *      - Admins
+ *    summary: Create a new admin
+ *    security:
+ *      - bearerAuth: []
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Admin'
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreatedAdmin'
+ *      400:
+ *        description: Bad Request
+ *      403:
+ *        description: Forbidden
+ */
+
 export const createAdmin = async (
   req: Request,
   res: Response,
@@ -42,6 +81,29 @@ export const createAdmin = async (
 }
 
 // GET /admins
+
+/**
+ * @openapi
+ * '/api/v1/admins':
+ *  get:
+ *    tags:
+ *      - Admins
+ *    summary: Get all admins
+ *    security:
+ *      - bearerAuth: []
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/AllAdmins'
+ *      400:
+ *        description: Bad Request
+ *      403:
+ *        description: Forbidden
+ */
+
 export const findAll = async (
   req: Request,
   res: Response,
@@ -70,6 +132,36 @@ export const findAll = async (
 }
 
 // GET /admins/:adminId
+
+/**
+ * @openapi
+ * '/api/v1/admins/{adminId}':
+ *  get:
+ *    tags:
+ *      - Admins
+ *    summary: Get admin by ID
+ *    security:
+ *      - bearerAuth: []
+ *    parameters:
+ *      - name: adminId
+ *        in: path
+ *        description: Admin ID
+ *        required: true
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreatedAdmin'
+ *      400:
+ *        description: Bad Request
+ *      403:
+ *        description: Forbidden
+ *      404:
+ *        description: Not Found
+ */
+
 export const findById = async (
   req: Request,
   res: Response,
@@ -87,6 +179,42 @@ export const findById = async (
 }
 
 // PUT /admins/:adminId
+
+/**
+ * @openapi
+ * '/api/v1/admins/{adminId}':
+ *  put:
+ *    tags:
+ *      - Admins
+ *    summary: Modify an admin
+ *    security:
+ *      - bearerAuth: []
+ *    parameters:
+ *      - name: adminId
+ *        in: path
+ *        description: Admin ID
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Admin'
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreatedAdmin'
+ *      400:
+ *        description: Bad Request
+ *      403:
+ *        description: Forbidden
+ *      404:
+ *        description: Not Found
+ */
+
 export const updateAdmin = async (
   req: Request,
   res: Response,
@@ -116,6 +244,28 @@ export const updateAdmin = async (
 }
 
 // DELETE /admins/:adminId
+
+/**
+ * @openapi
+ * '/api/v1/admins/{adminId}':
+ *  delete:
+ *    tags:
+ *      - Admins
+ *    summary: Delete an admin
+ *    security:
+ *      - bearerAuth: []
+ *    parameters:
+ *      - name: adminId
+ *        in: path
+ *        description: Admin ID
+ *        required: true
+ *    responses:
+ *      204:
+ *        description: Success
+ *      403:
+ *        description: Forbidden
+ */
+
 export const deleteAdmin = async (
   req: Request,
   res: Response,

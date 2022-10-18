@@ -1,9 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import passport from 'passport'
+import swaggerUi from 'swagger-ui-express'
 // import session from 'express-session'
 // import cookieParser from 'cookie-parser'
-import passport from 'passport'
 
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
@@ -13,6 +14,7 @@ import adminRouter from './routers/admin.router'
 import authRouter from './routers/auth.router'
 import orderRouter from './routers/order.router'
 import loginWithGoogle from './passport/google'
+import swaggerDocs from './util/swagger'
 
 dotenv.config({ path: '.env' })
 const app = express()
@@ -54,6 +56,7 @@ app.use('/api/v1/users', userRouter)
 app.use('/api/v1/admins', adminRouter)
 app.use('/api/v1/orders', orderRouter)
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 // Custom API error handler
 app.use(apiErrorHandler)

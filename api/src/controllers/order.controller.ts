@@ -4,7 +4,42 @@ import Order from '../models/Order'
 import orderService from '../services/order.service'
 import { BadRequestError } from '../helpers/apiError'
 
+/**
+ * @openapi
+ *  components:
+ *    securitySchemes:
+ *      bearerAuth:
+ *        type: http
+ *        scheme: bearer
+ *        bearerFormat: JWT
+ */
+
 // POST /orders
+
+/**
+ * @openapi
+ * '/api/v1/orders':
+ *  post:
+ *    tags:
+ *      - Orders
+ *    summary: Create a new order
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Order'
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreatedOrder'
+ *      400:
+ *        description: Bad Request
+ */
+
 export const createOrder = async (
   req: Request,
   res: Response,
@@ -34,6 +69,23 @@ export const createOrder = async (
 }
 
 // GET /orders
+
+/**
+ * @openapi
+ * '/api/v1/orders':
+ *  get:
+ *    tags:
+ *      - Orders
+ *    summary: Get all orders
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/AllOrders'
+ */
+
 export const findAll = async (
   req: Request,
   res: Response,
@@ -70,6 +122,32 @@ export const findAll = async (
 }
 
 // GET /orders/:orderId
+
+/**
+ * @openapi
+ * '/api/v1/orders/{orderId}':
+ *  get:
+ *    tags:
+ *      - Orders
+ *    summary: Get order by ID
+ *    parameters:
+ *      - name: orderId
+ *        in: path
+ *        description: Order ID
+ *        required: true
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreatedOrder'
+ *      400:
+ *        description: Bad Request
+ *      404:
+ *        description: Not Found
+ */
+
 export const findById = async (
   req: Request,
   res: Response,
@@ -87,6 +165,42 @@ export const findById = async (
 }
 
 // PUT /orders/:orderId
+
+/**
+ * @openapi
+ * '/api/v1/orders/{orderId}':
+ *  put:
+ *    tags:
+ *      - Orders
+ *    summary: Modify an order
+ *    security:
+ *      - bearerAuth: []
+ *    parameters:
+ *      - name: orderId
+ *        in: path
+ *        description: Order ID
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Order'
+ *    responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/CreatedOrder'
+ *      400:
+ *        description: Bad Request
+ *      403:
+ *        description: Forbidden
+ *      404:
+ *        description: Not Found
+ */
+
 export const updateOrder = async (
   req: Request,
   res: Response,
@@ -107,6 +221,28 @@ export const updateOrder = async (
 }
 
 // DELETE /orders/:orderId
+
+/**
+ * @openapi
+ * '/api/v1/orders/{orderId}':
+ *  delete:
+ *    tags:
+ *      - Orders
+ *    summary: Delete an order
+ *    security:
+ *      - bearerAuth: []
+ *    parameters:
+ *      - name: orderId
+ *        in: path
+ *        description: Order ID
+ *        required: true
+ *    responses:
+ *      204:
+ *        description: Success
+ *      403:
+ *        description: Forbidden
+ */
+
 export const deleteOrder = async (
   req: Request,
   res: Response,
