@@ -13,7 +13,7 @@
     A pet shop app & admin dashboard.
     <br />
     <br />
-    <a href="https://petlify.vercel.app/">View website</a>
+    <a href="https://petlify.vercel.app/">View website</a> |  <a href="https://petlify-backend.up.railway.app/api/v1/">View documentation</a>
     <br />
     <br />
   </p>
