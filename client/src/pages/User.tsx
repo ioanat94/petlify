@@ -161,7 +161,7 @@ const User = () => {
                 </button>
               </form>
               {user.isBanned && (
-                <p className='text-red-500 font-bold text-2xl border-4 border-red-500 px-2 py-1 rounded-lg'>
+                <p className='self-center text-red-500 font-bold text-2xl border-4 border-red-500 px-2 py-1 rounded-lg'>
                   BANNED
                 </p>
               )}
