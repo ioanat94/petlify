@@ -59,40 +59,53 @@ const Order = () => {
           <div className='flex flex-col gap-10 items-center'>
             <p className='text-lg text-mainBlue font-semibold'>Status</p>
             <div className='flex flex-col md:flex-row gap-10 md:gap-20'>
-              <img
-                src={require('../assets/processing.png')}
-                alt=''
-                width='75px'
-                className={`${
-                  order.status === 'processing' ? 'animate-pulse' : ''
-                }`}
-              />
-              <img
-                src={require('../assets/confirmed.png')}
-                alt=''
-                width='75px'
-                className={`${
-                  order.status === 'processing' ? 'filter grayscale' : ''
-                } ${order.status === 'confirmed' ? 'animate-pulse' : ''}`}
-              />
-              <img
-                src={require('../assets/shipping.png')}
-                alt=''
-                width='75px'
-                className={`${
-                  order.status === 'processing' || order.status === 'confirmed'
-                    ? 'filter grayscale'
-                    : ''
-                } ${order.status === 'shipping' ? 'animate-pulse' : ''}`}
-              />
-              <img
-                src={require('../assets/delivered.png')}
-                alt=''
-                width='75px'
-                className={`${
-                  order.status !== 'delivered' ? 'filter grayscale' : ''
-                }`}
-              />
+              <div className='flex flex-col items-center gap-4'>
+                <img
+                  src={require('../assets/processing.png')}
+                  alt=''
+                  width='75px'
+                  className={`${
+                    order.status === 'processing' ? 'animate-pulse' : ''
+                  }`}
+                />
+                <p>Processing</p>
+              </div>
+              <div className='flex flex-col items-center gap-4'>
+                <img
+                  src={require('../assets/confirmed.png')}
+                  alt=''
+                  width='75px'
+                  className={`${
+                    order.status === 'processing' ? 'filter grayscale' : ''
+                  } ${order.status === 'confirmed' ? 'animate-pulse' : ''}`}
+                />
+                <p>Confirmed</p>
+              </div>
+              <div className='flex flex-col items-center gap-4'>
+                <img
+                  src={require('../assets/shipping.png')}
+                  alt=''
+                  width='75px'
+                  className={`${
+                    order.status === 'processing' ||
+                    order.status === 'confirmed'
+                      ? 'filter grayscale'
+                      : ''
+                  } ${order.status === 'shipping' ? 'animate-pulse' : ''}`}
+                />
+                <p>Shipping</p>
+              </div>
+              <div className='flex flex-col items-center gap-4'>
+                <img
+                  src={require('../assets/delivered.png')}
+                  alt=''
+                  width='75px'
+                  className={`${
+                    order.status !== 'delivered' ? 'filter grayscale' : ''
+                  }`}
+                />
+                <p>Delivered</p>
+              </div>
             </div>
           </div>
         </div>

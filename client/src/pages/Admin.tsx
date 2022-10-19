@@ -51,7 +51,7 @@ const Admin = () => {
               tools, please contact a system administrator.
             </p>
           </div>
-          <div className='flex flex-wrap gap-16'>
+          <div className='flex flex-col md:flex-row md:flex-wrap gap-16'>
             {checkWritePerms('products-read') && <RecentProducts />}
             {checkWritePerms('users-read') && <RecentUsers />}
             {checkWritePerms('orders-read') && <RecentOrders />}
