@@ -4,7 +4,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/ioanat94/burgrrr">
+  <a href="https://github.com/ioanat94/petlify">
     <img src="https://petlify.vercel.app/static/media/logo.6f976448c65e3226c535.png" alt="Logo" width="120" height="auto">
   </a>
 <h3 align="center">Petlify</h3>
