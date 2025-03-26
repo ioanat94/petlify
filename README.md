@@ -4,16 +4,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/ioanat94/petlify">
-    <img src="https://petlify.vercel.app/static/media/logo.6f976448c65e3226c535.png" alt="Logo" width="120" height="auto">
-  </a>
 <h3 align="center">Petlify</h3>
 
   <p align="center">
     A pet shop app & admin dashboard.
-    <br />
-    <br />
-    <a href="https://petlify.vercel.app/">View website</a> |  <a href="https://petlify-backend.up.railway.app/api/v1/">View documentation</a>
     <br />
     <br />
   </p>
@@ -107,7 +101,7 @@ To get a local copy up and running follow these simple steps.
 - Enter the delivery address and choose to pay via cash on delivery or PayPal, then check out.
 - Follow the order page to see the status of your order.
 - Admin dashboard:
-  - Navigate to https://petlify.vercel.app/admin and log in.
+  - Navigate to '/admin' and log in.
   - View recent data on the admin dashboard main page.
   - Manage products, orders, users and admins on their respective pages.
 
