@@ -37,8 +37,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<p align="center"><img src="https://firebasestorage.googleapis.com/v0/b/netflix-clone-49e41.appspot.com/o/all-devices-black.png?alt=media&token=a9fe32c4-fb5a-4bd7-9b6b-9fa2815a7af6" alt="Petlify Screenshot">
-
 This is a pet shop application written using Typescript, React.js, Redux Toolkit, Node.js, MongoDB and Tailwind CSS. It features a home page that displays a list of categories and a list of products. Users are able to sign up / sign in with Google authentication, access their user page and edit their user information. Users are also able to select which product they want to order as well as several different options for their order, checkout using Paypal or cash on delivery, and track their order. The app also features an admin dashboard which allows admins to view, create, modify and delete products, orders, users and admins. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
